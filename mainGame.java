@@ -13,7 +13,9 @@ public class mainGame {
     public gameDifficulty.difficulties getDifficulty() {
         return difficulty;
     }
-
+    public int getMaxDay(){
+        return maxDay;
+    }
     public void setMaxDay(int day) {
         maxDay = day;
     }
@@ -29,7 +31,9 @@ public class mainGame {
         return allMonsters;
     }
     public static void main(String[] args) {
-        System.out.println("TEST");
+        while (getCurrentDay() < maxDay){
+
+        }
     }
 
     

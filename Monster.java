@@ -13,11 +13,9 @@ public class Monster {
     public String getName() {
         return monsterName;
     }
-
-
     public void useItem(Item item) {
-        monsterMaxHealth += item.maxHealthIncrease;
-        monsterDamage += item.damageIncrease;
-        monsterCurrentHealth += item.healthIncrease;
+        monsterMaxHealth += item.getMaxHealthIncrease();
+        monsterDamage += item.getDamageIncrease();
+        monsterCurrentHealth += item.getHealthIncrease();
     }
 }
