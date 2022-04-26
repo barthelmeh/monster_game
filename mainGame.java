@@ -4,13 +4,13 @@ public class mainGame {
     private gameDifficulty.difficulties difficulty = gameDifficulty.difficulties.MEDIUM;
     private int currentDay = 0;
     private int maxDay = 5;
-    private ArrayList<Monsters> allMonsters;
+    private static ArrayList<Monster> allMonsters;
 
-    public void setDifficulty(difficulties newDifficulty) {
+    public void setDifficulty(gameDifficulty.difficulties newDifficulty) {
         difficulty = newDifficulty;
     }
     
-    public difficulties getDifficulty() {
+    public gameDifficulty.difficulties getDifficulty() {
         return difficulty;
     }
 
@@ -25,7 +25,9 @@ public class mainGame {
     public void increaseDay() {
         currentDay++;
     }
-
+    public static ArrayList<Monster> getMonsters(){
+        return allMonsters;
+    }
 
     public static void main(String[] args) {
         System.out.println("TEST");
