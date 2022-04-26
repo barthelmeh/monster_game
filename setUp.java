@@ -11,8 +11,23 @@ public class setUp {
         String name = "Name: " + System.console().readLine();
         return name;
     }
-    public Difficulty getDifficulty(){
-        Difficulty dif = "Difficulty " + System.console().readLine();
+    public gameDifficulty.difficulties getDifficulty(){
+        String user_input = System.console().readLine();
+        gameDifficulty.difficulties dif;
+        switch(user_input) {
+            case "easy":
+                dif = gameDifficulty.difficulties.EASY;
+                break;
+            case "medium":
+                dif = gameDifficulty.difficulties.MEDIUM;
+                break;
+            case "hard":
+                dif = gameDifficulty.difficulties.HARD;
+                break;
+            default:
+                dif = gameDifficulty.difficulties.MEDIUM;
+        }
+
         return dif;
     }
     public Monster chooseMonster(){

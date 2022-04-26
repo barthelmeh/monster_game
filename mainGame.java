@@ -1,8 +1,7 @@
-import gameDifficulty.difficulties;
 import java.util.ArrayList;
 
 public class mainGame {
-    private difficulties difficulty = MEDIUM;
+    private gameDifficulty.difficulties difficulty = gameDifficulty.difficulties.MEDIUM;
     private int currentDay = 0;
     private int maxDay = 5;
     private ArrayList<Monsters> allMonsters;
@@ -20,11 +19,11 @@ public class mainGame {
     }
 
     public int getCurrentDay() {
-        return current_day;
+        return currentDay;
     }
 
     public void increaseDay() {
-        current_day++;
+        currentDay++;
     }
 
 
