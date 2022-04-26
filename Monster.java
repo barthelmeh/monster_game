@@ -15,7 +15,9 @@ public class Monster {
     }
 
 
-    public void heal(Item item) {
-        
+    public void useItem(Item item) {
+        monsterMaxHealth += item.maxHealthIncrease;
+        monsterDamage += item.damageIncrease;
+        monsterCurrentHealth += item.healthIncrease;
     }
 }

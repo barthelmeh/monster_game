@@ -25,11 +25,12 @@ public class mainGame {
     public void increaseDay() {
         currentDay++;
     }
-    public static ArrayList<Monster> getMonsters(){
+    public static ArrayList<Monster> getMonsters() {
         return allMonsters;
     }
-
     public static void main(String[] args) {
         System.out.println("TEST");
     }
+
+    
 }
