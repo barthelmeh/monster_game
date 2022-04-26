@@ -4,7 +4,6 @@ import java.util.Random;
 
 public class setUp {
     
-
     private ArrayList<Monster> starterMonsters = new ArrayList<Monster>();
     private ArrayList<Monster> avaiableMonsters = new ArrayList<Monster>();
     public static String getPlayerName(){
