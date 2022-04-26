@@ -9,7 +9,9 @@ public class mainGame {
     public void setDifficulty(gameDifficulty.difficulties newDifficulty) {
         difficulty = newDifficulty;
     }
-    
+    public mainGame(){
+
+    }
     public gameDifficulty.difficulties getDifficulty() {
         return difficulty;
     }
@@ -31,9 +33,7 @@ public class mainGame {
         return allMonsters;
     }
     public static void main(String[] args) {
-        while (getCurrentDay() < maxDay){
-
-        }
+        
     }
 
     

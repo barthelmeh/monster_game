@@ -6,7 +6,12 @@ public class setUp {
     
     private ArrayList<Monster> starterMonsters = new ArrayList<Monster>();
     private ArrayList<Monster> avaiableMonsters = mainGame.getMonsters();
-    public static String getPlayerName(){
+
+
+    public setUp(){
+        
+    }
+    public String getPlayerName(){
         String name = "Name: " + System.console().readLine();
         return name;
     }
@@ -42,6 +47,5 @@ public class setUp {
         return starterMonsters.get(Integer.parseInt(choice));
     }
     public static void main(String[] args) {
-        System.out.println(getPlayerName());
     }
 }
