@@ -3,8 +3,11 @@ public class Monster {
     private int monsterMaxHealth;
     private int monsterDamage;
     private int monsterCurrentHealth;
+    private int criticalStrike;
 
-    public Monster(String name, int health, int damage) {
+    
+
+    public Monster(String name, int health, int damage, int critChance) {
         monsterName = name;
         monsterMaxHealth = monsterCurrentHealth = health;
         monsterDamage = damage;

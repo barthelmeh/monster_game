@@ -9,9 +9,19 @@ public class mainGame {
     public void setDifficulty(gameDifficulty.difficulties newDifficulty) {
         difficulty = newDifficulty;
     }
-    public mainGame(){
 
+    public mainGame(){
+        setMonsters();
     }
+
+    private void setMonsters() {
+        File file = new File("Text Files\monsters.txt");
+        Scanner sc = new Scanner(file);
+        while (sc.hasNextLine()){
+            System.out.println(sc.nextLine());
+        }
+    }
+
     public gameDifficulty.difficulties getDifficulty() {
         return difficulty;
     }
@@ -33,7 +43,8 @@ public class mainGame {
         return allMonsters;
     }
     public static void main(String[] args) {
-        
+        mainGame gamer = new mainGame();
+        gamer.setMonster();
     }
 
     
