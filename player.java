@@ -6,9 +6,13 @@ public class player {
     private ArrayList<Item> inventory = new ArrayList<Item>();
     private int currentMoney;
     private int currentPoints;
-
-    public player(String name){
+    public player(){
+        currentMoney = 10;
+        currentPoints = 0;
+    }
+    public player(String name, Monster monster){
         playerName = name;
+        team.add(monster);
         currentMoney = 10;
         currentPoints = 0;
     }
