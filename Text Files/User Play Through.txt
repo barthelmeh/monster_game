@@ -1,0 +1,6 @@
+start app
+opens setup screen
+user inputs info
+clicks start adventure
+opens main game screen
+plays 1st day battle
