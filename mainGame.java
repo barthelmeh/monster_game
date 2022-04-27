@@ -10,7 +10,7 @@ public class mainGame {
     private gameDifficulty.difficulties difficulty = gameDifficulty.difficulties.MEDIUM;
     private int currentDay = 0;
     private int maxDay = 5;
-    private static ArrayList<Monster> allMonsters;
+    private static ArrayList<Monster> allMonsters = new ArrayList<Monster>();
 
     public void setDifficulty(gameDifficulty.difficulties newDifficulty) {
         difficulty = newDifficulty;
@@ -21,6 +21,7 @@ public class mainGame {
             setMonsters();
         } catch (Exception e) {
             //TODO: handle exception
+            e.printStackTrace();
             
         }
         
@@ -36,7 +37,7 @@ public class mainGame {
 
             while ((monster = br.readLine()) != null){
                 String[] values = monster.split(",");
-                Monster obj = new Monster(values[0],Integer.parseInt(values[1]),Integer.parseInt(values[2]),Integer.parseInt(values[3]));
+                Monster obj = new Monster(values[0],Integer.parseInt(values[1]),Integer.parseInt(values[2]),Double.parseDouble(values[3]));
                 allMonsters.add(obj);
             }
         } catch (IOException e) {
@@ -67,7 +68,7 @@ public class mainGame {
     public void increaseDay() {
         currentDay++;
     }
-    public static ArrayList<Monster> getMonsters() {
+    public ArrayList<Monster> getMonsters() {
         return allMonsters;
     }
 	public void launchSetupScreen() {
@@ -76,9 +77,15 @@ public class mainGame {
 	public void closeSetupScreen(setupScreen SetupWindow) {
 		SetupWindow.closeWindow();
 	}
+    public void closeMainScreen(mainScreen mainScreen) {
+        mainScreen.closeWindow();
+    }
     public static void main(String[] args) {
         mainGame gamer = new mainGame();
+        System.out.println(gamer.getMonsters());
         gamer.launchSetupScreen();
     }
+
+    
     
 }
