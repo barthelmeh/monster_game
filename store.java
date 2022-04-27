@@ -4,5 +4,4 @@ public class store {
     private ArrayList<Monster> availableMonster;
     private ArrayList<Item> availableItems;
 
-    public 
 }

@@ -46,6 +46,4 @@ public class setUp {
         String choice = "Monster: " + System.console().readLine();
         return starterMonsters.get(Integer.parseInt(choice));
     }
-    public static void main(String[] args) {
-    }
 }

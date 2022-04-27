@@ -1,4 +1,9 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Scanner;
+
+
 
 public class mainGame {
     private gameDifficulty.difficulties difficulty = gameDifficulty.difficulties.MEDIUM;
@@ -11,14 +16,25 @@ public class mainGame {
     }
 
     public mainGame(){
-        setMonsters();
+        try {
+            setMonsters();
+        } catch (Exception e) {
+            //TODO: handle exception
+            
+        }
+        
     }
 
-    private void setMonsters() {
-        File file = new File("Text Files\monsters.txt");
+    private void setMonsters() throws FileNotFoundException {
+        File file = new File("Text Files/monsters.txt");
         Scanner sc = new Scanner(file);
+        String monster;
         while (sc.hasNextLine()){
-            System.out.println(sc.nextLine());
+            monster = sc.nextLine();
+            String[] values = monster.split(",");
+            Monster obj = new Monster(values[0],Integer.parseInt(values[1]),Integer.parseInt(values[2]),Integer.parseInt(values[3]));
+            allMonsters.add(obj);
+
         }
     }
 
@@ -42,10 +58,10 @@ public class mainGame {
     public static ArrayList<Monster> getMonsters() {
         return allMonsters;
     }
+    
     public static void main(String[] args) {
         mainGame gamer = new mainGame();
-        gamer.setMonster();
-    }
 
+    }
     
 }
