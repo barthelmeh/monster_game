@@ -1,8 +1,9 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Scanner;
-
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 
 public class mainGame {
@@ -26,17 +27,27 @@ public class mainGame {
     }
 
     private void setMonsters() throws FileNotFoundException {
-        File file = new File("Text Files/monsters.txt");
-        Scanner sc = new Scanner(file);
-        String monster;
-        while (sc.hasNextLine()){
-            monster = sc.nextLine();
-            String[] values = monster.split(",");
-            Monster obj = new Monster(values[0],Integer.parseInt(values[1]),Integer.parseInt(values[2]),Integer.parseInt(values[3]));
-            allMonsters.add(obj);
+        BufferedReader br = null;
+        try {
+            File file = new File("Text Files/monsters.txt");
+            br = new BufferedReader(new FileReader(file));
 
+            String monster;
+
+            while ((monster = br.readLine()) != null){
+                String[] values = monster.split(",");
+                Monster obj = new Monster(values[0],Integer.parseInt(values[1]),Integer.parseInt(values[2]),Integer.parseInt(values[3]));
+                allMonsters.add(obj);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally { // Close the file
+            try {
+                br.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-        sc.close();
     }
 
     public gameDifficulty.difficulties getDifficulty() {
