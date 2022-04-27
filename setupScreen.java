@@ -307,7 +307,6 @@ public class setupScreen {
 		JRadioButton rdbtnStarterMonster = new JRadioButton(manager.getStarterMonsters().get(0).getName());
 		rdbtnStarterMonster.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_rdbtnStarterMonster = new GridBagConstraints();
-		gbc_rdbtnStarterMonster.fill = GridBagConstraints.HORIZONTAL;
 		gbc_rdbtnStarterMonster.anchor = GridBagConstraints.NORTH;
 		gbc_rdbtnStarterMonster.insets = new Insets(0, 0, 5, 5);
 		gbc_rdbtnStarterMonster.gridx = 1;
@@ -319,7 +318,6 @@ public class setupScreen {
 		JRadioButton rdbtnStarterMonster1 = new JRadioButton(manager.getStarterMonsters().get(1).getName());
 		rdbtnStarterMonster1.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_rdbtnStarterMonster1 = new GridBagConstraints();
-		gbc_rdbtnStarterMonster1.fill = GridBagConstraints.HORIZONTAL;
 		gbc_rdbtnStarterMonster1.anchor = GridBagConstraints.NORTH;
 		gbc_rdbtnStarterMonster1.insets = new Insets(0, 0, 5, 5);
 		gbc_rdbtnStarterMonster1.gridx = 2;
@@ -330,7 +328,6 @@ public class setupScreen {
 		JRadioButton rdbtnStarterMonster2 = new JRadioButton(manager.getStarterMonsters().get(2).getName());
 		rdbtnStarterMonster2.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_rdbtnStarterMonster2 = new GridBagConstraints();
-		gbc_rdbtnStarterMonster2.fill = GridBagConstraints.HORIZONTAL;
 		gbc_rdbtnStarterMonster2.insets = new Insets(0, 0, 5, 0);
 		gbc_rdbtnStarterMonster2.anchor = GridBagConstraints.NORTH;
 		gbc_rdbtnStarterMonster2.gridx = 3;
