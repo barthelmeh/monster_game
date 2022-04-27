@@ -1,24 +1,50 @@
-import java.lang.reflect.Array;
+
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.Random;
+
+import javax.swing.AbstractButton;
+import javax.swing.ButtonGroup;
 
 public class setUp {
     
-    private ArrayList<Monster> starterMonsters = new ArrayList<Monster>();
-    private ArrayList<Monster> avaiableMonsters = mainGame.getMonsters();
+	private mainGame manager;
+	private setupScreen screen;
 
+    public String getSelectedButtonText(ButtonGroup buttonGroup) {
+        for (Enumeration<AbstractButton> buttons = buttonGroup.getElements(); buttons.hasMoreElements();) {
+            AbstractButton button = buttons.nextElement();
 
-    public setUp(){
-        
+            if (button.isSelected()) {
+                return button.getText();
+            }
+        }
+
+        return null;
+    }
+
+    public setUp(mainGame incomingManager, setupScreen incomingScreen){
+    	manager = incomingManager;
+    	screen = incomingScreen;
+    	gameDifficulty.difficulties difficulty = getDifficulty();
+    	int maxDays = getMaxDays();
+    	manager.setMaxDay(maxDays);
+    	manager.setDifficulty(difficulty);
+    	System.out.println(manager.getMaxDay());
+    	System.out.println(manager.getDifficulty());
     }
     public String getPlayerName(){
-        String name = "Name: " + System.console().readLine();
+        String name = screen.userNameTextField.getText();
         return name;
     }
+    public int getMaxDays() {
+    	int maxDays = screen.maxDaySlider.getValue();
+    	return maxDays;
+    }
     public gameDifficulty.difficulties getDifficulty(){
-        String user_input = System.console().readLine();
+        String user_input = getSelectedButtonText(screen.difficultyButtonGroup);
         gameDifficulty.difficulties dif;
-        switch(user_input) {
+		switch(user_input.toLowerCase()) {
             case "easy":
                 dif = gameDifficulty.difficulties.EASY;
                 break;
@@ -33,17 +59,5 @@ public class setUp {
         }
 
         return dif;
-    }
-    public Monster chooseMonster(){
-        Random rand = new Random();
-        for (int i=0; i<3;  i++){
-            int randomIndex = rand.nextInt(avaiableMonsters.size());
-            Monster randomElemet = avaiableMonsters.get(randomIndex);
-            avaiableMonsters.remove(randomIndex);
-            starterMonsters.add(randomElemet);
-        }
-        System.out.println(starterMonsters);
-        String choice = "Monster: " + System.console().readLine();
-        return starterMonsters.get(Integer.parseInt(choice));
     }
 }

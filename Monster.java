@@ -11,6 +11,7 @@ public class Monster {
         monsterName = name;
         monsterMaxHealth = monsterCurrentHealth = health;
         monsterDamage = damage;
+        criticalStrike = critChance;
     }
 
     public String getName() {
@@ -24,6 +25,9 @@ public class Monster {
     }
     public int getMonsterMaxHealth(){
         return monsterMaxHealth;
+    }
+    public int getCriticalStrike(){
+        return criticalStrike;
     }
     public void useItem(Item item) {
         monsterMaxHealth += item.getMaxHealthIncrease();

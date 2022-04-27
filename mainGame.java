@@ -36,6 +36,7 @@ public class mainGame {
             allMonsters.add(obj);
 
         }
+        sc.close();
     }
 
     public gameDifficulty.difficulties getDifficulty() {
@@ -58,10 +59,15 @@ public class mainGame {
     public static ArrayList<Monster> getMonsters() {
         return allMonsters;
     }
-    
+	public void launchSetupScreen() {
+		setupScreen setupWindow = new setupScreen(this);
+	}
+	public void closeSetupScreen(setupScreen SetupWindow) {
+		SetupWindow.closeWindow();
+	}
     public static void main(String[] args) {
         mainGame gamer = new mainGame();
-
+        gamer.launchSetupScreen();
     }
     
 }
