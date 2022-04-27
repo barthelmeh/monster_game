@@ -3,11 +3,11 @@ public class Monster {
     private int monsterMaxHealth;
     private int monsterDamage;
     private int monsterCurrentHealth;
-    private int criticalStrike;
+    private double criticalStrike;
 
     
 
-    public Monster(String name, int health, int damage, int critChance) {
+    public Monster(String name, int health, int damage, double critChance) {
         monsterName = name;
         monsterMaxHealth = monsterCurrentHealth = health;
         monsterDamage = damage;
@@ -26,7 +26,7 @@ public class Monster {
     public int getMonsterMaxHealth(){
         return monsterMaxHealth;
     }
-    public int getCriticalStrike(){
+    public double getCriticalStrike(){
         return criticalStrike;
     }
     public void useItem(Item item) {

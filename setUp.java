@@ -1,7 +1,6 @@
 
 import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.Random;
 
 import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
@@ -11,6 +10,27 @@ public class setUp {
 	private mainGame manager;
 	private setupScreen screen;
 
+    
+
+    public setUp(mainGame incomingManager, setupScreen incomingScreen){
+    	manager = incomingManager;
+    	screen = incomingScreen;
+    	gameDifficulty.difficulties difficulty = getDifficulty();
+    	int maxDays = getMaxDays();
+    	manager.setMaxDay(maxDays);
+    	manager.setDifficulty(difficulty);
+
+        
+        manager.getPlayer().setPlayerName(getPlayerName());
+        manager.getPlayer().addMonster(getUsersStarterMonster());
+        System.out.println(getUsersStarterMonster());
+    	System.out.println(manager.getMaxDay());
+    	System.out.println(manager.getDifficulty());
+    }
+    public String getPlayerName(){
+        String name = screen.userNameTextField.getText();
+        return name;
+    }
     public String getSelectedButtonText(ButtonGroup buttonGroup) {
         for (Enumeration<AbstractButton> buttons = buttonGroup.getElements(); buttons.hasMoreElements();) {
             AbstractButton button = buttons.nextElement();
@@ -22,29 +42,14 @@ public class setUp {
 
         return null;
     }
-
-    public setUp(mainGame incomingManager, setupScreen incomingScreen){
-    	manager = incomingManager;
-    	screen = incomingScreen;
-    	gameDifficulty.difficulties difficulty = getDifficulty();
-    	int maxDays = getMaxDays();
-    	manager.setMaxDay(maxDays);
-    	manager.setDifficulty(difficulty);
-    	System.out.println(manager.getMaxDay());
-    	System.out.println(manager.getDifficulty());
-    }
-    public String getPlayerName(){
-        String name = screen.userNameTextField.getText();
-        return name;
-    }
     public int getMaxDays() {
     	int maxDays = screen.maxDaySlider.getValue();
     	return maxDays;
     }
     public gameDifficulty.difficulties getDifficulty(){
-        String user_input = getSelectedButtonText(screen.difficultyButtonGroup);
+        String userInput = getSelectedButtonText(screen.difficultyButtonGroup);
         gameDifficulty.difficulties dif;
-		switch(user_input.toLowerCase()) {
+		switch(userInput.toLowerCase()) {
             case "easy":
                 dif = gameDifficulty.difficulties.EASY;
                 break;
@@ -59,5 +64,14 @@ public class setUp {
         }
 
         return dif;
+    }
+    public Monster getUsersStarterMonster(){
+        String userInput = getSelectedButtonText(screen.starterButtonGroup);
+        ArrayList<Monster> monsters = manager.getStarterMonsters();
+        for (Monster monster : monsters){
+            if (monster.getName().equals(userInput)){
+                return monster;
+            }
+        } return null;
     }
 }
