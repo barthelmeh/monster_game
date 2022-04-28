@@ -1,5 +1,3 @@
-package src;
-
 public class Monster {
     private String monsterName;
     private int monsterMaxHealth;
