@@ -62,7 +62,9 @@ public class setupScreen {
 	public setupScreen() {
 		initialize();
 	}
-
+	public String toPercentage(double n){
+		return String.format("%.0f",n*100)+"%";
+	}
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -204,6 +206,7 @@ public class setupScreen {
 		gbc_lblHealth.gridx = 0;
 		gbc_lblHealth.gridy = 1;
 		panel.add(lblHealth, gbc_lblHealth);
+
 		
 		JLabel lblStarterMonsterHealth = new JLabel(Integer.toString(manager.getStarterMonsters().get(0).getMonsterMaxHealth()));
 		lblStarterMonsterHealth.setFont(new Font("Tahoma", Font.PLAIN, 30));
@@ -271,7 +274,7 @@ public class setupScreen {
 		gbc_lblCriticalChance.gridy = 3;
 		panel.add(lblCriticalChance, gbc_lblCriticalChance);
 		
-		JLabel lblStarterMonsterCritChance = new JLabel(Double.toString(manager.getStarterMonsters().get(0).getCriticalStrike()));
+		JLabel lblStarterMonsterCritChance = new JLabel(toPercentage(manager.getStarterMonsters().get(0).getCriticalStrike()));
 		lblStarterMonsterCritChance.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblStarterMonsterCritChance = new GridBagConstraints();
 		gbc_lblStarterMonsterCritChance.insets = new Insets(0, 0, 5, 5);
@@ -279,7 +282,7 @@ public class setupScreen {
 		gbc_lblStarterMonsterCritChance.gridy = 3;
 		panel.add(lblStarterMonsterCritChance, gbc_lblStarterMonsterCritChance);
 		
-		JLabel lblStarterMonsterCritChance_1 = new JLabel(Double.toString(manager.getStarterMonsters().get(1).getCriticalStrike()));
+		JLabel lblStarterMonsterCritChance_1 = new JLabel(toPercentage(manager.getStarterMonsters().get(1).getCriticalStrike()));
 		lblStarterMonsterCritChance_1.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblStarterMonsterCritChance_1 = new GridBagConstraints();
 		gbc_lblStarterMonsterCritChance_1.insets = new Insets(0, 0, 5, 5);
@@ -287,7 +290,7 @@ public class setupScreen {
 		gbc_lblStarterMonsterCritChance_1.gridy = 3;
 		panel.add(lblStarterMonsterCritChance_1, gbc_lblStarterMonsterCritChance_1);
 		
-		JLabel lblStarterMonsterCritChance_2 = new JLabel(Double.toString(manager.getStarterMonsters().get(2).getCriticalStrike()));
+		JLabel lblStarterMonsterCritChance_2 = new JLabel(toPercentage(manager.getStarterMonsters().get(2).getCriticalStrike()));
 		lblStarterMonsterCritChance_2.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblStarterMonsterCritChance_2 = new GridBagConstraints();
 		gbc_lblStarterMonsterCritChance_2.insets = new Insets(0, 0, 5, 0);
