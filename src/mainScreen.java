@@ -4,6 +4,9 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JPanel;
 import java.awt.GridLayout;
+import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
@@ -11,13 +14,14 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import javax.swing.JSplitPane;
+import javax.swing.JTable;
 
 public class mainScreen {
 
 	private JFrame window;
 	private mainGame manager;
 	private mainScreen screen;
-
+	private ArrayList<Monster> team;
 	/**
 	 * Launch the application.
 	 */
@@ -43,8 +47,12 @@ public class mainScreen {
 	public mainScreen(mainGame incomingManager) {
 		screen = this;
 		manager = incomingManager;
+		setTeam(manager.getPlayer().getTeam());
 		initialize();
 		window.setVisible(true);
+	}
+	public void setTeam(ArrayList<Monster> newTeam) {
+		team = newTeam;
 	}
 	public void closeWindow() {
 		window.dispose();
@@ -65,17 +73,23 @@ public class mainScreen {
 		JPanel panelTop = new JPanel();
 		
 		JPanel panelBattles = new JPanel();
+		panelBattles.setBorder(new LineBorder(new Color(0, 0, 0)));
 		
-		JPanel panel = new JPanel();
+		JPanel panelTeam = new JPanel();
+		panelTeam.setBorder(new LineBorder(new Color(0, 0, 0)));
+		
+		JPanel panelInventory = new JPanel();
+		panelInventory.setLayout(new GridLayout(1, 0, 0, 0));
 		GroupLayout groupLayout = new GroupLayout(window.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(panel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 1416, Short.MAX_VALUE)
-						.addComponent(panelBattles, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 1416, Short.MAX_VALUE)
-						.addComponent(panelTop, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 1416, Short.MAX_VALUE))
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(panelTeam, GroupLayout.DEFAULT_SIZE, 1414, Short.MAX_VALUE)
+						.addComponent(panelBattles, GroupLayout.DEFAULT_SIZE, 1414, Short.MAX_VALUE)
+						.addComponent(panelTop, GroupLayout.DEFAULT_SIZE, 1414, Short.MAX_VALUE)
+						.addComponent(panelInventory, GroupLayout.PREFERRED_SIZE, 1414, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
@@ -86,10 +100,71 @@ public class mainScreen {
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(panelBattles, GroupLayout.PREFERRED_SIZE, 439, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 135, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(324, Short.MAX_VALUE))
+					.addComponent(panelTeam, GroupLayout.PREFERRED_SIZE, 135, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(panelInventory, GroupLayout.PREFERRED_SIZE, 135, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(261, Short.MAX_VALUE))
 		);
+		
+		JPanel panel = new JPanel();
+		panelInventory.add(panel);
 		panel.setLayout(new GridLayout(1, 0, 0, 0));
+		
+		JTable table = new JTable();
+		panel.add(table);
+		panelTeam.setLayout(new GridLayout(1, 0, 0, 0));
+		
+		JPanel panelMonster = new JPanel();
+		panelMonster.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panelTeam.add(panelMonster);
+		JLabel lblMonsterName = new JLabel("Open Slot");
+		lblMonsterName.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		try {
+			lblMonsterName.setText(team.get(0).getName());
+		} catch (Exception e) {
+			System.out.println("Not enough monsters");
+		}
+		
+		panelMonster.add(lblMonsterName);
+		
+		JPanel panelMonster_1 = new JPanel();
+		panelMonster_1.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panelTeam.add(panelMonster_1);
+		
+		JLabel lblMonsterName_1 = new JLabel("Open Slot");
+		lblMonsterName_1.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		try {
+			lblMonsterName_1.setText(team.get(1).getName());
+		} catch (Exception e) {
+			System.out.println("Not enough monsters");
+		}
+		panelMonster_1.add(lblMonsterName_1);
+		
+		JPanel panelMonster_2 = new JPanel();
+		panelMonster_2.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panelTeam.add(panelMonster_2);
+		
+		JLabel lblMonsterName_2 = new JLabel("Open Slot");
+		lblMonsterName_2.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		try {
+			lblMonsterName_2.setText(team.get(1).getName());
+		} catch (Exception e) {
+			System.out.println("Not enough monsters");
+		}
+		panelMonster_2.add(lblMonsterName_2);
+		
+		JPanel panelMonster_3 = new JPanel();
+		panelMonster_3.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panelTeam.add(panelMonster_3);
+		
+		JLabel lblMonsterName_3 = new JLabel("Open Slot");
+		lblMonsterName_3.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		try {
+			lblMonsterName_3.setText(team.get(1).getName());
+		} catch (Exception e) {
+			System.out.println("Not enough monsters");
+		}
+		panelMonster_3.add(lblMonsterName_3);
 		panelBattles.setLayout(new GridLayout(1, 0, 0, 0));
 		
 		JPanel panelBattle1 = new JPanel();

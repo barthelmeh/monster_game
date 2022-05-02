@@ -88,7 +88,6 @@ public class setUp {
                 return button.getText();
             }
         }
-
         return null;
     }
     public int getMaxDays() {
@@ -116,6 +115,7 @@ public class setUp {
     }
     public Monster getUsersStarterMonster(){
         String userInput = getSelectedButtonText(screen.starterButtonGroup);
+        
         ArrayList<Monster> monsters = manager.getStarterMonsters();
         for (Monster monster : monsters){
             if (monster.getName().equals(userInput)){
