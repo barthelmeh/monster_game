@@ -15,6 +15,7 @@ import javax.swing.border.LineBorder;
 import java.awt.Color;
 import javax.swing.JSplitPane;
 import javax.swing.JTable;
+import java.awt.BorderLayout;
 
 public class mainScreen {
 
@@ -22,6 +23,7 @@ public class mainScreen {
 	private mainGame manager;
 	private mainScreen screen;
 	private ArrayList<Monster> team;
+	private ArrayList<Item> inventory;
 	/**
 	 * Launch the application.
 	 */
@@ -48,11 +50,15 @@ public class mainScreen {
 		screen = this;
 		manager = incomingManager;
 		setTeam(manager.getPlayer().getTeam());
+		setInventory(manager.getPlayer().getInventory());
 		initialize();
 		window.setVisible(true);
 	}
 	public void setTeam(ArrayList<Monster> newTeam) {
 		team = newTeam;
+	}
+	public void setInventory(ArrayList<Item> newInventory) {
+		inventory = newInventory;
 	}
 	public void closeWindow() {
 		window.dispose();
@@ -106,12 +112,109 @@ public class mainScreen {
 					.addContainerGap(261, Short.MAX_VALUE))
 		);
 		
-		JPanel panel = new JPanel();
-		panelInventory.add(panel);
-		panel.setLayout(new GridLayout(1, 0, 0, 0));
+		JPanel panelItem = new JPanel();
+		panelInventory.add(panelItem);
 		
-		JTable table = new JTable();
-		panel.add(table);
+		JLabel lblItemName = new JLabel("Open Slot");
+		lblItemName.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		lblItemName.setHorizontalAlignment(SwingConstants.CENTER);
+		try {
+			lblItemName.setText(inventory.get(0).getItemName());
+		} catch (Exception e) {
+			System.out.println("Open Slot");
+		}
+		panelItem.setLayout(new BorderLayout(0, 0));
+		panelItem.add(lblItemName, BorderLayout.NORTH);
+
+		
+		JLabel lblItemCost = new JLabel((String) null);
+		try {
+			lblItemCost.setText(Integer.toString(inventory.get(0).getItemCost()));
+		} catch (Exception e) {
+			System.out.println("Open Slot");
+		}
+		lblItemCost.setHorizontalAlignment(SwingConstants.CENTER);
+		lblItemCost.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		panelItem.add(lblItemCost, BorderLayout.SOUTH);
+		
+		JPanel panelItem_1 = new JPanel();
+		panelInventory.add(panelItem_1);
+		
+		JLabel lblItemName_1 = new JLabel("Open Slot");
+		lblItemName_1.setHorizontalAlignment(SwingConstants.CENTER);
+		try {
+			lblItemName_1.setText(inventory.get(0).getItemName());
+		} catch (Exception e) {
+			System.out.println("Not enough monsters");
+		}
+		panelItem_1.setLayout(new BorderLayout(0, 0));
+		panelItem_1.add(lblItemName_1, BorderLayout.NORTH);
+		
+		JPanel panelItem_2 = new JPanel();
+		panelInventory.add(panelItem_2);
+		panelItem_2.setLayout(new GridLayout(1, 0, 0, 0));
+		
+		JLabel lblItemName_2 = new JLabel("Open Slot");
+		lblItemName_2.setHorizontalAlignment(SwingConstants.CENTER);
+		try {
+			lblItemName_2.setText(inventory.get(0).getItemName());
+		} catch (Exception e) {
+			System.out.println("Not enough monsters");
+		}
+		panelItem_2.add(lblItemName_2);
+		
+		JPanel panelItem_3 = new JPanel();
+		panelInventory.add(panelItem_3);
+		panelItem_3.setLayout(new GridLayout(1, 0, 0, 0));
+		
+		JLabel lblItemName_3 = new JLabel("Open Slot");
+		lblItemName_3.setHorizontalAlignment(SwingConstants.CENTER);
+		try {
+			lblItemName_3.setText(inventory.get(0).getItemName());
+		} catch (Exception e) {
+			System.out.println("Not enough monsters");
+		}
+		panelItem_3.add(lblItemName_3);
+		
+		JPanel panelItem_4 = new JPanel();
+		panelInventory.add(panelItem_4);
+		panelItem_4.setLayout(new GridLayout(1, 0, 0, 0));
+		
+		JLabel lblItemName_4 = new JLabel("Open Slot");
+		lblItemName_4.setHorizontalAlignment(SwingConstants.CENTER);
+		try {
+			lblItemName_4.setText(inventory.get(0).getItemName());
+		} catch (Exception e) {
+			System.out.println("Not enough monsters");
+		}
+		panelItem_4.add(lblItemName_4);
+		
+		JPanel panelItem_5 = new JPanel();
+		panelInventory.add(panelItem_5);
+		panelItem_5.setLayout(new GridLayout(1, 0, 0, 0));
+		
+		JLabel lblItemName_5 = new JLabel("Open Slot");
+		lblItemName_5.setHorizontalAlignment(SwingConstants.CENTER);
+		try {
+			lblItemName_5.setText(inventory.get(0).getItemName());
+		} catch (Exception e) {
+			System.out.println("Not enough monsters");
+		}
+		panelItem_5.add(lblItemName_5);
+		
+		JPanel panelItem_6 = new JPanel();
+		panelInventory.add(panelItem_6);
+		panelItem_6.setLayout(new GridLayout(1, 0, 0, 0));
+		
+		JLabel lblItemName_6 = new JLabel("Open Slot");
+		lblItemName_6.setHorizontalAlignment(SwingConstants.CENTER);
+		try {
+			lblItemName_6.setText(inventory.get(0).getItemName());
+		} catch (Exception e) {
+			System.out.println("Not enough monsters");
+		}
+		panelItem_6.add(lblItemName_6);
+		
 		panelTeam.setLayout(new GridLayout(1, 0, 0, 0));
 		
 		JPanel panelMonster = new JPanel();

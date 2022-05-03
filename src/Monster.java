@@ -30,8 +30,5 @@ public class Monster {
         return criticalStrike;
     }
     public void useItem(Item item) {
-        monsterMaxHealth += item.getMaxHealthIncrease();
-        monsterDamage += item.getDamageIncrease();
-        monsterCurrentHealth += item.getHealthIncrease();
     }
 }
