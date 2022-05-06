@@ -29,6 +29,6 @@ public class Monster {
     public double getCriticalStrike(){
         return criticalStrike;
     }
-    public void useItem(Item item) {
+    public void useItem(item item) {
     }
 }

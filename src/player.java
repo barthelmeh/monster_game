@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class player {
     private String playerName;
     private ArrayList<Monster> team = new ArrayList<Monster>();
-    private ArrayList<Item> inventory = new ArrayList<Item>();
+    private ArrayList<item> inventory = new ArrayList<item>();
     private int currentMoney;
     private int currentPoints;
     public player(){
@@ -25,13 +25,13 @@ public class player {
     public ArrayList<Monster> getTeam(){
         return team;
     }
-    public ArrayList<Item> getInventory(){
+    public ArrayList<item> getInventory(){
         return inventory;
     }
     public void addMonster(Monster monster){
         team.add(monster);
     }
-    public void addItem(Item item){
+    public void addItem(item item){
         inventory.add(item);
     }
     public int getCurrentMoney(){

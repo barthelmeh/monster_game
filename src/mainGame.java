@@ -1,3 +1,4 @@
+import java.awt.Container;
 import java.util.ArrayList;
 
 
@@ -6,6 +7,8 @@ public class mainGame {
     private int currentDay = 0;
     private int maxDay = 5;
     private ArrayList<Monster> allMonsters = new ArrayList<Monster>();
+    private ArrayList<item> allItems = new ArrayList<item>();
+    private ArrayList<item> starterItems = new ArrayList<item>();
     private ArrayList<Monster> starterMonsters = new ArrayList<Monster>();
     private player newPlayer = new player();
 
@@ -42,30 +45,40 @@ public class mainGame {
 	public ArrayList<Monster> getStarterMonsters() {
 		return starterMonsters;
 	}
+	public ArrayList<item> getStarterItems() {
+		return starterItems;
+	}
 	public void increaseDay() {
         currentDay++;
     }
     public void addToAllMonsters(Monster monster){
         allMonsters.add(monster);
     }
+	public ArrayList<item> getAllItems() {
+		return allItems;
+	}
+	public void setAllItems(ArrayList<item> allItems) {
+		this.allItems = allItems;
+	}
 	public void launchSetupScreen() {
-		setupScreen setupWindow = new setupScreen(this);
+		new setupScreen(this);
 	}
     public void closeSetupScreen(setupScreen SetupWindow) {
 		SetupWindow.closeWindow();
         launchMainScreen();
 	}
     public void launchMainScreen(){
-        mainScreen mainWindow = new mainScreen(this);
+        new mainScreen(this);
     }
 	
     public void closeMainScreen(mainScreen mainScreen) {
         mainScreen.closeWindow();
     }
-      
+     
     public static void main(String[] args) {
         mainGame gamer = new mainGame();
         System.out.println(gamer.getAllMonsters());
         
     }
+	
 }
