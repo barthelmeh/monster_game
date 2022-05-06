@@ -20,15 +20,15 @@ public class setUp {
         try {
             setMonsters();
             setStarterMonsters();
-            setItems();
-            setStarterItems();
+            //setItems();
+            //setStarterItems();
         } catch (Exception e) {
             e.printStackTrace();
         } 
         manager.launchSetupScreen();
     }
     public void setItems() throws FileNotFoundException {
-    	ArrayList<item> items = new ArrayList<>();
+    	ArrayList<Item> items = new ArrayList<Item>();
     	BufferedReader br = null;
         try {
             File file = new File("Text Files/items.txt");
@@ -38,16 +38,21 @@ public class setUp {
 
             while ((item = br.readLine()) != null){
                 String[] values = item.split(",");
-                if (values[0].toLowerCase().startsWith("h")){
-                	items.add(new healthItem(values[0], Double.parseDouble(values[1]), Integer.parseInt(values[2])));
+                
+                switch(values[3]) {
+                    case "1":
+                        HealthItem healthObj = new HealthItem(values[0],Double.parseDouble(values[1]),Integer.parseInt(values[2]));
+                        items.add(healthObj);
+                        break;
+                    case "2":
+                        MaxHealthItem maxHealthObj = new MaxHealthItem(values[0],Double.parseDouble(values[1]),Integer.parseInt(values[2]));
+                        items.add(maxHealthObj);
+                        break;
+                    case "3":
+                        DamageItem damageObj = new DamageItem(values[0],Double.parseDouble(values[1]),Integer.parseInt(values[2]));
+                        items.add(damageObj);
+                        break;
                 }
-                else if (values[0].toLowerCase().startsWith("m")){
-                	items.add(new maxHealthItem(values[0], Double.parseDouble(values[1]), Integer.parseInt(values[2])));
-                }
-                else if (values[0].toLowerCase().startsWith("d")){
-                	items.add(new damageItem(values[0], Double.parseDouble(values[1]), Integer.parseInt(values[2])));
-                }
-
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -61,17 +66,18 @@ public class setUp {
         manager.setAllItems(items);
     }
     public void setStarterItems(){
-        ArrayList<item> avaiableItems = manager.getAllItems();
+        ArrayList<Item> avaiableItems = manager.getAllItems();
         Random rand = new Random();
         for (int i = 0; i < 3; i++){
         	System.out.println(avaiableItems.size());
             int randomIndex = rand.nextInt(avaiableItems.size());
-            item randomItem = avaiableItems.get(randomIndex);
+            Item randomItem = avaiableItems.get(randomIndex);
             manager.getStarterItems().add(randomItem);
             avaiableItems.remove(randomIndex);
         }
     }
     private void setMonsters() throws FileNotFoundException {
+        ArrayList<Monster> monsters = new ArrayList<Monster>();
         BufferedReader br = null;
         try {
             File file = new File("Text Files/monsters.txt");
@@ -82,7 +88,7 @@ public class setUp {
             while ((monster = br.readLine()) != null){
                 String[] values = monster.split(",");
                 Monster obj = new Monster(values[0],Integer.parseInt(values[1]),Integer.parseInt(values[2]),Double.parseDouble(values[3]));
-                manager.addToAllMonsters(obj);
+                monsters.add(obj);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -92,7 +98,7 @@ public class setUp {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
+        }manager.setAllMonsters(monsters);
     }
 
     public void setStarterMonsters(){
@@ -170,10 +176,10 @@ public class setUp {
             }
         } return null;
     }
-    private item getUsersStarterItem() {
+    private Item getUsersStarterItem() {
     	String userInput = getSelectedButtonText(screen.starterItemButtonGroup);
-    	ArrayList<item> items = manager.getStarterItems();
-    	for (item item : items) {
+    	ArrayList<Item> items = manager.getStarterItems();
+    	for (Item item : items) {
     		System.out.println(item.getItemName());
     		System.out.println(userInput);
     		if (item.getItemName().equals(userInput)) {

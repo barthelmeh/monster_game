@@ -1,0 +1,15 @@
+Health Potion I,0.10,5,1
+Health Potion II,0.25,10,1
+Health Potion III,0.5,15,1
+Health Potion IV,0.75,20,1
+Health Potion V,1,30,1
+Max Health Potion I,0.1,10,2
+Max Health Potion II,0.25,20,2
+Max Health Potion III,0.5,30,2
+Max Health Potion IV,0.75,40,2
+Max Health Potion V,1,50,2
+Damage Potion I,0.15,25,3
+Damage Potion II,0.25,35,3
+Damage Potion III,0.5,50,3
+Damage Potion IV,0.75,70,3
+Damage Potion V,1,100,3

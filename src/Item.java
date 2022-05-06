@@ -1,35 +1,12 @@
-public class Item {
-	private String itemName; 
-    private int itemIncrease;
-    private int itemCost;
+public interface Item {
+    String getItemName();
+    double getItemIncrease();
+    int getItemCost();
+
+    void setItemName(String itemName);
+    void setItemIncrease(double itemIncrease);
+    void setItemCost(int itemCost );
     
-    public Item(String name, int increase , int cost){
-		itemName = name;
-		itemIncrease = increase;
-		itemCost = cost;
-	}
+    void applyItem(Monster monster);
 
-	public String getItemName() {
-		return itemName;
-	}
-
-	public int getItemIncrease() {
-		return itemIncrease;
-	}
-
-	public int getItemCost() {
-		return itemCost;
-	}
-
-	public void setItemName(String itemName) {
-		this.itemName = itemName;
-	}
-
-	public void setItemIncrease(int itemIncrease) {
-		this.itemIncrease = itemIncrease;
-	}
-
-	public void setItemCost(int itemCost) {
-		this.itemCost = itemCost;
-	}
 }
