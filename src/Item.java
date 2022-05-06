@@ -1,13 +1,13 @@
-public class Item {
+public class item {
 	private String itemName; 
     private int itemIncrease;
     private int itemCost;
     
-    public Item(String name, int increase, int cost) {
-    	itemName = name;
-    	itemIncrease = increase;
-    	itemCost = cost;
-    }
+    public item(String name, int increase , int cost){
+		itemName = name;
+		itemIncrease = increase;
+		itemCost = cost;
+	}
 
 	public String getItemName() {
 		return itemName;
