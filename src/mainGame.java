@@ -6,8 +6,8 @@ public class mainGame {
     private int currentDay = 0;
     private int maxDay = 5;
     private ArrayList<Monster> allMonsters = new ArrayList<Monster>();
-    private ArrayList<item> allItems = new ArrayList<item>();
-    private ArrayList<item> starterItems = new ArrayList<item>();
+    private ArrayList<Item> allItems = new ArrayList<Item>();
+    private ArrayList<Item> starterItems = new ArrayList<Item>();
     private ArrayList<Monster> starterMonsters = new ArrayList<Monster>();
     private player newPlayer = new player();
 
@@ -44,7 +44,7 @@ public class mainGame {
 	public ArrayList<Monster> getStarterMonsters() {
 		return starterMonsters;
 	}
-	public ArrayList<item> getStarterItems() {
+	public ArrayList<Item> getStarterItems() {
 		return starterItems;
 	}
 	public void increaseDay() {
@@ -53,10 +53,10 @@ public class mainGame {
     public void addToAllMonsters(Monster monster){
         allMonsters.add(monster);
     }
-	public ArrayList<item> getAllItems() {
+	public ArrayList<Item> getAllItems() {
 		return allItems;
 	}
-	public void setAllItems(ArrayList<item> allItems) {
+	public void setAllItems(ArrayList<Item> allItems) {
 		this.allItems = allItems;
 	}
 	public void launchSetupScreen() {

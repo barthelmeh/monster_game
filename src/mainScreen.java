@@ -57,7 +57,7 @@ public class mainScreen {
 	public void setTeam(ArrayList<Monster> newTeam) {
 		team = newTeam;
 	}
-	public void setInventory(ArrayList<item> newInventory) {
+	public void setInventory(ArrayList<Item> newInventory) {
 		inventory = newInventory;
 	}
 	public void closeWindow() {

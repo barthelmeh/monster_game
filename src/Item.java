@@ -1,9 +1,9 @@
-public class item {
+public class Item {
 	private String itemName; 
     private int itemIncrease;
     private int itemCost;
     
-    public item(String name, int increase , int cost){
+    public Item(String name, int increase , int cost){
 		itemName = name;
 		itemIncrease = increase;
 		itemCost = cost;
@@ -32,5 +32,4 @@ public class item {
 	public void setItemCost(int itemCost) {
 		this.itemCost = itemCost;
 	}
-
 }
