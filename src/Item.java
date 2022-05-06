@@ -1,7 +1,7 @@
 public class item {
-	private String itemName; 
-    private int itemIncrease;
-    private int itemCost;
+	private String itemName = null; 
+    private int itemIncrease = 0;
+    private int itemCost = 0;
     
     public item(String name, int increase , int cost){
 		itemName = name;

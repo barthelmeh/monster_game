@@ -20,8 +20,8 @@ public class setUp {
         try {
             setMonsters();
             setStarterMonsters();
-            setItems();
-            setStarterItems();
+            //setItems();
+            //setStarterItems();
         } catch (Exception e) {
             e.printStackTrace();
         } 
@@ -37,17 +37,6 @@ public class setUp {
             String item;
 
             while ((item = br.readLine()) != null){
-                String[] values = item.split(",");
-                if (values[0].toLowerCase().startsWith("h")){
-                	items.add(new healthItem(values[0], Double.parseDouble(values[1]), Integer.parseInt(values[2])));
-                }
-                else if (values[0].toLowerCase().startsWith("m")){
-                	items.add(new maxHealthItem(values[0], Double.parseDouble(values[1]), Integer.parseInt(values[2])));
-                }
-                else if (values[0].toLowerCase().startsWith("d")){
-                	items.add(new damageItem(values[0], Double.parseDouble(values[1]), Integer.parseInt(values[2])));
-                }
-
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -72,6 +61,7 @@ public class setUp {
         }
     }
     private void setMonsters() throws FileNotFoundException {
+        ArrayList<Monster> monsters = new ArrayList<Monster>();
         BufferedReader br = null;
         try {
             File file = new File("Text Files/monsters.txt");
@@ -82,7 +72,7 @@ public class setUp {
             while ((monster = br.readLine()) != null){
                 String[] values = monster.split(",");
                 Monster obj = new Monster(values[0],Integer.parseInt(values[1]),Integer.parseInt(values[2]),Double.parseDouble(values[3]));
-                manager.addToAllMonsters(obj);
+                monsters.add(obj);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -92,7 +82,7 @@ public class setUp {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
+        }manager.setAllMonsters(monsters);
     }
 
     public void setStarterMonsters(){

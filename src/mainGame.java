@@ -50,8 +50,8 @@ public class mainGame {
 	public void increaseDay() {
         currentDay++;
     }
-    public void addToAllMonsters(Monster monster){
-        allMonsters.add(monster);
+    public void setAllMonsters(ArrayList<Monster> allMonsters){
+        this.allMonsters = allMonsters;
     }
 	public ArrayList<item> getAllItems() {
 		return allItems;

@@ -123,7 +123,7 @@ public class mainScreen {
 		try {
 			lblItemName.setText(inventory.get(0).getItemName());
 		} catch (Exception e) {
-			System.out.println(inventory.get(0).getItemName());
+			System.out.println("Open Slot");
 		}
 		panelItem.setLayout(new BorderLayout(0, 0));
 		panelItem.add(lblItemName, BorderLayout.CENTER);
