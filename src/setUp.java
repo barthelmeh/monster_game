@@ -14,6 +14,10 @@ public class setUp {
     
 	private mainGame manager;
 	private setupScreen screen;
+	
+	public setUp() {
+		// Empty so that we can create an instance of this class without running main screen.
+	}
 
     public setUp(mainGame incomingManager){
         manager = incomingManager;
