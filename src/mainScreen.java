@@ -124,7 +124,7 @@ public class mainScreen {
 			System.out.println("Open Slot");
 		}
 		panelItem.setLayout(new BorderLayout(0, 0));
-		panelItem.add(lblItemName, BorderLayout.NORTH);
+		panelItem.add(lblItemName, BorderLayout.CENTER);
 
 		
 		JLabel lblItemCost = new JLabel((String) null);
