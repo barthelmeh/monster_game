@@ -1,3 +1,0 @@
-Health Potion,40,15
-Max Health Potion,30,20
-Damage Potion,15,25

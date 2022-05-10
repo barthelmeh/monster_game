@@ -85,6 +85,7 @@ public class mainScreen {
 		panelTeam.setBorder(new LineBorder(new Color(0, 0, 0)));
 		
 		JPanel panelInventory = new JPanel();
+		panelInventory.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panelInventory.setLayout(new GridLayout(1, 0, 0, 0));
 		GroupLayout groupLayout = new GroupLayout(window.getContentPane());
 		groupLayout.setHorizontalGroup(
@@ -95,7 +96,7 @@ public class mainScreen {
 						.addComponent(panelTeam, GroupLayout.DEFAULT_SIZE, 1414, Short.MAX_VALUE)
 						.addComponent(panelBattles, GroupLayout.DEFAULT_SIZE, 1414, Short.MAX_VALUE)
 						.addComponent(panelTop, GroupLayout.DEFAULT_SIZE, 1414, Short.MAX_VALUE)
-						.addComponent(panelInventory, GroupLayout.PREFERRED_SIZE, 1414, GroupLayout.PREFERRED_SIZE))
+						.addComponent(panelInventory, GroupLayout.DEFAULT_SIZE, 1414, Short.MAX_VALUE))
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
@@ -113,10 +114,11 @@ public class mainScreen {
 		);
 		
 		JPanel panelItem = new JPanel();
+		panelItem.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panelInventory.add(panelItem);
 		
 		JLabel lblItemName = new JLabel("Open Slot");
-		lblItemName.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		lblItemName.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		lblItemName.setHorizontalAlignment(SwingConstants.CENTER);
 		try {
 			lblItemName.setText(inventory.get(0).getItemName());
@@ -129,91 +131,117 @@ public class mainScreen {
 		
 		JLabel lblItemCost = new JLabel((String) null);
 		try {
-			lblItemCost.setText(Integer.toString(inventory.get(0).getItemCost()));
+			lblItemCost.setText("Cost " + Integer.toString(inventory.get(0).getItemCost()));
 		} catch (Exception e) {
 			System.out.println("Open Slot");
 		}
 		lblItemCost.setHorizontalAlignment(SwingConstants.CENTER);
-		lblItemCost.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblItemCost.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		panelItem.add(lblItemCost, BorderLayout.SOUTH);
 		
 		JPanel panelItem_1 = new JPanel();
+		panelItem_1.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panelInventory.add(panelItem_1);
 		
 		JLabel lblItemName_1 = new JLabel("Open Slot");
+		lblItemName_1.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		lblItemName_1.setHorizontalAlignment(SwingConstants.CENTER);
 		try {
-			lblItemName_1.setText(inventory.get(0).getItemName());
+			lblItemName_1.setText(inventory.get(1).getItemName());
 		} catch (Exception e) {
 			System.out.println("Not enough monsters");
 		}
 		panelItem_1.setLayout(new BorderLayout(0, 0));
-		panelItem_1.add(lblItemName_1, BorderLayout.NORTH);
+		panelItem_1.add(lblItemName_1, BorderLayout.CENTER);
+		
+		JLabel lblItemCost_1 = new JLabel("Cost 0");
+		lblItemCost_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblItemCost_1.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		panelItem_1.add(lblItemCost_1, BorderLayout.SOUTH);
 		
 		JPanel panelItem_2 = new JPanel();
+		panelItem_2.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panelInventory.add(panelItem_2);
-		panelItem_2.setLayout(new GridLayout(1, 0, 0, 0));
 		
 		JLabel lblItemName_2 = new JLabel("Open Slot");
+		lblItemName_2.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		lblItemName_2.setHorizontalAlignment(SwingConstants.CENTER);
 		try {
-			lblItemName_2.setText(inventory.get(0).getItemName());
+			lblItemName_2.setText(inventory.get(2).getItemName());
 		} catch (Exception e) {
 			System.out.println("Not enough monsters");
 		}
+		panelItem_2.setLayout(new BorderLayout(0, 0));
 		panelItem_2.add(lblItemName_2);
 		
+		JLabel lblItemCost_2 = new JLabel("Cost 0");
+		lblItemCost_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblItemCost_2.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		panelItem_2.add(lblItemCost_2, BorderLayout.SOUTH);
+		
 		JPanel panelItem_3 = new JPanel();
+		panelItem_3.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panelInventory.add(panelItem_3);
-		panelItem_3.setLayout(new GridLayout(1, 0, 0, 0));
 		
 		JLabel lblItemName_3 = new JLabel("Open Slot");
+		lblItemName_3.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		lblItemName_3.setHorizontalAlignment(SwingConstants.CENTER);
 		try {
-			lblItemName_3.setText(inventory.get(0).getItemName());
+			lblItemName_3.setText(inventory.get(3).getItemName());
 		} catch (Exception e) {
 			System.out.println("Not enough monsters");
 		}
+		panelItem_3.setLayout(new BorderLayout(0, 0));
 		panelItem_3.add(lblItemName_3);
 		
+		JLabel lblItemCost_3 = new JLabel("Cost 0");
+		lblItemCost_3.setHorizontalAlignment(SwingConstants.CENTER);
+		lblItemCost_3.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		panelItem_3.add(lblItemCost_3, BorderLayout.SOUTH);
+		
 		JPanel panelItem_4 = new JPanel();
+		panelItem_4.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panelInventory.add(panelItem_4);
-		panelItem_4.setLayout(new GridLayout(1, 0, 0, 0));
 		
 		JLabel lblItemName_4 = new JLabel("Open Slot");
+		lblItemName_4.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		lblItemName_4.setHorizontalAlignment(SwingConstants.CENTER);
 		try {
-			lblItemName_4.setText(inventory.get(0).getItemName());
+			lblItemName_4.setText(inventory.get(4).getItemName());
 		} catch (Exception e) {
 			System.out.println("Not enough monsters");
 		}
+		panelItem_4.setLayout(new BorderLayout(0, 0));
 		panelItem_4.add(lblItemName_4);
 		
+		JLabel lblItemCost_4 = new JLabel("Cost 0");
+		lblItemCost_4.setHorizontalAlignment(SwingConstants.CENTER);
+		lblItemCost_4.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		panelItem_4.add(lblItemCost_4, BorderLayout.SOUTH);
+		
 		JPanel panelItem_5 = new JPanel();
+		panelItem_5.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panelInventory.add(panelItem_5);
-		panelItem_5.setLayout(new GridLayout(1, 0, 0, 0));
 		
 		JLabel lblItemName_5 = new JLabel("Open Slot");
+		lblItemName_5.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		lblItemName_5.setHorizontalAlignment(SwingConstants.CENTER);
 		try {
-			lblItemName_5.setText(inventory.get(0).getItemName());
+			lblItemName_5.setText(inventory.get(5).getItemName());
 		} catch (Exception e) {
 			System.out.println("Not enough monsters");
 		}
+		panelItem_5.setLayout(new BorderLayout(0, 0));
 		panelItem_5.add(lblItemName_5);
 		
-		JPanel panelItem_6 = new JPanel();
-		panelInventory.add(panelItem_6);
-		panelItem_6.setLayout(new GridLayout(1, 0, 0, 0));
-		
-		JLabel lblItemName_6 = new JLabel("Open Slot");
-		lblItemName_6.setHorizontalAlignment(SwingConstants.CENTER);
+		JLabel lblItemCost_5 = new JLabel("Cost 0");
+		lblItemCost_5.setHorizontalAlignment(SwingConstants.CENTER);
+		lblItemCost_5.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		panelItem_5.add(lblItemCost_5, BorderLayout.SOUTH);
 		try {
-			lblItemName_6.setText(inventory.get(0).getItemName());
 		} catch (Exception e) {
 			System.out.println("Not enough monsters");
 		}
-		panelItem_6.add(lblItemName_6);
 		
 		panelTeam.setLayout(new GridLayout(1, 0, 0, 0));
 		

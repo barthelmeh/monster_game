@@ -17,18 +17,33 @@ public class Monster {
     public String getName() {
         return monsterName;
     }
+
     public int getDamage(){
         return monsterDamage;
     }
+
     public int getMonsterCurrentHealth(){
         return monsterCurrentHealth;
     }
+
     public int getMonsterMaxHealth(){
         return monsterMaxHealth;
     }
+
     public double getCriticalStrike(){
         return criticalStrike;
     }
-    public void useItem(Item item) {
+
+    public void setCurrentHealth(int newHealth) {
+        monsterCurrentHealth = newHealth;
     }
+
+    public void setMaxHealth(int newHealth) {
+        monsterMaxHealth = newHealth;
+    }
+
+    public void setDamage(int newDamage) {
+        monsterDamage = newDamage;
+    }
+
 }
