@@ -13,7 +13,7 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
-public class battleScreen {
+public class BattleScreen {
 
 	private JFrame window;
 
@@ -24,7 +24,7 @@ public class battleScreen {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					battleScreen window = new battleScreen();
+					BattleScreen window = new BattleScreen();
 					window.window.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -36,7 +36,7 @@ public class battleScreen {
 	/**
 	 * Create the application.
 	 */
-	public battleScreen() {
+	public BattleScreen() {
 		initialize();
 	}
 

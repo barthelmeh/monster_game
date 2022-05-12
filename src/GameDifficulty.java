@@ -1,4 +1,4 @@
-public class gameDifficulty {
+public class GameDifficulty {
     public enum difficulties {
         EASY,
         MEDIUM,

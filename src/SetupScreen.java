@@ -20,15 +20,15 @@ import java.awt.Insets;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 
-public class setupScreen {
+public class SetupScreen {
 	public ButtonGroup difficultyButtonGroup = new ButtonGroup();
 	public ButtonGroup starterMonsterButtonGroup = new ButtonGroup();
 	public ButtonGroup starterItemButtonGroup = new ButtonGroup();
 	public JTextField userNameTextField = new JTextField();
 	public JSlider maxDaySlider = new JSlider();
 	private JFrame window;
-	private mainGame manager;
-	private setupScreen screen;
+	private MainGame manager;
+	private SetupScreen screen;
 	/**
 	 * Launch the application.
 	 */
@@ -36,7 +36,7 @@ public class setupScreen {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					setupScreen window = new setupScreen();
+					SetupScreen window = new SetupScreen();
 					window.window.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -48,7 +48,7 @@ public class setupScreen {
 	/**
 	 * Create the application.
 	 */
-	public setupScreen(mainGame incomingManager) {
+	public SetupScreen(MainGame incomingManager) {
 		screen = this;
 		manager = incomingManager;
 		initialize();
@@ -60,7 +60,7 @@ public class setupScreen {
 	public void finishedWindow() {
 		manager.closeSetupScreen(this);
 	}
-	public setupScreen() {
+	public SetupScreen() {
 		initialize();
 	}
 	public String toPercentage(double n){
@@ -119,10 +119,10 @@ public class setupScreen {
 		JButton btnStartGameButton = new JButton("Start Adventure");
 		btnStartGameButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setUp getButtons = new setUp();
+				SetUp getButtons = new SetUp();
 				if(getButtons.getSelectedButtonText(starterMonsterButtonGroup) != null &&
 						getButtons.getSelectedButtonText(starterItemButtonGroup) != null) {
-					setUp setup = new setUp(manager, screen);
+					SetUp setup = new SetUp(manager, screen);
 					manager.closeSetupScreen(screen);
 				}
 			}
@@ -150,7 +150,7 @@ public class setupScreen {
 		gbc_lblCost.gridy = 0;
 		panelItem.add(lblCost, gbc_lblCost);
 		
-		JLabel lblStarterItemCost = new JLabel((String) null);
+		JLabel lblStarterItemCost = new JLabel(Integer.toString(manager.getStarterItems().get(0).getItemCost()));
 		lblStarterItemCost.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblStarterItemCost = new GridBagConstraints();
 		gbc_lblStarterItemCost.insets = new Insets(0, 0, 5, 5);
@@ -158,7 +158,7 @@ public class setupScreen {
 		gbc_lblStarterItemCost.gridy = 0;
 		panelItem.add(lblStarterItemCost, gbc_lblStarterItemCost);
 		
-		JLabel lblStarterItemCost1 = new JLabel((String) null);
+		JLabel lblStarterItemCost1 = new JLabel(Integer.toString(manager.getStarterItems().get(1).getItemCost()));
 		lblStarterItemCost1.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblStarterItemCost1 = new GridBagConstraints();
 		gbc_lblStarterItemCost1.insets = new Insets(0, 0, 5, 5);
@@ -166,7 +166,7 @@ public class setupScreen {
 		gbc_lblStarterItemCost1.gridy = 0;
 		panelItem.add(lblStarterItemCost1, gbc_lblStarterItemCost1);
 		
-		JLabel lblStarterItemCost2 = new JLabel((String) null);
+		JLabel lblStarterItemCost2 = new JLabel(Integer.toString(manager.getStarterItems().get(2).getItemCost()));
 		lblStarterItemCost2.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblStarterItemCost2 = new GridBagConstraints();
 		gbc_lblStarterItemCost2.insets = new Insets(0, 0, 5, 0);
@@ -183,7 +183,7 @@ public class setupScreen {
 		gbc_lblIncreasePercentage.gridy = 1;
 		panelItem.add(lblIncreasePercentage, gbc_lblIncreasePercentage);
 		
-		JLabel lblStarterItemIncrease = new JLabel((String) null);
+		JLabel lblStarterItemIncrease = new JLabel(Double.toString(manager.getStarterItems().get(0).getItemIncrease()));
 		lblStarterItemIncrease.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblStarterItemIncrease = new GridBagConstraints();
 		gbc_lblStarterItemIncrease.insets = new Insets(0, 0, 5, 5);
@@ -191,7 +191,7 @@ public class setupScreen {
 		gbc_lblStarterItemIncrease.gridy = 1;
 		panelItem.add(lblStarterItemIncrease, gbc_lblStarterItemIncrease);
 		
-		JLabel lblStarterItemIncrease1 = new JLabel((String) null);
+		JLabel lblStarterItemIncrease1 = new JLabel(Double.toString(manager.getStarterItems().get(1).getItemIncrease()));
 		lblStarterItemIncrease1.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblStarterItemIncrease1 = new GridBagConstraints();
 		gbc_lblStarterItemIncrease1.insets = new Insets(0, 0, 5, 5);
@@ -199,7 +199,7 @@ public class setupScreen {
 		gbc_lblStarterItemIncrease1.gridy = 1;
 		panelItem.add(lblStarterItemIncrease1, gbc_lblStarterItemIncrease1);
 		
-		JLabel lblStarterItemIncrease2 = new JLabel((String) null);
+		JLabel lblStarterItemIncrease2 = new JLabel(Double.toString(manager.getStarterItems().get(2).getItemIncrease()));
 		lblStarterItemIncrease2.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblStarterItemIncrease2 = new GridBagConstraints();
 		gbc_lblStarterItemIncrease2.insets = new Insets(0, 0, 5, 0);
@@ -216,7 +216,7 @@ public class setupScreen {
 		gbc_lblSelection.gridy = 2;
 		panelItem.add(lblSelection, gbc_lblSelection);
 		
-		JRadioButton rdbtnStarterItem = new JRadioButton((String) null);
+		JRadioButton rdbtnStarterItem = new JRadioButton(manager.getStarterItems().get(0).getItemName());
 		rdbtnStarterItem.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_rdbtnStarterItem = new GridBagConstraints();
 		gbc_rdbtnStarterItem.anchor = GridBagConstraints.NORTH;
@@ -226,7 +226,7 @@ public class setupScreen {
 		panelItem.add(rdbtnStarterItem, gbc_rdbtnStarterItem);
 		starterItemButtonGroup.add(rdbtnStarterItem);
 		
-		JRadioButton rdbtnStarterItem1 = new JRadioButton((String) null);
+		JRadioButton rdbtnStarterItem1 = new JRadioButton(manager.getStarterItems().get(1).getItemName());
 		rdbtnStarterItem1.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_rdbtnStarterItem1 = new GridBagConstraints();
 		gbc_rdbtnStarterItem1.anchor = GridBagConstraints.NORTH;
@@ -236,7 +236,7 @@ public class setupScreen {
 		panelItem.add(rdbtnStarterItem1, gbc_rdbtnStarterItem1);
 		starterItemButtonGroup.add(rdbtnStarterItem1);
 		
-		JRadioButton rdbtnStarterItem2 = new JRadioButton((String) null);
+		JRadioButton rdbtnStarterItem2 = new JRadioButton(manager.getStarterItems().get(2).getItemName());
 		rdbtnStarterItem2.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_rdbtnStarterItem2 = new GridBagConstraints();
 		gbc_rdbtnStarterItem2.anchor = GridBagConstraints.NORTH;
