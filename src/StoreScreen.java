@@ -2,7 +2,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 
-public class storeScreen {
+public class StoreScreen {
 
 	private JFrame window;
 
@@ -13,7 +13,7 @@ public class storeScreen {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					storeScreen window = new storeScreen();
+					StoreScreen window = new StoreScreen();
 					window.window.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -25,7 +25,7 @@ public class storeScreen {
 	/**
 	 * Create the application.
 	 */
-	public storeScreen() {
+	public StoreScreen() {
 		initialize();
 	}
 

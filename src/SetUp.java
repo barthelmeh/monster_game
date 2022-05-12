@@ -10,16 +10,16 @@ import java.util.Random;
 import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 
-public class setUp {
+public class SetUp {
     
-	private mainGame manager;
-	private setupScreen screen;
+	private MainGame manager;
+	private SetupScreen screen;
 	
-	public setUp() {
+	public SetUp() {
 		// Empty so that we can create an instance of this class without running main screen.
 	}
 
-    public setUp(mainGame incomingManager){
+    public SetUp(MainGame incomingManager){
         manager = incomingManager;
         try {
             setMonsters();
@@ -35,7 +35,7 @@ public class setUp {
     	ArrayList<Item> items = new ArrayList<Item>();
     	BufferedReader br = null;
         try {
-            File file = new File("Text Files/items.txt");
+            File file = new File("src/Text Files/items.txt");
             br = new BufferedReader(new FileReader(file));
 
             String item;
@@ -84,7 +84,7 @@ public class setUp {
         ArrayList<Monster> monsters = new ArrayList<Monster>();
         BufferedReader br = null;
         try {
-            File file = new File("Text Files/monsters.txt");
+            File file = new File("src/Text Files/monsters.txt");
             br = new BufferedReader(new FileReader(file));
 
             String monster;
@@ -115,11 +115,11 @@ public class setUp {
             avaiableMonsters.remove(randomIndex);
         }
     }
-    public setUp(mainGame incomingManager, setupScreen incomingScreen){
+    public SetUp(MainGame incomingManager, SetupScreen incomingScreen){
     	manager = incomingManager;
-    	player newPlayer = manager.getPlayer();
+    	Player newPlayer = manager.getPlayer();
     	screen = incomingScreen;
-    	gameDifficulty.difficulties difficulty = getDifficulty();
+    	GameDifficulty.difficulties difficulty = getDifficulty();
     	int maxDays = getMaxDays();
     	manager.setMaxDay(maxDays);
     	manager.setDifficulty(difficulty);
@@ -152,21 +152,21 @@ public class setUp {
     	int maxDays = screen.maxDaySlider.getValue();
     	return maxDays;
     }
-    public gameDifficulty.difficulties getDifficulty(){
+    public GameDifficulty.difficulties getDifficulty(){
         String userInput = getSelectedButtonText(screen.difficultyButtonGroup);
-        gameDifficulty.difficulties dif;
+        GameDifficulty.difficulties dif;
 		switch(userInput.toLowerCase()) {
             case "easy":
-                dif = gameDifficulty.difficulties.EASY;
+                dif = GameDifficulty.difficulties.EASY;
                 break;
             case "medium":
-                dif = gameDifficulty.difficulties.MEDIUM;
+                dif = GameDifficulty.difficulties.MEDIUM;
                 break;
             case "hard":
-                dif = gameDifficulty.difficulties.HARD;
+                dif = GameDifficulty.difficulties.HARD;
                 break;
             default:
-                dif = gameDifficulty.difficulties.MEDIUM;
+                dif = GameDifficulty.difficulties.MEDIUM;
         }
 
         return dif;

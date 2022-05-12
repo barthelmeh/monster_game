@@ -1,16 +1,16 @@
 import java.util.ArrayList;
 
-public class player {
+public class Player {
     private String playerName;
     private ArrayList<Monster> team = new ArrayList<Monster>();
     private ArrayList<Item> inventory = new ArrayList<Item>();
     private int currentMoney;
     private int currentPoints;
-    public player(){
+    public Player(){
         currentMoney = 10;
         currentPoints = 0;
     }
-    public player(String name, Monster monster){
+    public Player(String name, Monster monster){
         playerName = name;
         team.add(monster);
         currentMoney = 10;

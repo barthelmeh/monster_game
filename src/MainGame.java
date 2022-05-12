@@ -1,23 +1,25 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 
-public class mainGame {
-    private gameDifficulty.difficulties difficulty = gameDifficulty.difficulties.MEDIUM;
+public class MainGame {
+    private GameDifficulty.difficulties difficulty = GameDifficulty.difficulties.MEDIUM;
     private int currentDay = 0;
     private int maxDay = 5;
     private ArrayList<Monster> allMonsters = new ArrayList<Monster>();
     private ArrayList<Item> allItems = new ArrayList<Item>();
     private ArrayList<Item> starterItems = new ArrayList<Item>();
     private ArrayList<Monster> starterMonsters = new ArrayList<Monster>();
-    private player newPlayer = new player();
+    private Player newPlayer = new Player();
+    private ArrayList<Battle> battles = new ArrayList<Battle>();
 
-    public mainGame(){
-        new setUp(this);
+    public MainGame(){
+        new SetUp(this);
     }
     public int getDaysLeft() {
     	return getMaxDay()-getCurrentDay();
     }
-    public player getPlayer(){
+    public Player getPlayer(){
         return newPlayer;
     }
     public int getCurrentDay() {
@@ -32,10 +34,10 @@ public class mainGame {
 	public void setMaxDay(int maxDay) {
 		this.maxDay = maxDay;
 	}
-	public gameDifficulty.difficulties getDifficulty() {
+	public GameDifficulty.difficulties getDifficulty() {
 		return difficulty;
 	}
-	public void setDifficulty(gameDifficulty.difficulties newDifficulty) {
+	public void setDifficulty(GameDifficulty.difficulties newDifficulty) {
         difficulty = newDifficulty;
     }
 	public ArrayList<Monster> getAllMonsters() {
@@ -59,23 +61,61 @@ public class mainGame {
 	public void setAllItems(ArrayList<Item> allItems) {
 		this.allItems = allItems;
 	}
-	public void launchSetupScreen() {
-		new setupScreen(this);
+	public ArrayList<Battle> getBattles() {
+		return battles;
 	}
-    public void closeSetupScreen(setupScreen SetupWindow) {
+	public void setBattles(ArrayList<Battle> newBattles) {
+		battles = newBattles;
+	}
+	public void launchSetupScreen() {
+		new SetupScreen(this);
+	}
+    public void closeSetupScreen(SetupScreen SetupWindow) {
 		SetupWindow.closeWindow();
         launchMainScreen();
 	}
     public void launchMainScreen(){
-        new mainScreen(this);
+    	setDaysBattles();
+        new MainScreen(this);
     }
 	
-    public void closeMainScreen(mainScreen mainScreen) {
+    private void setDaysBattles() {
+		Random rand = new Random();
+    	for (int i=0; i<4; i++ ){
+			ArrayList<Monster> team = new ArrayList<Monster>();
+			if (getCurrentDay() < 5) {
+				int randomSize = rand.nextInt(2);
+				for (int j=0; i < randomSize; j++){
+					int randomIndex = rand.nextInt(getAllMonsters().size());
+            		Monster randomMonster = getAllMonsters().get(randomIndex);
+					team.add(randomMonster);
+				}
+
+    		} else if (getCurrentDay() >= 5 && getCurrentDay() < 10){
+				int randomSize = rand.nextInt(2,3);
+				for (int j=0; i < randomSize; j++){
+					int randomIndex = rand.nextInt(getAllMonsters().size());
+            		Monster randomMonster = getAllMonsters().get(randomIndex);
+					team.add(randomMonster);
+				}
+			} else {
+				int randomSize = rand.nextInt(2, 4);
+				for (int j=0; i < randomSize; j++){
+					int randomIndex = rand.nextInt(getAllMonsters().size());
+            		Monster randomMonster = getAllMonsters().get(randomIndex);
+					team.add(randomMonster);
+				}
+			}
+			Battle battle = new Battle(team);
+			getBattles().add(battle);
+		}
+	}
+	public void closeMainScreen(MainScreen mainScreen) {
         mainScreen.closeWindow();
     }
      
     public static void main(String[] args) {
-        mainGame gamer = new mainGame();
+        MainGame gamer = new MainGame();
         System.out.println(gamer.getAllMonsters());
         
     }
