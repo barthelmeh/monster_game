@@ -16,12 +16,13 @@ import java.awt.Color;
 import javax.swing.JSplitPane;
 import javax.swing.JTable;
 import java.awt.BorderLayout;
+import javax.swing.JButton;
 
-public class mainScreen {
+public class MainScreen {
 
 	private JFrame window;
-	private mainGame manager;
-	private mainScreen screen;
+	private MainGame manager;
+	private MainScreen screen;
 	private ArrayList<Monster> team;
 	private ArrayList<Item> inventory;
 	/**
@@ -31,7 +32,7 @@ public class mainScreen {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					mainScreen window = new mainScreen();
+					MainScreen window = new MainScreen();
 					window.window.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -43,10 +44,10 @@ public class mainScreen {
 	/**
 	 * Create the application.
 	 */
-	public mainScreen() {
+	public MainScreen() {
 		initialize();
 	}
-	public mainScreen(mainGame incomingManager) {
+	public MainScreen(MainGame incomingManager) {
 		screen = this;
 		manager = incomingManager;
 		setTeam(manager.getPlayer().getTeam());
@@ -302,36 +303,70 @@ public class mainScreen {
 		panelBattle1.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panelBattles.add(panelBattle1);
 		
-		JLabel lblBattleTitle1 = new JLabel("Battle 1");
-		lblBattleTitle1.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblBattleTitle1.setHorizontalAlignment(SwingConstants.CENTER);
-		panelBattle1.add(lblBattleTitle1);
+		JLabel lblBattle1Title = new JLabel("Battle 1");
+		lblBattle1Title.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		lblBattle1Title.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		JPanel panelBattle1Team = new JPanel();
+		
+		JButton btnBattleButton = new JButton("Battle!");
+		btnBattleButton.setFont(new Font("Tahoma", Font.PLAIN, 35));
+		GroupLayout gl_panelBattle1 = new GroupLayout(panelBattle1);
+		gl_panelBattle1.setHorizontalGroup(
+			gl_panelBattle1.createParallelGroup(Alignment.LEADING)
+				.addComponent(lblBattle1Title, GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE)
+				.addComponent(panelBattle1Team, GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE)
+				.addComponent(btnBattleButton, GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE)
+		);
+		gl_panelBattle1.setVerticalGroup(
+			gl_panelBattle1.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelBattle1.createSequentialGroup()
+					.addComponent(lblBattle1Title, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(panelBattle1Team, GroupLayout.PREFERRED_SIZE, 281, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnBattleButton, GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE))
+		);
+		panelBattle1Team.setLayout(new GridLayout(1, 0, 0, 0));
+		
+		JLabel lblEnemyTeamMonster = new JLabel("New label");
+		panelBattle1Team.add(lblEnemyTeamMonster);
+		
+		JLabel lblEnemyTeamMonster1 = new JLabel("New label");
+		panelBattle1Team.add(lblEnemyTeamMonster1);
+		
+		JLabel lblEnemyTeamMonster2 = new JLabel("New label");
+		panelBattle1Team.add(lblEnemyTeamMonster2);
+		
+		JLabel lblEnemyTeamMonster3 = new JLabel("New label");
+		panelBattle1Team.add(lblEnemyTeamMonster3);
+		panelBattle1.setLayout(gl_panelBattle1);
 		
 		JPanel panelBattle2 = new JPanel();
 		panelBattle2.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panelBattles.add(panelBattle2);
 		
-		JLabel lblBattleTitle2 = new JLabel("Battle 2");
-		lblBattleTitle2.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		panelBattle2.add(lblBattleTitle2);
+		JLabel lblBattle2Title = new JLabel("Battle 2");
+		lblBattle2Title.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		panelBattle2.add(lblBattle2Title);
 		
 		JPanel panelBattle3 = new JPanel();
 		panelBattle3.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panelBattles.add(panelBattle3);
 		
-		JLabel lblBattleTitle3 = new JLabel("Battle 3");
-		lblBattleTitle3.setHorizontalAlignment(SwingConstants.CENTER);
-		lblBattleTitle3.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		panelBattle3.add(lblBattleTitle3);
+		JLabel lblBattle3Title = new JLabel("Battle 3");
+		lblBattle3Title.setHorizontalAlignment(SwingConstants.CENTER);
+		lblBattle3Title.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		panelBattle3.add(lblBattle3Title);
 		
 		JPanel panelBattle4 = new JPanel();
 		panelBattle4.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panelBattles.add(panelBattle4);
 		
-		JLabel lblBattleTitle4 = new JLabel("Battle 4");
-		lblBattleTitle4.setHorizontalAlignment(SwingConstants.CENTER);
-		lblBattleTitle4.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		panelBattle4.add(lblBattleTitle4);
+		JLabel lblBattle4Title = new JLabel("Battle 4");
+		lblBattle4Title.setHorizontalAlignment(SwingConstants.CENTER);
+		lblBattle4Title.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		panelBattle4.add(lblBattle4Title);
 		panelTop.setLayout(new GridLayout(1, 0, 0, 0));
 		
 		JLabel lblScore = new JLabel("Score: " + manager.getPlayer().getPoints());

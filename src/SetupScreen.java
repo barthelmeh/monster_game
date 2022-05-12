@@ -20,15 +20,15 @@ import java.awt.Insets;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 
-public class setupScreen {
+public class SetupScreen {
 	public ButtonGroup difficultyButtonGroup = new ButtonGroup();
 	public ButtonGroup starterMonsterButtonGroup = new ButtonGroup();
 	public ButtonGroup starterItemButtonGroup = new ButtonGroup();
 	public JTextField userNameTextField = new JTextField();
 	public JSlider maxDaySlider = new JSlider();
 	private JFrame window;
-	private mainGame manager;
-	private setupScreen screen;
+	private MainGame manager;
+	private SetupScreen screen;
 	/**
 	 * Launch the application.
 	 */
@@ -36,7 +36,7 @@ public class setupScreen {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					setupScreen window = new setupScreen();
+					SetupScreen window = new SetupScreen();
 					window.window.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -48,7 +48,7 @@ public class setupScreen {
 	/**
 	 * Create the application.
 	 */
-	public setupScreen(mainGame incomingManager) {
+	public SetupScreen(MainGame incomingManager) {
 		screen = this;
 		manager = incomingManager;
 		initialize();
@@ -60,7 +60,7 @@ public class setupScreen {
 	public void finishedWindow() {
 		manager.closeSetupScreen(this);
 	}
-	public setupScreen() {
+	public SetupScreen() {
 		initialize();
 	}
 	public String toPercentage(double n){
@@ -119,8 +119,12 @@ public class setupScreen {
 		JButton btnStartGameButton = new JButton("Start Adventure");
 		btnStartGameButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setUp setup = new setUp(manager,screen);
-				manager.closeSetupScreen(screen);
+				SetUp getButtons = new SetUp();
+				if(getButtons.getSelectedButtonText(starterMonsterButtonGroup) != null &&
+						getButtons.getSelectedButtonText(starterItemButtonGroup) != null) {
+					SetUp setup = new SetUp(manager, screen);
+					manager.closeSetupScreen(screen);
+				}
 			}
 		});
 		btnStartGameButton.setFont(new Font("Tahoma", Font.PLAIN, 30));
