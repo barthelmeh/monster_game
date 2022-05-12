@@ -20,8 +20,8 @@ public class setUp {
         try {
             setMonsters();
             setStarterMonsters();
-            //setItems();
-            //setStarterItems();
+            setItems();
+            setStarterItems();
         } catch (Exception e) {
             e.printStackTrace();
         } 
@@ -31,7 +31,7 @@ public class setUp {
     	ArrayList<Item> items = new ArrayList<Item>();
     	BufferedReader br = null;
         try {
-            File file = new File("Text Files/items.txt");
+            File file = new File("src/Text Files/items.txt");
             br = new BufferedReader(new FileReader(file));
 
             String item;
@@ -72,6 +72,7 @@ public class setUp {
         	System.out.println(avaiableItems.size());
             int randomIndex = rand.nextInt(avaiableItems.size());
             Item randomItem = avaiableItems.get(randomIndex);
+            System.out.println(randomItem.getItemName());
             manager.getStarterItems().add(randomItem);
             avaiableItems.remove(randomIndex);
         }
@@ -80,7 +81,7 @@ public class setUp {
         ArrayList<Monster> monsters = new ArrayList<Monster>();
         BufferedReader br = null;
         try {
-            File file = new File("Text Files/monsters.txt");
+            File file = new File("src/Text Files/monsters.txt");
             br = new BufferedReader(new FileReader(file));
 
             String monster;
