@@ -120,6 +120,7 @@ public class SetupScreen {
 		btnStartGameButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				SetUp getButtons = new SetUp();
+				
 				if(getButtons.getSelectedButtonText(starterMonsterButtonGroup) != null &&
 						getButtons.getSelectedButtonText(starterItemButtonGroup) != null) {
 					SetUp setup = new SetUp(manager, screen);
