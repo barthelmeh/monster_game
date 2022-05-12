@@ -85,7 +85,7 @@ public class MainGame {
 			ArrayList<Monster> team = new ArrayList<Monster>();
 			if (getCurrentDay() < 5) {
 				int randomSize = rand.nextInt(2);
-				for (int j=0; i < randomSize; j++){
+				for (int j=0; j < randomSize; j++){
 					int randomIndex = rand.nextInt(getAllMonsters().size());
             		Monster randomMonster = getAllMonsters().get(randomIndex);
 					team.add(randomMonster);
@@ -93,14 +93,14 @@ public class MainGame {
 
     		} else if (getCurrentDay() >= 5 && getCurrentDay() < 10){
 				int randomSize = rand.nextInt(2,3);
-				for (int j=0; i < randomSize; j++){
+				for (int j=0; j < randomSize; j++){
 					int randomIndex = rand.nextInt(getAllMonsters().size());
             		Monster randomMonster = getAllMonsters().get(randomIndex);
 					team.add(randomMonster);
 				}
 			} else {
 				int randomSize = rand.nextInt(2, 4);
-				for (int j=0; i < randomSize; j++){
+				for (int j=0; j < randomSize; j++){
 					int randomIndex = rand.nextInt(getAllMonsters().size());
             		Monster randomMonster = getAllMonsters().get(randomIndex);
 					team.add(randomMonster);

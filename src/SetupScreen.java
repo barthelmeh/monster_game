@@ -119,12 +119,8 @@ public class SetupScreen {
 		JButton btnStartGameButton = new JButton("Start Adventure");
 		btnStartGameButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				SetUp getButtons = new SetUp();
-				if(getButtons.getSelectedButtonText(starterMonsterButtonGroup) != null &&
-						getButtons.getSelectedButtonText(starterItemButtonGroup) != null) {
-					SetUp setup = new SetUp(manager, screen);
-					manager.closeSetupScreen(screen);
-				}
+				SetUp setup = new SetUp(manager,screen);
+				manager.closeSetupScreen(screen);
 			}
 		});
 		btnStartGameButton.setFont(new Font("Tahoma", Font.PLAIN, 30));
@@ -462,8 +458,4 @@ public class SetupScreen {
 		window.getContentPane().setLayout(groupLayout);
 	}
 
-	private String String(Object object) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
