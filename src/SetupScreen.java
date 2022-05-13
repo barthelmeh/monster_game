@@ -63,9 +63,7 @@ public class SetupScreen {
 	public SetupScreen() {
 		initialize();
 	}
-	public String toPercentage(double n){
-		return String.format("%.0f",n*100)+"%";
-	}
+	
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -396,7 +394,7 @@ public class SetupScreen {
 		gbc_lblCriticalChance.gridy = 2;
 		panelMonster.add(lblCriticalChance, gbc_lblCriticalChance);
 		
-		JLabel lblStarterMonsterCritChance = new JLabel(toPercentage(manager.getStarterMonsters().get(0).getCriticalStrike()));
+		JLabel lblStarterMonsterCritChance = new JLabel(manager.toPercentage(manager.getStarterMonsters().get(0).getCriticalStrike()));
 		lblStarterMonsterCritChance.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblStarterMonsterCritChance = new GridBagConstraints();
 		gbc_lblStarterMonsterCritChance.insets = new Insets(0, 0, 5, 5);
@@ -404,7 +402,7 @@ public class SetupScreen {
 		gbc_lblStarterMonsterCritChance.gridy = 2;
 		panelMonster.add(lblStarterMonsterCritChance, gbc_lblStarterMonsterCritChance);
 		
-		JLabel lblStarterMonsterCritChance_1 = new JLabel(toPercentage(manager.getStarterMonsters().get(1).getCriticalStrike()));
+		JLabel lblStarterMonsterCritChance_1 = new JLabel(manager.toPercentage(manager.getStarterMonsters().get(1).getCriticalStrike()));
 		lblStarterMonsterCritChance_1.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblStarterMonsterCritChance_1 = new GridBagConstraints();
 		gbc_lblStarterMonsterCritChance_1.insets = new Insets(0, 0, 5, 5);
@@ -412,7 +410,7 @@ public class SetupScreen {
 		gbc_lblStarterMonsterCritChance_1.gridy = 2;
 		panelMonster.add(lblStarterMonsterCritChance_1, gbc_lblStarterMonsterCritChance_1);
 		
-		JLabel lblStarterMonsterCritChance_2 = new JLabel(toPercentage(manager.getStarterMonsters().get(2).getCriticalStrike()));
+		JLabel lblStarterMonsterCritChance_2 = new JLabel(manager.toPercentage(manager.getStarterMonsters().get(2).getCriticalStrike()));
 		lblStarterMonsterCritChance_2.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblStarterMonsterCritChance_2 = new GridBagConstraints();
 		gbc_lblStarterMonsterCritChance_2.insets = new Insets(0, 0, 5, 0);

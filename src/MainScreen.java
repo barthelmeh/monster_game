@@ -14,6 +14,8 @@ import javax.swing.border.LineBorder;
 import java.awt.Color;
 import java.awt.BorderLayout;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class MainScreen {
 
@@ -87,6 +89,11 @@ public class MainScreen {
 		panelInventory.setLayout(new GridLayout(1, 0, 0, 0));
 		
 		JButton btnMoveTeam = new JButton("Move Monster / Apply Item");
+		btnMoveTeam.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				manager.launchMoveTeamScreen(btnMoveTeam);
+			}
+		});
 		btnMoveTeam.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GroupLayout groupLayout = new GroupLayout(window.getContentPane());
 		groupLayout.setHorizontalGroup(

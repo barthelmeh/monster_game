@@ -1,5 +1,8 @@
+import java.awt.Button;
 import java.util.ArrayList;
 import java.util.Random;
+
+import javax.swing.JButton;
 
 
 public class MainGame {
@@ -70,6 +73,14 @@ public class MainGame {
 	public void launchSetupScreen() {
 		new SetupScreen(this);
 	}
+	public void launchMoveTeamScreen(JButton btnMoveTeam) {
+		btnMoveTeam.setEnabled(false);
+		MoveTeamScreen moveTeam = new MoveTeamScreen(this, btnMoveTeam);
+	}
+	public void closeMoveTeamScreen(MoveTeamScreen moveTeamScreen, JButton button) {
+		moveTeamScreen.closeWindow();
+		button.setEnabled(true);
+	}
     public void closeSetupScreen(SetupScreen SetupWindow) {
 		SetupWindow.closeWindow();
         launchMainScreen();
@@ -78,7 +89,9 @@ public class MainGame {
     	setDaysBattles();
         new MainScreen(this);
     }
-	
+    public String toPercentage(double n){
+		return String.format("%.0f",n*100)+"%";
+	}
     private void setDaysBattles() {
 		Random rand = new Random();
     	for (int i=0; i<4; i++ ){
@@ -119,5 +132,6 @@ public class MainGame {
         System.out.println(gamer.getAllMonsters());
         
     }
+	
 	
 }
