@@ -73,6 +73,9 @@ public class MainGame {
 	public void launchSetupScreen() {
 		new SetupScreen(this);
 	}
+	public void launchBattleScreen(int battle){
+		new BattleScreen(this,getBattles().get(battle));
+	}
 	public void launchMoveTeamScreen(JButton btnMoveTeam) {
 		btnMoveTeam.setEnabled(false);
 		MoveTeamScreen moveTeam = new MoveTeamScreen(this, btnMoveTeam);
@@ -89,6 +92,9 @@ public class MainGame {
     	setDaysBattles();
         new MainScreen(this);
     }
+	public void closeBattleScreen(BattleScreen BattleScreen) {
+		BattleScreen.closeWindow();
+	}
     public String toPercentage(double n){
 		return String.format("%.0f",n*100)+"%";
 	}
@@ -126,12 +132,18 @@ public class MainGame {
 	public void closeMainScreen(MainScreen mainScreen) {
         mainScreen.closeWindow();
     }
+	public void closeMainScreen(MainScreen mainScreen, int i) {
+		mainScreen.closeWindow();
+		launchBattleScreen(i);
+    }
      
     public static void main(String[] args) {
         MainGame gamer = new MainGame();
         System.out.println(gamer.getAllMonsters());
         
     }
+    
+	
 	
 	
 }
