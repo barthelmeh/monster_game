@@ -3,15 +3,17 @@ public class Monster {
     private int monsterMaxHealth;
     private int monsterDamage;
     private int monsterCurrentHealth;
+    private int monsterCost;
     private double criticalStrike;
 
     
 
-    public Monster(String name, int health, int damage, double critChance) {
+    public Monster(String name, int health, int damage, double critChance, int cost) {
         monsterName = name;
         monsterMaxHealth = monsterCurrentHealth = health;
         monsterDamage = damage;
         criticalStrike = critChance;
+        monsterCost = cost;
     }
 
     public String getName() {
@@ -45,5 +47,13 @@ public class Monster {
     public void setDamage(int newDamage) {
         monsterDamage = newDamage;
     }
+
+	public int getMonsterCost() {
+		return monsterCost;
+	}
+
+	public void setMonsterCost(int newMonsterCost) {
+		monsterCost = newMonsterCost;
+	}
 
 }

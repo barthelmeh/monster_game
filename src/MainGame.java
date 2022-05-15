@@ -73,22 +73,26 @@ public class MainGame {
 	public void launchSetupScreen() {
 		new SetupScreen(this);
 	}
+	public void launchMainScreen(){
+    	setDaysBattles();
+        new MainScreen(this);
+    }
 	public void launchMoveTeamScreen(JButton btnMoveTeam) {
 		btnMoveTeam.setEnabled(false);
 		MoveTeamScreen moveTeam = new MoveTeamScreen(this, btnMoveTeam);
+	}
+	public void closeSetupScreen(SetupScreen SetupWindow) {
+		SetupWindow.closeWindow();
+        launchMainScreen();
 	}
 	public void closeMoveTeamScreen(MoveTeamScreen moveTeamScreen, JButton button) {
 		moveTeamScreen.closeWindow();
 		button.setEnabled(true);
 	}
-    public void closeSetupScreen(SetupScreen SetupWindow) {
-		SetupWindow.closeWindow();
-        launchMainScreen();
-	}
-    public void launchMainScreen(){
-    	setDaysBattles();
-        new MainScreen(this);
+	public void closeMainScreen(MainScreen mainScreen) {
+        mainScreen.closeWindow();
     }
+    
     public String toPercentage(double n){
 		return String.format("%.0f",n*100)+"%";
 	}
@@ -123,9 +127,7 @@ public class MainGame {
 			getBattles().add(battle);
 		}
 	}
-	public void closeMainScreen(MainScreen mainScreen) {
-        mainScreen.closeWindow();
-    }
+	
      
     public static void main(String[] args) {
         MainGame gamer = new MainGame();

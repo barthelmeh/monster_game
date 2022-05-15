@@ -92,7 +92,7 @@ public class SetUp {
 
             while ((monster = br.readLine()) != null){
                 String[] values = monster.split(",");
-                Monster obj = new Monster(values[0],Integer.parseInt(values[1]),Integer.parseInt(values[2]),Double.parseDouble(values[3]));
+                Monster obj = new Monster(values[0],Integer.parseInt(values[1]),Integer.parseInt(values[2]),Double.parseDouble(values[3]), Integer.parseInt(values[4]));
                 monsters.add(obj);
             }
         } catch (IOException e) {
