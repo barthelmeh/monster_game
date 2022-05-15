@@ -5,6 +5,7 @@ public class Battle {
 
     public Battle(ArrayList<Monster> team) {
     	enemyTeam = team;
+    	runBattle();
     }
     
     public ArrayList<Monster> getTeam() {
@@ -13,6 +14,10 @@ public class Battle {
 
     public void setTeam(ArrayList<Monster> team) {
         enemyTeam = team;
+    }
+    
+    public void runBattle() {
+    	
     }
 
     

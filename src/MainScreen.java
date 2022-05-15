@@ -63,8 +63,9 @@ public class MainScreen {
 	public void closeWindow() {
 		window.dispose();
 	}
-	public void finishedWindow() {
-		manager.closeMainScreen(this);
+	public void finishedWindow(int i) {
+		manager.closeMainScreen(this, i);
+
 	}
 
 	/**
@@ -301,6 +302,14 @@ public class MainScreen {
 		JPanel panelBattle1Team = new JPanel();
 		
 		JButton btnBattleButton = new JButton("Battle!");
+		btnBattleButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				finishedWindow(0);
+				
+			}
+
+			
+		});
 		btnBattleButton.setFont(new Font("Tahoma", Font.PLAIN, 35));
 		GroupLayout gl_panelBattle1 = new GroupLayout(panelBattle1);
 		gl_panelBattle1.setHorizontalGroup(
