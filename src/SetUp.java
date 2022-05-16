@@ -35,7 +35,7 @@ public class SetUp {
     	ArrayList<Item> items = new ArrayList<Item>();
     	BufferedReader br = null;
         try {
-            File file = new File("..\\Text Files/items.txt");
+            File file = new File("../Text Files/items.txt");
             br = new BufferedReader(new FileReader(file));
 
             String item;
@@ -85,7 +85,9 @@ public class SetUp {
         ArrayList<Monster> monsters = new ArrayList<Monster>();
         BufferedReader br = null;
         try {
-            File file = new File("..\\Text Files\\monsters.txt");
+            File file = new File("src/Text Files/monster.txt");
+
+            //File file = new File("../src/Text Files/monster.txt");
             br = new BufferedReader(new FileReader(file));
 
             String monster;

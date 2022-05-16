@@ -73,16 +73,9 @@ public class MainGame {
 	public void launchSetupScreen() {
 		new SetupScreen(this);
 	}
-<<<<<<< HEAD
-	public void launchMainScreen(){
-    	setDaysBattles();
-        new MainScreen(this);
-    }
-=======
 	public void launchBattleScreen(int battle){
 		new BattleScreen(this,getBattles().get(battle));
 	}
->>>>>>> 8b0a9454873b6e4904228da6dc6758cb071e8556
 	public void launchMoveTeamScreen(JButton btnMoveTeam) {
 		btnMoveTeam.setEnabled(false);
 		MoveTeamScreen moveTeam = new MoveTeamScreen(this, btnMoveTeam);
@@ -91,20 +84,17 @@ public class MainGame {
 		SetupWindow.closeWindow();
         launchMainScreen();
 	}
+	private void launchMainScreen() {
+		MainScreen mainScreen = new MainScreen(this);
+	}
 	public void closeMoveTeamScreen(MoveTeamScreen moveTeamScreen, JButton button) {
 		moveTeamScreen.closeWindow();
 		button.setEnabled(true);
 	}
-	public void closeMainScreen(MainScreen mainScreen) {
-        mainScreen.closeWindow();
-    }
-<<<<<<< HEAD
-    
-=======
+
 	public void closeBattleScreen(BattleScreen BattleScreen) {
 		BattleScreen.closeWindow();
 	}
->>>>>>> 8b0a9454873b6e4904228da6dc6758cb071e8556
     public String toPercentage(double n){
 		return String.format("%.0f",n*100)+"%";
 	}
@@ -139,9 +129,6 @@ public class MainGame {
 			getBattles().add(battle);
 		}
 	}
-<<<<<<< HEAD
-	
-=======
 	public void closeMainScreen(MainScreen mainScreen) {
         mainScreen.closeWindow();
     }
@@ -149,7 +136,6 @@ public class MainGame {
 		mainScreen.closeWindow();
 		launchBattleScreen(i);
     }
->>>>>>> 8b0a9454873b6e4904228da6dc6758cb071e8556
      
     public static void main(String[] args) {
         MainGame gamer = new MainGame();
