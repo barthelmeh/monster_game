@@ -117,9 +117,14 @@ public class SetupScreen {
 		JButton btnStartGameButton = new JButton("Start Adventure");
 		btnStartGameButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				SetUp getButtons = new SetUp();
+				SetUp getButtons = new SetUp(screen);
+				if (getButtons.getPlayerName().length() >= 3 && getButtons.getPlayerName().length() <= 15) {
+					
+				}
 				if(getButtons.getSelectedButtonText(starterMonsterButtonGroup) != null &&
-						getButtons.getSelectedButtonText(starterItemButtonGroup) != null) {
+						getButtons.getSelectedButtonText(starterItemButtonGroup) != null && 
+						getButtons.getPlayerName().length() >= 3 && 
+						getButtons.getPlayerName().length() <= 15) {
 					SetUp setup = new SetUp(manager, screen);
 					manager.closeSetupScreen(screen);
 				}

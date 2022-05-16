@@ -376,6 +376,7 @@ public class StoreScreen {
 		JButton btnSleep = new JButton("Sleep");
 		btnSleep.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				manager.increaseDay();
 				if (manager.getCurrentDay() == manager.getMaxDay()) {
 					finishedWindow("Game Over");
 				}else {

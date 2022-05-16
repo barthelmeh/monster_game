@@ -1,7 +1,5 @@
-import java.awt.Button;
 import java.util.ArrayList;
 import java.util.Random;
-
 import javax.swing.JButton;
 
 
@@ -27,37 +25,7 @@ public class MainGame {
 	public String toDollar(int n) {
 		return "$"+n;
 	}
-    private void setDaysBattles() {
-		Random rand = new Random();
-    	for (int i=0; i<4; i++ ){
-			ArrayList<Monster> team = new ArrayList<Monster>();
-			if (getCurrentDay() < 5) {
-				int randomSize = rand.nextInt(2);
-				for (int j=0; j < randomSize; j++){
-					int randomIndex = rand.nextInt(getAllMonsters().size());
-            		Monster randomMonster = getAllMonsters().get(randomIndex);
-					team.add(randomMonster);
-				}
-
-    		} else if (getCurrentDay() >= 5 && getCurrentDay() < 10){
-				int randomSize = rand.nextInt(2,3);
-				for (int j=0; j < randomSize; j++){
-					int randomIndex = rand.nextInt(getAllMonsters().size());
-            		Monster randomMonster = getAllMonsters().get(randomIndex);
-					team.add(randomMonster);
-				}
-			} else {
-				int randomSize = rand.nextInt(2, 4);
-				for (int j=0; j < randomSize; j++){
-					int randomIndex = rand.nextInt(getAllMonsters().size());
-            		Monster randomMonster = getAllMonsters().get(randomIndex);
-					team.add(randomMonster);
-				}
-			}
-			Battle battle = new Battle(team);
-			getBattles().add(battle);
-		}
-	}
+    
     public int getDaysLeft() {
     	return getMaxDay()-getCurrentDay();
     }
@@ -118,10 +86,6 @@ public class MainGame {
 	public void launchSetupScreen() {
 		new SetupScreen(this);
 	}
-	public void launchMainScreen(){
-    	setDaysBattles();
-        new MainScreen(this);
-    }
 	public void launchBattleScreen(int battle){
 		new BattleScreen(this,getBattles().get(battle));
 	}
@@ -141,11 +105,69 @@ public class MainGame {
 	}
 	public void closeSetupScreen(SetupScreen SetupWindow) {
 		SetupWindow.closeWindow();
+		setDaysBattles();
         launchMainScreen();
+	}
+	public void closeStoreScreen(StoreScreen storeScreen, String s) {
+		if (s.toLowerCase().startsWith("g")){
+			launchGameOverScreen();
+		} else {
+			setDaysBattles();
+			launchMainScreen();
+		}
+    }
+	private void launchMainScreen() {
+		MainScreen mainScreen = new MainScreen(this);
+	}
+	public void launchApplyItemScreen(JButton btnApplyItem) {
+		btnApplyItem.setEnabled(false);
+		ApplyItemScreen apply = new ApplyItemScreen(this, btnApplyItem);
+	}
+	public void closeApplyItemScreen(ApplyItemScreen screen, JButton button) {
+		screen.closeWindow();
+		button.setEnabled(true);
 	}
 	public void closeMoveTeamScreen(MoveTeamScreen moveTeamScreen, JButton button) {
 		moveTeamScreen.closeWindow();
 		button.setEnabled(true);
+	}
+
+	public void closeBattleScreen(BattleScreen BattleScreen) {
+		BattleScreen.closeWindow();
+	}
+	public void closeGameOverScreen(GameOverScreen gameOverScreen) {
+		gameOverScreen.closeWindow();
+	}
+    private void setDaysBattles() {
+		Random rand = new Random();
+    	for (int i=0; i<4; i++ ){
+			ArrayList<Monster> team = new ArrayList<Monster>();
+			if (getCurrentDay() < 5) {
+				int randomSize = rand.nextInt(2);
+				for (int j=0; j < randomSize; j++){
+					int randomIndex = rand.nextInt(getAllMonsters().size());
+            		Monster randomMonster = getAllMonsters().get(randomIndex);
+					team.add(randomMonster);
+				}
+
+    		} else if (getCurrentDay() >= 5 && getCurrentDay() < 10){
+				int randomSize = rand.nextInt(2,3);
+				for (int j=0; j < randomSize; j++){
+					int randomIndex = rand.nextInt(getAllMonsters().size());
+            		Monster randomMonster = getAllMonsters().get(randomIndex);
+					team.add(randomMonster);
+				}
+			} else {
+				int randomSize = rand.nextInt(2, 4);
+				for (int j=0; j < randomSize; j++){
+					int randomIndex = rand.nextInt(getAllMonsters().size());
+            		Monster randomMonster = getAllMonsters().get(randomIndex);
+					team.add(randomMonster);
+				}
+			}
+			Battle battle = new Battle(team);
+			getBattles().add(battle);
+		}
 	}
 	public void closeMainScreen(MainScreen mainScreen) {
         mainScreen.closeWindow();
@@ -154,29 +176,14 @@ public class MainGame {
 		mainScreen.closeWindow();
 		launchBattleScreen(i);
     }
-	public void closeBattleScreen(BattleScreen battleScreen) {
-		battleScreen.closeWindow();
-		setUpStore();
-	}
-	public void closeStoreScreen(StoreScreen storeScreen, String s) {
-		storeScreen.closeWindow();
-		if (s.startsWith("g")) {
-			launchGameOverScreen();
-		}else {
-			launchMainScreen();
-		}
-		
-	}
-	
-	public void closeGameOverScreen(GameOverScreen gameOverScreen) {
-		gameOverScreen.closeWindow();
-	}
+     
     public static void main(String[] args) {
         MainGame gamer = new MainGame();
         System.out.println(gamer.getAllMonsters());
         
     }
 	
+    
 	
     
 	
