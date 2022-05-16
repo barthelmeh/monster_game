@@ -89,26 +89,35 @@ public class MainScreen {
 		panelInventory.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panelInventory.setLayout(new GridLayout(1, 0, 0, 0));
 		
-		JButton btnMoveTeam = new JButton("Move Monster / Apply Item");
+		JButton btnMoveTeam = new JButton("Move Monster");
 		btnMoveTeam.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				manager.launchMoveTeamScreen(btnMoveTeam);
 			}
 		});
 		btnMoveTeam.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		
+		JButton btnApplyItem = new JButton("Apply Item");
+		btnApplyItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				manager.launchApplyItemScreen(btnApplyItem);
+			}
+		});
+		btnApplyItem.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GroupLayout groupLayout = new GroupLayout(window.getContentPane());
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(panelTeam, GroupLayout.DEFAULT_SIZE, 1414, Short.MAX_VALUE)
-						.addComponent(panelBattles, GroupLayout.DEFAULT_SIZE, 1414, Short.MAX_VALUE)
-						.addComponent(panelTop, GroupLayout.DEFAULT_SIZE, 1414, Short.MAX_VALUE)
-						.addComponent(panelInventory, GroupLayout.DEFAULT_SIZE, 1414, Short.MAX_VALUE)
+						.addComponent(panelTeam, GroupLayout.DEFAULT_SIZE, 1416, Short.MAX_VALUE)
+						.addComponent(panelBattles, GroupLayout.DEFAULT_SIZE, 1416, Short.MAX_VALUE)
+						.addComponent(panelTop, GroupLayout.DEFAULT_SIZE, 1416, Short.MAX_VALUE)
+						.addComponent(panelInventory, GroupLayout.DEFAULT_SIZE, 1416, Short.MAX_VALUE)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(btnMoveTeam, GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE)
-							.addGap(945)))
+							.addComponent(btnMoveTeam, GroupLayout.PREFERRED_SIZE, 473, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnApplyItem, GroupLayout.PREFERRED_SIZE, 473, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
@@ -123,8 +132,10 @@ public class MainScreen {
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(panelInventory, GroupLayout.PREFERRED_SIZE, 135, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnMoveTeam, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(73, Short.MAX_VALUE))
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(btnMoveTeam, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnApplyItem, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(75, Short.MAX_VALUE))
 		);
 		
 		JPanel panelItem = new JPanel();

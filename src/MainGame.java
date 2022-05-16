@@ -1,7 +1,5 @@
-import java.awt.Button;
 import java.util.ArrayList;
 import java.util.Random;
-
 import javax.swing.JButton;
 
 
@@ -87,6 +85,14 @@ public class MainGame {
 	private void launchMainScreen() {
 		MainScreen mainScreen = new MainScreen(this);
 	}
+	public void launchApplyItemScreen(JButton btnApplyItem) {
+		btnApplyItem.setEnabled(false);
+		ApplyItemScreen apply = new ApplyItemScreen(this, btnApplyItem);
+	}
+	public void closeApplyItemScreen(ApplyItemScreen screen, JButton button) {
+		screen.closeWindow();
+		button.setEnabled(true);
+	}
 	public void closeMoveTeamScreen(MoveTeamScreen moveTeamScreen, JButton button) {
 		moveTeamScreen.closeWindow();
 		button.setEnabled(true);
@@ -142,6 +148,7 @@ public class MainGame {
         System.out.println(gamer.getAllMonsters());
         
     }
+	
     
 	
 	
