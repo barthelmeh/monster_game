@@ -30,9 +30,11 @@ public class Player {
     }
     public void addMonster(Monster monster){
         team.add(monster);
+        decreaseMoney(monster.getMonsterCost());
     }
     public void addItem(Item item){
         inventory.add(item);
+        decreaseMoney(item.getItemCost());
     }
     public int getCurrentMoney(){
         return currentMoney;

@@ -10,15 +10,54 @@ public class MainGame {
     private int currentDay = 0;
     private int maxDay = 5;
     private ArrayList<Monster> allMonsters = new ArrayList<Monster>();
+    private ArrayList<Monster> starterMonsters = new ArrayList<Monster>();
+    private ArrayList<Monster> storeMonsters = new ArrayList<Monster>();
     private ArrayList<Item> allItems = new ArrayList<Item>();
     private ArrayList<Item> starterItems = new ArrayList<Item>();
-    private ArrayList<Monster> starterMonsters = new ArrayList<Monster>();
+    private ArrayList<Item> storeItems = new ArrayList<Item>();
     private Player newPlayer = new Player();
     private ArrayList<Battle> battles = new ArrayList<Battle>();
 
     public MainGame(){
         new SetUp(this);
     }
+	public String toPercentage(double n){
+		return String.format("%.0f",n*100)+"%";
+	}
+	public String toDollar(int n) {
+		return "$"+n;
+	}
+    private void setDaysBattles() {
+		Random rand = new Random();
+    	for (int i=0; i<4; i++ ){
+			ArrayList<Monster> team = new ArrayList<Monster>();
+			if (getCurrentDay() < 5) {
+				int randomSize = rand.nextInt(2);
+				for (int j=0; j < randomSize; j++){
+					int randomIndex = rand.nextInt(getAllMonsters().size());
+            		Monster randomMonster = getAllMonsters().get(randomIndex);
+					team.add(randomMonster);
+				}
+
+    		} else if (getCurrentDay() >= 5 && getCurrentDay() < 10){
+				int randomSize = rand.nextInt(2,3);
+				for (int j=0; j < randomSize; j++){
+					int randomIndex = rand.nextInt(getAllMonsters().size());
+            		Monster randomMonster = getAllMonsters().get(randomIndex);
+					team.add(randomMonster);
+				}
+			} else {
+				int randomSize = rand.nextInt(2, 4);
+				for (int j=0; j < randomSize; j++){
+					int randomIndex = rand.nextInt(getAllMonsters().size());
+            		Monster randomMonster = getAllMonsters().get(randomIndex);
+					team.add(randomMonster);
+				}
+			}
+			Battle battle = new Battle(team);
+			getBattles().add(battle);
+		}
+	}
     public int getDaysLeft() {
     	return getMaxDay()-getCurrentDay();
     }
@@ -52,6 +91,12 @@ public class MainGame {
 	public ArrayList<Item> getStarterItems() {
 		return starterItems;
 	}
+	public ArrayList<Monster> getStoreMonsters() {
+		return storeMonsters;
+	}
+	public ArrayList<Item> getStoreItems() {
+		return storeItems;
+	}
 	public void increaseDay() {
         currentDay++;
     }
@@ -61,8 +106,8 @@ public class MainGame {
 	public ArrayList<Item> getAllItems() {
 		return allItems;
 	}
-	public void setAllItems(ArrayList<Item> allItems) {
-		this.allItems = allItems;
+	public void setAllItems(ArrayList<Item> newAllItems) {
+		allItems = newAllItems;
 	}
 	public ArrayList<Battle> getBattles() {
 		return battles;
@@ -73,19 +118,26 @@ public class MainGame {
 	public void launchSetupScreen() {
 		new SetupScreen(this);
 	}
-<<<<<<< HEAD
 	public void launchMainScreen(){
     	setDaysBattles();
         new MainScreen(this);
     }
-=======
 	public void launchBattleScreen(int battle){
 		new BattleScreen(this,getBattles().get(battle));
 	}
->>>>>>> 8b0a9454873b6e4904228da6dc6758cb071e8556
 	public void launchMoveTeamScreen(JButton btnMoveTeam) {
 		btnMoveTeam.setEnabled(false);
 		MoveTeamScreen moveTeam = new MoveTeamScreen(this, btnMoveTeam);
+	}
+	public void setUpStore(){
+		new StoreSetUp(this);
+		launchStoreScreen();
+	}
+	public void launchStoreScreen(){
+		StoreScreen store = new StoreScreen(this, this.getPlayer());
+	}
+	private void launchGameOverScreen() {
+		GameOverScreen gameOver = new GameOverScreen(this);
 	}
 	public void closeSetupScreen(SetupScreen SetupWindow) {
 		SetupWindow.closeWindow();
@@ -98,64 +150,34 @@ public class MainGame {
 	public void closeMainScreen(MainScreen mainScreen) {
         mainScreen.closeWindow();
     }
-<<<<<<< HEAD
-    
-=======
-	public void closeBattleScreen(BattleScreen BattleScreen) {
-		BattleScreen.closeWindow();
-	}
->>>>>>> 8b0a9454873b6e4904228da6dc6758cb071e8556
-    public String toPercentage(double n){
-		return String.format("%.0f",n*100)+"%";
-	}
-    private void setDaysBattles() {
-		Random rand = new Random();
-    	for (int i=0; i<4; i++ ){
-			ArrayList<Monster> team = new ArrayList<Monster>();
-			if (getCurrentDay() < 5) {
-				int randomSize = rand.nextInt(2);
-				for (int j=0; j < randomSize; j++){
-					int randomIndex = rand.nextInt(getAllMonsters().size());
-            		Monster randomMonster = getAllMonsters().get(randomIndex);
-					team.add(randomMonster);
-				}
-
-    		} else if (getCurrentDay() >= 5 && getCurrentDay() < 10){
-				int randomSize = rand.nextInt(2,3);
-				for (int j=0; j < randomSize; j++){
-					int randomIndex = rand.nextInt(getAllMonsters().size());
-            		Monster randomMonster = getAllMonsters().get(randomIndex);
-					team.add(randomMonster);
-				}
-			} else {
-				int randomSize = rand.nextInt(2, 4);
-				for (int j=0; j < randomSize; j++){
-					int randomIndex = rand.nextInt(getAllMonsters().size());
-            		Monster randomMonster = getAllMonsters().get(randomIndex);
-					team.add(randomMonster);
-				}
-			}
-			Battle battle = new Battle(team);
-			getBattles().add(battle);
-		}
-	}
-<<<<<<< HEAD
-	
-=======
-	public void closeMainScreen(MainScreen mainScreen) {
-        mainScreen.closeWindow();
-    }
 	public void closeMainScreen(MainScreen mainScreen, int i) {
 		mainScreen.closeWindow();
 		launchBattleScreen(i);
     }
->>>>>>> 8b0a9454873b6e4904228da6dc6758cb071e8556
-     
+	public void closeBattleScreen(BattleScreen battleScreen) {
+		battleScreen.closeWindow();
+		setUpStore();
+	}
+	public void closeStoreScreen(StoreScreen storeScreen, String s) {
+		storeScreen.closeWindow();
+		if (s.startsWith("g")) {
+			launchGameOverScreen();
+		}else {
+			launchMainScreen();
+		}
+		
+	}
+	
+	public void closeGameOverScreen(GameOverScreen gameOverScreen) {
+		gameOverScreen.closeWindow();
+	}
     public static void main(String[] args) {
         MainGame gamer = new MainGame();
         System.out.println(gamer.getAllMonsters());
         
     }
+	
+	
     
 	
 	
