@@ -175,18 +175,10 @@ public class MainGame {
 	public void closeMainScreen(MainScreen mainScreen, int i) {
 		mainScreen.closeWindow();
 		launchBattleScreen(i);
-    }
-     
+    }   
     public static void main(String[] args) {
         MainGame gamer = new MainGame();
         System.out.println(gamer.getAllMonsters());
         
     }
-	
-    
-	
-    
-	
-	
-	
 }

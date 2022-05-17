@@ -1,6 +1,12 @@
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import java.awt.Font;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class GameOverScreen {
 
@@ -46,8 +52,24 @@ public class GameOverScreen {
 	 */
 	private void initialize() {
 		window = new JFrame();
-		window.setBounds(100, 100, 450, 300);
+		window.setBounds(100, 100, 1125, 514);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		window.getContentPane().setLayout(null);
+		
+		JLabel lblGameOverLabel = new JLabel("Game Over");
+		lblGameOverLabel.setFont(new Font("Tahoma", Font.PLAIN, 55));
+		lblGameOverLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblGameOverLabel.setBounds(10, 11, 1099, 398);
+		window.getContentPane().add(lblGameOverLabel);
+		
+		JButton btnNewButton = new JButton("Quit");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				closeWindow();
+			}
+		});
+		btnNewButton.setBounds(486, 420, 102, 44);
+		window.getContentPane().add(btnNewButton);
 	}
 
 }

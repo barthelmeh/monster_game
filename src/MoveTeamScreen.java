@@ -13,6 +13,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Enumeration;
 import javax.swing.border.LineBorder;
 
@@ -32,6 +33,7 @@ public class MoveTeamScreen {
 	private MainGame manager;
 	private JButton button;
 	private ArrayList<JCheckBox> teamButtonList = new ArrayList<JCheckBox>();
+	private ArrayList<Monster> playerTeam;
 
 	/**
 	 * Launch the application.
@@ -59,6 +61,7 @@ public class MoveTeamScreen {
 	public MoveTeamScreen(MainGame incomingManager, JButton incomingButton) {
 		screen = this;
 		manager = incomingManager;
+		playerTeam = manager.getPlayer().getTeam();
 		button = incomingButton;
 		initialize();
 		window.setVisible(true);
@@ -92,12 +95,24 @@ public class MoveTeamScreen {
                 }
             }
         }
-        
     }
 	public ArrayList<JCheckBox> getTeamButtonList() {
 		return teamButtonList;
 	}
-
+	public void swapMonsters() {
+		int counter = 0;
+		int first = -1;
+		int second = -1;
+		for (JCheckBox box : getTeamButtonList()) {
+			if (first == -1 && box.isSelected()) {
+				first = getTeamButtonList().indexOf(box);
+			} else if (first == -1 && box.isSelected()) {
+				second = getTeamButtonList().indexOf(box);
+			}
+		}
+		Collections.swap(playerTeam, first, second);
+		window.repaint();
+	}
 	/**
 	 * Initialize the contents of the window.
 	 */
