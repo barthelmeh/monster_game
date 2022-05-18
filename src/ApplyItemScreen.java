@@ -1,5 +1,4 @@
 import java.awt.EventQueue;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.GroupLayout;
@@ -77,7 +76,25 @@ public class ApplyItemScreen {
 		manager.closeApplyItemScreen(screen, button);
 	}
 	public void applyItem() {
-		
+		String userInput = manager.getSelectedButtonText(monsterSelection);
+		String userInput1 = manager.getSelectedButtonText(itemSelection);
+		Monster selectedMonster = null;
+		Item selectedItem = null;
+		int index = 0;
+		for (Monster monster : team){
+            if (monster.getName().equals(userInput)){
+                selectedMonster = monster;
+            }
+		}
+		for (Item item : inventory) {
+			if (item.getItemName().equals(userInput1)){
+                selectedItem = item;
+                index = inventory.indexOf(item);
+            }
+		}
+		selectedItem.applyItem(selectedMonster);
+		inventory.remove(index);
+		window.repaint();
 	}
 	/**
 	 * Initialize the contents of the window.
@@ -352,65 +369,65 @@ public class ApplyItemScreen {
 		gbl_panelInventory.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panelInventory.setLayout(gbl_panelInventory);
 		
-		JLabel lblName = new JLabel("Cost:");
-		lblName.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		GridBagConstraints gbc_lblName = new GridBagConstraints();
-		gbc_lblName.insets = new Insets(0, 0, 5, 5);
-		gbc_lblName.gridx = 0;
-		gbc_lblName.gridy = 0;
-		panelInventory.add(lblName, gbc_lblName);
+		JLabel lblCost = new JLabel("Cost:");
+		lblCost.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		GridBagConstraints gbc_lblCost = new GridBagConstraints();
+		gbc_lblCost.insets = new Insets(0, 0, 5, 5);
+		gbc_lblCost.gridx = 0;
+		gbc_lblCost.gridy = 0;
+		panelInventory.add(lblCost, gbc_lblCost);
 		
-		JLabel lblItemName = new JLabel("");
+		JLabel lblItemCost = new JLabel("");
 		try {
-			lblItemName.setText(inventory.get(0).getItemName());
+			lblItemCost.setText(Integer.toString(inventory.get(0).getItemCost()));
 		} catch (Exception e) {
-			lblItemName.setText("");
+			lblItemCost.setText("");
 		}
-		lblItemName.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		GridBagConstraints gbc_lblItemName = new GridBagConstraints();
-		gbc_lblItemName.insets = new Insets(0, 0, 5, 5);
-		gbc_lblItemName.gridx = 1;
-		gbc_lblItemName.gridy = 0;
-		panelInventory.add(lblItemName, gbc_lblItemName);
+		lblItemCost.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		GridBagConstraints gbc_lblItemCost = new GridBagConstraints();
+		gbc_lblItemCost.insets = new Insets(0, 0, 5, 5);
+		gbc_lblItemCost.gridx = 1;
+		gbc_lblItemCost.gridy = 0;
+		panelInventory.add(lblItemCost, gbc_lblItemCost);
 		
-		JLabel lblItemName_1 = new JLabel("");
+		JLabel lblItemCost1 = new JLabel("");
 		try {
-			lblItemName_1.setText(inventory.get(1).getItemName());
+			lblItemCost1.setText(Integer.toString(inventory.get(1).getItemCost()));
 		} catch (Exception e) {
-			lblItemName_1.setText("");
+			lblItemCost1.setText("");
 		}
-		lblItemName_1.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		GridBagConstraints gbc_lblItemName_1 = new GridBagConstraints();
-		gbc_lblItemName_1.insets = new Insets(0, 0, 5, 5);
-		gbc_lblItemName_1.gridx = 2;
-		gbc_lblItemName_1.gridy = 0;
-		panelInventory.add(lblItemName_1, gbc_lblItemName_1);
+		lblItemCost1.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		GridBagConstraints gbc_lblItemCost1 = new GridBagConstraints();
+		gbc_lblItemCost1.insets = new Insets(0, 0, 5, 5);
+		gbc_lblItemCost1.gridx = 2;
+		gbc_lblItemCost1.gridy = 0;
+		panelInventory.add(lblItemCost1, gbc_lblItemCost1);
 		
-		JLabel lblItemName_2 = new JLabel("");
+		JLabel lblItemCost2 = new JLabel("");
 		try {
-			lblItemName_2.setText(inventory.get(2).getItemName());
+			lblItemCost2.setText(Integer.toString(inventory.get(2).getItemCost()));
 		} catch (Exception e) {
-			lblItemName_2.setText("");
+			lblItemCost2.setText("");
 		}
-		lblItemName_2.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		GridBagConstraints gbc_lblItemName_2 = new GridBagConstraints();
-		gbc_lblItemName_2.insets = new Insets(0, 0, 5, 5);
-		gbc_lblItemName_2.gridx = 3;
-		gbc_lblItemName_2.gridy = 0;
-		panelInventory.add(lblItemName_2, gbc_lblItemName_2);
+		lblItemCost2.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		GridBagConstraints gbc_lblItemCost2 = new GridBagConstraints();
+		gbc_lblItemCost2.insets = new Insets(0, 0, 5, 5);
+		gbc_lblItemCost2.gridx = 3;
+		gbc_lblItemCost2.gridy = 0;
+		panelInventory.add(lblItemCost2, gbc_lblItemCost2);
 		
-		JLabel lblItemName_3 = new JLabel("");
+		JLabel lblItemCost3 = new JLabel("");
 		try {
-			lblItemName_3.setText(inventory.get(3).getItemName());
+			lblItemCost3.setText(Integer.toString(inventory.get(3).getItemCost()));
 		} catch (Exception e) {
-			lblItemName_3.setText("");
+			lblItemCost3.setText("");
 		}
-		lblItemName_3.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		GridBagConstraints gbc_lblItemName_3 = new GridBagConstraints();
-		gbc_lblItemName_3.insets = new Insets(0, 0, 5, 0);
-		gbc_lblItemName_3.gridx = 4;
-		gbc_lblItemName_3.gridy = 0;
-		panelInventory.add(lblItemName_3, gbc_lblItemName_3);
+		lblItemCost3.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		GridBagConstraints gbc_lblItemCost3 = new GridBagConstraints();
+		gbc_lblItemCost3.insets = new Insets(0, 0, 5, 0);
+		gbc_lblItemCost3.gridx = 4;
+		gbc_lblItemCost3.gridy = 0;
+		panelInventory.add(lblItemCost3, gbc_lblItemCost3);
 		
 		JLabel lblPercentageIncrease = new JLabel("Percentage Increase:");
 		lblPercentageIncrease.setHorizontalAlignment(SwingConstants.CENTER);
@@ -432,6 +449,7 @@ public class ApplyItemScreen {
 		JButton btnApplyItem = new JButton("Apply Item");
 		btnApplyItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				applyItem();
 			}
 		});
 		btnApplyItem.setFont(new Font("Tahoma", Font.PLAIN, 30));
@@ -525,7 +543,12 @@ public class ApplyItemScreen {
 		gbc_lblSelection_1.gridy = 2;
 		panelInventory.add(lblSelection_1, gbc_lblSelection_1);
 		
-		JToggleButton tglbtnItemSelect = new JToggleButton("Select");
+		JToggleButton tglbtnItemSelect = new JToggleButton();
+		try {
+			tglbtnItemSelect.setText(inventory.get(0).getItemName());
+		} catch (Exception e) {
+			tglbtnItemSelect.setText("");
+		}
 		itemSelection.add(tglbtnItemSelect);
 		
 		tglbtnItemSelect.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -537,6 +560,11 @@ public class ApplyItemScreen {
 		panelInventory.add(tglbtnItemSelect, gbc_tglbtnItemSelect);
 		
 		JToggleButton tglbtnItemSelect_1 = new JToggleButton("Select");
+		try {
+			tglbtnItemSelect_1.setText(inventory.get(1).getItemName());
+		} catch (Exception e) {
+			tglbtnItemSelect_1.setText("");
+		}
 		itemSelection.add(tglbtnItemSelect_1);
 		tglbtnItemSelect_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		GridBagConstraints gbc_tglbtnItemSelect_1 = new GridBagConstraints();
@@ -547,6 +575,11 @@ public class ApplyItemScreen {
 		panelInventory.add(tglbtnItemSelect_1, gbc_tglbtnItemSelect_1);
 		
 		JToggleButton tglbtnItemSelect_2 = new JToggleButton("Select");
+		try {
+			tglbtnItemSelect_2.setText(inventory.get(2).getItemName());
+		} catch (Exception e) {
+			tglbtnItemSelect_2.setText("");
+		}
 		itemSelection.add(tglbtnItemSelect_2);
 		tglbtnItemSelect_2.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		GridBagConstraints gbc_tglbtnItemSelect_2 = new GridBagConstraints();
@@ -557,6 +590,11 @@ public class ApplyItemScreen {
 		panelInventory.add(tglbtnItemSelect_2, gbc_tglbtnItemSelect_2);
 		
 		JToggleButton tglbtnItemSelect_3 = new JToggleButton("Select");
+		try {
+			tglbtnItemSelect_3.setText(inventory.get(3).getItemName());
+		} catch (Exception e) {
+			tglbtnItemSelect_3.setText("");
+		}
 		itemSelection.add(tglbtnItemSelect_3);
 		tglbtnItemSelect_3.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		GridBagConstraints gbc_tglbtnItemSelect_3 = new GridBagConstraints();
@@ -579,6 +617,21 @@ public class ApplyItemScreen {
 			tglbtnItemSelect_3.setEnabled(false);
 		} else if (inventory.size() == 3) {
 			tglbtnItemSelect_3.setEnabled(false);
+		}
+		if (team.size() == 0 ) {
+			tglbtnMonsterSelect.setEnabled(false);
+			tglbtnMonsterSelect_1.setEnabled(false);
+			tglbtnMonsterSelect_2.setEnabled(false);
+			tglbtnMonsterSelect_3.setEnabled(false);	
+		} else if (team.size() == 1) {
+			tglbtnMonsterSelect_1.setEnabled(false);
+			tglbtnMonsterSelect_2.setEnabled(false);
+			tglbtnMonsterSelect_3.setEnabled(false);
+		} else if (team.size() == 2) {
+			tglbtnMonsterSelect_2.setEnabled(false);
+			tglbtnMonsterSelect_3.setEnabled(false);
+		} else if (team.size() == 3) {
+			tglbtnMonsterSelect_3.setEnabled(false);
 		}
 		
 		window.getContentPane().setLayout(groupLayout);

@@ -90,9 +90,9 @@ public class SetupScreen {
 				SetUp getButtons = new SetUp(screen);
 				if (getButtons.getPlayerName().length() < 3 || getButtons.getPlayerName().length() > 15) {
 					lblErrorLabel.setText("Please input name between 3 and 15 characters");
-				} else if (getButtons.getSelectedButtonText(starterMonsterButtonGroup) == null) {
+				} else if (manager.getSelectedButtonText(starterMonsterButtonGroup) == null) {
 					lblErrorLabel.setText("Please select a monster");
-				} else if (getButtons.getSelectedButtonText(starterItemButtonGroup) == null) {
+				} else if (manager.getSelectedButtonText(starterItemButtonGroup) == null) {
 					lblErrorLabel.setText("Please select a item");
 				} else {
 					SetUp setup = new SetUp(manager, screen);
