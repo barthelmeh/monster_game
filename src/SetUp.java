@@ -124,9 +124,7 @@ public class SetUp {
     	GameDifficulty.difficulties difficulty = getDifficulty();
     	int maxDays = getMaxDays();
     	manager.setMaxDay(maxDays);
-    	manager.setDifficulty(difficulty);
-
-        
+    	manager.setDifficulty(difficulty);        
     	newPlayer.setPlayerName(getPlayerName());
     	newPlayer.addStarters(getUsersStarterMonster(), getUsersStarterItem());
     }
@@ -136,22 +134,13 @@ public class SetUp {
         String name = screen.getUserNameTextField().getText();
         return name;
     }
-    public String getSelectedButtonText(ButtonGroup buttonGroup) {
-        for (Enumeration<AbstractButton> buttons = buttonGroup.getElements(); buttons.hasMoreElements();) {
-            AbstractButton button = buttons.nextElement();
-
-            if (button.isSelected()) {
-                return button.getText();
-            }
-        }
-        return null;
-    }
+    
     public int getMaxDays() {
     	int maxDays = screen.getMaxDaySlider().getValue();
     	return maxDays;
     }
     public GameDifficulty.difficulties getDifficulty(){
-        String userInput = getSelectedButtonText(screen.difficultyButtonGroup);
+        String userInput = manager.getSelectedButtonText(screen.difficultyButtonGroup);
         GameDifficulty.difficulties dif;
 		switch(userInput.toLowerCase()) {
             case "easy":
@@ -170,7 +159,7 @@ public class SetUp {
         return dif;
     }
     public Monster getUsersStarterMonster(){
-        String userInput = getSelectedButtonText(screen.starterMonsterButtonGroup);
+        String userInput = manager.getSelectedButtonText(screen.starterMonsterButtonGroup);
         ArrayList<Monster> monsters = manager.getStarterMonsters();
         for (Monster monster : monsters){
             if (monster.getName().equals(userInput)){
@@ -179,7 +168,7 @@ public class SetUp {
         } return null;
     }
     private Item getUsersStarterItem() {
-    	String userInput = getSelectedButtonText(screen.starterItemButtonGroup);
+    	String userInput = manager.getSelectedButtonText(screen.starterItemButtonGroup);
     	ArrayList<Item> items = manager.getStarterItems();
     	for (Item item : items) {
     		if (item.getItemName().equals(userInput)) {

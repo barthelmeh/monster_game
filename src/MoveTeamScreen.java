@@ -111,6 +111,7 @@ public class MoveTeamScreen {
 				Collections.swap(playerTeam, first, second);
 			}
 		}
+		
 		window.repaint();
 	}
 	/**
