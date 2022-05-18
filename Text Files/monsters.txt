@@ -1,0 +1,6 @@
+Tiny Jeremy,80,25,0.8,7
+Punjabi Anu,120,15,0.05,5
+Psy Farry,100,20,0.15,5
+Bruce the Giant,200,5,0.12345,6
+Comrade Tom,50,50,0.05,3
+Sprinter Liam,150,15,0.75,10

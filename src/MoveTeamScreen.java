@@ -1,7 +1,5 @@
 import java.awt.EventQueue;
 import javax.swing.JFrame;
-import javax.swing.AbstractButton;
-import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JPanel;
@@ -13,10 +11,8 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.util.ArrayList;
-import java.util.Enumeration;
+import java.util.Collections;
 import javax.swing.border.LineBorder;
-
-import java.awt.CheckboxGroup;
 import java.awt.Color;
 import javax.swing.SwingConstants;
 import javax.swing.JCheckBox;
@@ -32,6 +28,7 @@ public class MoveTeamScreen {
 	private MainGame manager;
 	private JButton button;
 	private ArrayList<JCheckBox> teamButtonList = new ArrayList<JCheckBox>();
+	private ArrayList<Monster> playerTeam;
 
 	/**
 	 * Launch the application.
@@ -59,6 +56,7 @@ public class MoveTeamScreen {
 	public MoveTeamScreen(MainGame incomingManager, JButton incomingButton) {
 		screen = this;
 		manager = incomingManager;
+		playerTeam = manager.getPlayer().getTeam();
 		button = incomingButton;
 		initialize();
 		window.setVisible(true);
@@ -72,8 +70,8 @@ public class MoveTeamScreen {
 	public void getMaxSelected(ArrayList<JCheckBox> checkboxes) {
 		int max = 2;
 		int checkboxCount = 0;
+		
         for (JCheckBox checkbox : checkboxes) {
-            
             if (checkbox.isSelected()) {
             	checkboxCount += 1;
             }
@@ -85,19 +83,36 @@ public class MoveTeamScreen {
                 }
             }
 
-        }else {
+        } else {
         	for (JCheckBox checkbox : checkboxes) {
-                if (checkbox.isSelected() == false) {
+        		System.out.println(checkbox.getText());
+                if (checkbox.isSelected() == false && checkbox.getText() != null) {
                 	checkbox.setEnabled(true);
                 }
             }
         }
-        
     }
 	public ArrayList<JCheckBox> getTeamButtonList() {
 		return teamButtonList;
 	}
-
+	public void swapMonsters() {
+		int counter = 0;
+		int first = 0;
+		int second = 0;
+		
+		for (JCheckBox box : getTeamButtonList()) {
+			if (counter == 0 && box.isSelected()) {
+				first = getTeamButtonList().indexOf(box);
+				counter++;
+			} else if (counter == 1 && box.isSelected()) {
+				second = getTeamButtonList().indexOf(box);
+				counter++;
+			} else {
+				Collections.swap(playerTeam, first, second);
+			}
+		}
+		window.repaint();
+	}
 	/**
 	 * Initialize the contents of the window.
 	 */
@@ -167,174 +182,265 @@ public class MoveTeamScreen {
 		gbc_lblSelection.gridx = 0;
 		gbc_lblSelection.gridy = 3;
 		panelTeam.add(lblSelection, gbc_lblSelection);
-		if (manager.getPlayer().getTeam().size() == 1){
-			JLabel lblHealth_1 = new JLabel(Integer.toString(manager.getPlayer().getTeam().get(0).getMonsterCurrentHealth()));
-			lblHealth_1.setHorizontalAlignment(SwingConstants.CENTER);
-			lblHealth_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
-			GridBagConstraints gbc_lblHealth_1 = new GridBagConstraints();
-			gbc_lblHealth_1.fill = GridBagConstraints.HORIZONTAL;
-			gbc_lblHealth_1.insets = new Insets(0, 0, 5, 5);
-			gbc_lblHealth_1.gridx = 1;
-			gbc_lblHealth_1.gridy = 0;
-			panelTeam.add(lblHealth_1, gbc_lblHealth_1);
+		
+		JLabel lblHealth1 = new JLabel();
+		try {
+			lblHealth1.setText(Integer.toString(playerTeam.get(0).getMonsterCurrentHealth()));
+		} catch (Exception e) {
+			lblHealth1.setText("");
+		}
+		lblHealth1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblHealth1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		GridBagConstraints gbc_lblHealth1 = new GridBagConstraints();
+		gbc_lblHealth1.fill = GridBagConstraints.HORIZONTAL;
+		gbc_lblHealth1.insets = new Insets(0, 0, 5, 5);
+		gbc_lblHealth1.gridx = 1;
+		gbc_lblHealth1.gridy = 0;
+		panelTeam.add(lblHealth1, gbc_lblHealth1);
 
-			JLabel lblDamage_1 = new JLabel(Integer.toString(manager.getPlayer().getTeam().get(0).getDamage()));
-			lblDamage_1.setHorizontalAlignment(SwingConstants.CENTER);
-			lblDamage_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
-			GridBagConstraints gbc_lblDamage_1 = new GridBagConstraints();
-			gbc_lblDamage_1.insets = new Insets(0, 0, 5, 5);
-			gbc_lblDamage_1.gridx = 1;
-			gbc_lblDamage_1.gridy = 1;
-			panelTeam.add(lblDamage_1, gbc_lblDamage_1);
+		JLabel lblDamage1 = new JLabel();
+		try {
+			lblDamage1.setText(Integer.toString(playerTeam.get(0).getDamage()));
+		} catch (Exception e) {
+			lblDamage1.setText("");
+		}
+		lblDamage1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDamage1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		GridBagConstraints gbc_lblDamage1 = new GridBagConstraints();
+		gbc_lblDamage1.insets = new Insets(0, 0, 5, 5);
+		gbc_lblDamage1.gridx = 1;
+		gbc_lblDamage1.gridy = 1;
+		panelTeam.add(lblDamage1, gbc_lblDamage1);
 
-			JLabel lblCritChance_1 = new JLabel(manager.toPercentage(manager.getPlayer().getTeam().get(0).getCriticalStrike()));
-			lblCritChance_1.setHorizontalAlignment(SwingConstants.CENTER);
-			lblCritChance_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
-			GridBagConstraints gbc_lblCritChance_1 = new GridBagConstraints();
-			gbc_lblCritChance_1.fill = GridBagConstraints.HORIZONTAL;
-			gbc_lblCritChance_1.insets = new Insets(0, 0, 5, 5);
-			gbc_lblCritChance_1.gridx = 1;
-			gbc_lblCritChance_1.gridy = 2;
-			panelTeam.add(lblCritChance_1, gbc_lblCritChance_1);
+		JLabel lblCritChance1 = new JLabel();
+		try {
+			lblCritChance1.setText(manager.toPercentage(playerTeam.get(0).getCriticalStrike()));
+		} catch (Exception e) {
+			lblCritChance1.setText("");
+		}
+		
+		lblCritChance1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCritChance1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		GridBagConstraints gbc_lblCritChance1 = new GridBagConstraints();
+		gbc_lblCritChance1.fill = GridBagConstraints.HORIZONTAL;
+		gbc_lblCritChance1.insets = new Insets(0, 0, 5, 5);
+		gbc_lblCritChance1.gridx = 1;
+		gbc_lblCritChance1.gridy = 2;
+		panelTeam.add(lblCritChance1, gbc_lblCritChance1);
 
-			JCheckBox chckbxSelection = new JCheckBox(manager.getPlayer().getTeam().get(0).getName());
+		JCheckBox chckbxSelection = new JCheckBox();
+		chckbxSelection.setEnabled(false);
+		try {
+			chckbxSelection.setText(playerTeam.get(0).getName());
+			chckbxSelection.setEnabled(true);
 			chckbxSelection.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					getMaxSelected(getTeamButtonList());
 				}
 			});
-			chckbxSelection.setFont(new Font("Tahoma", Font.PLAIN, 20));
-			GridBagConstraints gbc_chckbxSelection = new GridBagConstraints();
-			gbc_chckbxSelection.insets = new Insets(0, 0, 0, 5);
-			gbc_chckbxSelection.gridx = 1;
-			gbc_chckbxSelection.gridy = 3;
-			panelTeam.add(chckbxSelection, gbc_chckbxSelection);
-			teamButtonList.add(chckbxSelection);
-		} else if (manager.getPlayer().getTeam().size() == 2){
-			JLabel lblHealth_1_1 = new JLabel(Integer.toString(manager.getPlayer().getTeam().get(1).getMonsterCurrentHealth()));
-			lblHealth_1_1.setHorizontalAlignment(SwingConstants.CENTER);
-			lblHealth_1_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
-			GridBagConstraints gbc_lblHealth_1_1 = new GridBagConstraints();
-			gbc_lblHealth_1_1.fill = GridBagConstraints.HORIZONTAL;
-			gbc_lblHealth_1_1.insets = new Insets(0, 0, 5, 5);
-			gbc_lblHealth_1_1.gridx = 2;
-			gbc_lblHealth_1_1.gridy = 0;
-			panelTeam.add(lblHealth_1_1, gbc_lblHealth_1_1);
+		} catch (Exception e){
+			chckbxSelection.setEnabled(false);
+		}
+		
+		chckbxSelection.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		GridBagConstraints gbc_chckbxSelection = new GridBagConstraints();
+		gbc_chckbxSelection.insets = new Insets(0, 0, 0, 5);
+		gbc_chckbxSelection.gridx = 1;
+		gbc_chckbxSelection.gridy = 3;
+		panelTeam.add(chckbxSelection, gbc_chckbxSelection);
+		teamButtonList.add(chckbxSelection);
+			
+		JLabel lblHealth2 = new JLabel();
+		try {
+			lblHealth2.setText(Integer.toString(playerTeam.get(1).getMonsterCurrentHealth()));
+		} catch (Exception e) {
+			lblHealth2.setText("");
+		}
+		lblHealth2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblHealth2.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		GridBagConstraints gbc_lblHealth2 = new GridBagConstraints();
+		gbc_lblHealth2.fill = GridBagConstraints.HORIZONTAL;
+		gbc_lblHealth2.insets = new Insets(0, 0, 5, 5);
+		gbc_lblHealth2.gridx = 2;
+		gbc_lblHealth2.gridy = 0;
+		panelTeam.add(lblHealth2, gbc_lblHealth2);
 
-			JLabel lblDamage_1_1 = new JLabel(Integer.toString(manager.getPlayer().getTeam().get(1).getDamage()));
-			lblDamage_1_1.setHorizontalAlignment(SwingConstants.CENTER);
-			lblDamage_1_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
-			GridBagConstraints gbc_lblDamage_1_1 = new GridBagConstraints();
-			gbc_lblDamage_1_1.insets = new Insets(0, 0, 5, 5);
-			gbc_lblDamage_1_1.gridx = 2;
-			gbc_lblDamage_1_1.gridy = 1;
-			panelTeam.add(lblDamage_1_1, gbc_lblDamage_1_1);
+		JLabel lblDamage2 = new JLabel();
+		try {
+			lblDamage2.setText(Integer.toString(playerTeam.get(1).getDamage()));
+		} catch (Exception e) {
+			lblDamage2.setText("");
+		}
+		lblDamage2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDamage2.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		GridBagConstraints gbc_lblDamage2 = new GridBagConstraints();
+		gbc_lblDamage2.insets = new Insets(0, 0, 5, 5);
+		gbc_lblDamage2.gridx = 2;
+		gbc_lblDamage2.gridy = 1;
+		panelTeam.add(lblDamage2, gbc_lblDamage2);
 
-			JLabel lblCritChance_1_1 = new JLabel(manager.toPercentage(manager.getPlayer().getTeam().get(1).getCriticalStrike()));
-			lblCritChance_1_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
-			GridBagConstraints gbc_lblCritChance_1_1 = new GridBagConstraints();
-			gbc_lblCritChance_1_1.insets = new Insets(0, 0, 5, 5);
-			gbc_lblCritChance_1_1.gridx = 2;
-			gbc_lblCritChance_1_1.gridy = 2;
-			panelTeam.add(lblCritChance_1_1, gbc_lblCritChance_1_1);
+		JLabel lblCritChance2 = new JLabel();
+		try {
+			lblCritChance2.setText(manager.toPercentage(playerTeam.get(1).getCriticalStrike()));
+		} catch (Exception e) {
+			lblCritChance2.setText("");
+		}
+		lblCritChance2.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		GridBagConstraints gbc_lblCritChance2 = new GridBagConstraints();
+		gbc_lblCritChance2.insets = new Insets(0, 0, 5, 5);
+		gbc_lblCritChance2.gridx = 2;
+		gbc_lblCritChance2.gridy = 2;
+		panelTeam.add(lblCritChance2, gbc_lblCritChance2);
 
-			JCheckBox chckbxSelection_1 = new JCheckBox(manager.getPlayer().getTeam().get(1).getName());
+		JCheckBox chckbxSelection_1 = new JCheckBox();
+		chckbxSelection_1.setEnabled(false);
+		try {
+			chckbxSelection_1.setText(playerTeam.get(1).getName());
 			chckbxSelection_1.addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent e) {
 					getMaxSelected(getTeamButtonList());
 				}
 			});
-			chckbxSelection_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
-			GridBagConstraints gbc_chckbxSelection_1 = new GridBagConstraints();
-			gbc_chckbxSelection_1.insets = new Insets(0, 0, 0, 5);
-			gbc_chckbxSelection_1.gridx = 2;
-			gbc_chckbxSelection_1.gridy = 3;
-			panelTeam.add(chckbxSelection_1, gbc_chckbxSelection_1);
-			teamButtonList.add(chckbxSelection_1);
-		} else if (manager.getPlayer().getTeam().size() == 3){
-			JLabel lblHealth_1_2 = new JLabel(Integer.toString(manager.getPlayer().getTeam().get(2).getMonsterCurrentHealth()));
-			lblHealth_1_2.setHorizontalAlignment(SwingConstants.CENTER);
-			lblHealth_1_2.setFont(new Font("Tahoma", Font.PLAIN, 20));
-			GridBagConstraints gbc_lblHealth_1_2 = new GridBagConstraints();
-			gbc_lblHealth_1_2.fill = GridBagConstraints.HORIZONTAL;
-			gbc_lblHealth_1_2.insets = new Insets(0, 0, 5, 5);
-			gbc_lblHealth_1_2.gridx = 3;
-			gbc_lblHealth_1_2.gridy = 0;
-			panelTeam.add(lblHealth_1_2, gbc_lblHealth_1_2);
+		} catch (Exception e) {
+			chckbxSelection_1.setEnabled(false);
+		}
+		
+		chckbxSelection_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		GridBagConstraints gbc_chckbxSelection_1 = new GridBagConstraints();
+		gbc_chckbxSelection_1.insets = new Insets(0, 0, 0, 5);
+		gbc_chckbxSelection_1.gridx = 2;
+		gbc_chckbxSelection_1.gridy = 3;
+		panelTeam.add(chckbxSelection_1, gbc_chckbxSelection_1);
+		teamButtonList.add(chckbxSelection_1);
+		
+		JLabel lblHealth3 = new JLabel();
+		try {
+			lblHealth3.setText(Integer.toString(playerTeam.get(2).getMonsterCurrentHealth()));
+		} catch (Exception e) {
+			lblHealth3.setText("");
+		}
+		lblHealth3.setHorizontalAlignment(SwingConstants.CENTER);
+		lblHealth3.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		GridBagConstraints gbc_lblHealth3 = new GridBagConstraints();
+		gbc_lblHealth3.fill = GridBagConstraints.HORIZONTAL;
+		gbc_lblHealth3.insets = new Insets(0, 0, 5, 5);
+		gbc_lblHealth3.gridx = 3;
+		gbc_lblHealth3.gridy = 0;
+		panelTeam.add(lblHealth3, gbc_lblHealth3);
 
-			JLabel lblDamage_1_2 = new JLabel(Integer.toString(manager.getPlayer().getTeam().get(2).getDamage()));
-			lblDamage_1_2.setHorizontalAlignment(SwingConstants.CENTER);
-			lblDamage_1_2.setFont(new Font("Tahoma", Font.PLAIN, 20));
-			GridBagConstraints gbc_lblDamage_1_2 = new GridBagConstraints();
-			gbc_lblDamage_1_2.insets = new Insets(0, 0, 5, 5);
-			gbc_lblDamage_1_2.gridx = 3;
-			gbc_lblDamage_1_2.gridy = 1;
-			panelTeam.add(lblDamage_1_2, gbc_lblDamage_1_2);
+		JLabel lblDamage3 = new JLabel();
+		try {
+			lblDamage3.setText(Integer.toString(playerTeam.get(2).getDamage()));
+		} catch (Exception e) {
+			lblDamage3.setText("");
+		}
+		lblDamage3.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDamage3.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		GridBagConstraints gbc_lblDamage3 = new GridBagConstraints();
+		gbc_lblDamage3.insets = new Insets(0, 0, 5, 5);
+		gbc_lblDamage3.gridx = 3;
+		gbc_lblDamage3.gridy = 1;
+		panelTeam.add(lblDamage3, gbc_lblDamage3);
 
-			JLabel lblCritChance_1_2 = new JLabel(manager.toPercentage(manager.getPlayer().getTeam().get(2).getCriticalStrike()));
-			lblCritChance_1_2.setFont(new Font("Tahoma", Font.PLAIN, 20));
-			GridBagConstraints gbc_lblCritChance_1_2 = new GridBagConstraints();
-			gbc_lblCritChance_1_2.insets = new Insets(0, 0, 5, 5);
-			gbc_lblCritChance_1_2.gridx = 3;
-			gbc_lblCritChance_1_2.gridy = 2;
-			panelTeam.add(lblCritChance_1_2, gbc_lblCritChance_1_2);
+		JLabel lblCritChance3 = new JLabel();
+		try {
+			lblCritChance3.setText(manager.toPercentage(playerTeam.get(2).getCriticalStrike()));
+		} catch (Exception e) {
+			lblCritChance3.setText("");
+		}
+		lblCritChance3.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		GridBagConstraints gbc_lblCritChance3 = new GridBagConstraints();
+		gbc_lblCritChance3.insets = new Insets(0, 0, 5, 5);
+		gbc_lblCritChance3.gridx = 3;
+		gbc_lblCritChance3.gridy = 2;
+		panelTeam.add(lblCritChance3, gbc_lblCritChance3);
 
-			JCheckBox chckbxSelection_2 = new JCheckBox(manager.getPlayer().getTeam().get(2).getName());
+		JCheckBox chckbxSelection_2 = new JCheckBox();
+		chckbxSelection_2.setEnabled(false);
+		try {
+			chckbxSelection_2.setText(manager.toPercentage(playerTeam.get(2).getCriticalStrike()));
+			chckbxSelection_2.setEnabled(true);
 			chckbxSelection_2.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					getMaxSelected(getTeamButtonList());
 				}
 			});
-			chckbxSelection_2.setFont(new Font("Tahoma", Font.PLAIN, 20));
-			GridBagConstraints gbc_chckbxSelection_2 = new GridBagConstraints();
-			gbc_chckbxSelection_2.insets = new Insets(0, 0, 0, 5);
-			gbc_chckbxSelection_2.gridx = 3;
-			gbc_chckbxSelection_2.gridy = 3;
-			panelTeam.add(chckbxSelection_2, gbc_chckbxSelection_2);
-			teamButtonList.add(chckbxSelection_2);
-		} else {
-			JLabel lblHealth_1_3 = new JLabel(Integer.toString(manager.getPlayer().getTeam().get(3).getMonsterCurrentHealth()));
-			lblHealth_1_3.setHorizontalAlignment(SwingConstants.CENTER);
-			lblHealth_1_3.setFont(new Font("Tahoma", Font.PLAIN, 20));
-			GridBagConstraints gbc_lblHealth_1_3 = new GridBagConstraints();
-			gbc_lblHealth_1_3.fill = GridBagConstraints.HORIZONTAL;
-			gbc_lblHealth_1_3.insets = new Insets(0, 0, 5, 0);
-			gbc_lblHealth_1_3.gridx = 4;
-			gbc_lblHealth_1_3.gridy = 0;
-			panelTeam.add(lblHealth_1_3, gbc_lblHealth_1_3);
+		} catch (Exception e) {
+			chckbxSelection_2.setEnabled(false);
+		}
+		
+		chckbxSelection_2.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		GridBagConstraints gbc_chckbxSelection_2 = new GridBagConstraints();
+		gbc_chckbxSelection_2.insets = new Insets(0, 0, 0, 5);
+		gbc_chckbxSelection_2.gridx = 3;
+		gbc_chckbxSelection_2.gridy = 3;
+		panelTeam.add(chckbxSelection_2, gbc_chckbxSelection_2);
+		teamButtonList.add(chckbxSelection_2);
+		
+		JLabel lblHealth4 = new JLabel();
+		try {
+			lblHealth4.setText(Integer.toString(playerTeam.get(3).getMonsterCurrentHealth()));
+		} catch (Exception e) {
+			lblHealth4.setText("");
+		}
+		lblHealth4.setHorizontalAlignment(SwingConstants.CENTER);
+		lblHealth4.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		GridBagConstraints gbc_lblHealth4 = new GridBagConstraints();
+		gbc_lblHealth4.fill = GridBagConstraints.HORIZONTAL;
+		gbc_lblHealth4.insets = new Insets(0, 0, 5, 0);
+		gbc_lblHealth4.gridx = 4;
+		gbc_lblHealth4.gridy = 0;
+		panelTeam.add(lblHealth4, gbc_lblHealth4);
 
-			JLabel lblDamage_1_3 = new JLabel(Integer.toString(manager.getPlayer().getTeam().get(3).getDamage()));
-			lblDamage_1_3.setFont(new Font("Tahoma", Font.PLAIN, 20));
-			GridBagConstraints gbc_lblDamage_1_3 = new GridBagConstraints();
-			gbc_lblDamage_1_3.insets = new Insets(0, 0, 5, 0);
-			gbc_lblDamage_1_3.gridx = 4;
-			gbc_lblDamage_1_3.gridy = 1;
-			panelTeam.add(lblDamage_1_3, gbc_lblDamage_1_3);
+		JLabel lblDamage4 = new JLabel();
+		try {
+			lblDamage4.setText(Integer.toString(playerTeam.get(3).getDamage()));
+		} catch (Exception e) {
+			lblDamage4.setText("");
+		}
+		lblDamage4.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		GridBagConstraints gbc_lblDamage4 = new GridBagConstraints();
+		gbc_lblDamage4.insets = new Insets(0, 0, 5, 0);
+		gbc_lblDamage4.gridx = 4;
+		gbc_lblDamage4.gridy = 1;
+		panelTeam.add(lblDamage4, gbc_lblDamage4);
 
-			JLabel lblCritChance_1_3 = new JLabel(manager.toPercentage(manager.getPlayer().getTeam().get(3).getCriticalStrike()));
-			lblCritChance_1_3.setFont(new Font("Tahoma", Font.PLAIN, 20));
-			GridBagConstraints gbc_lblCritChance_1_3 = new GridBagConstraints();
-			gbc_lblCritChance_1_3.insets = new Insets(0, 0, 5, 0);
-			gbc_lblCritChance_1_3.gridx = 4;
-			gbc_lblCritChance_1_3.gridy = 2;
-			panelTeam.add(lblCritChance_1_3, gbc_lblCritChance_1_3);
+		JLabel lblCritChance4 = new JLabel();
+		try {
+			lblCritChance4.setText(manager.toPercentage(playerTeam.get(3).getCriticalStrike()));
+		} catch (Exception e) {
+			lblCritChance4.setText("");
+		}
+		lblCritChance4.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		GridBagConstraints gbc_lblCritChance4 = new GridBagConstraints();
+		gbc_lblCritChance4.insets = new Insets(0, 0, 5, 0);
+		gbc_lblCritChance4.gridx = 4;
+		gbc_lblCritChance4.gridy = 2;
+		panelTeam.add(lblCritChance4, gbc_lblCritChance4);
 
-			JCheckBox chckbxSelection_3 = new JCheckBox(manager.getPlayer().getTeam().get(3).getName());
+		JCheckBox chckbxSelection_3 = new JCheckBox();
+		chckbxSelection_3.setEnabled(false);
+		try {
+			chckbxSelection_3.setText(playerTeam.get(3).getName());
+			chckbxSelection_3.setEnabled(true);
 			chckbxSelection_3.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					getMaxSelected(getTeamButtonList());
 				}
 			});
-			chckbxSelection_3.setFont(new Font("Tahoma", Font.PLAIN, 20));
-			GridBagConstraints gbc_chckbxSelection_3 = new GridBagConstraints();
-			gbc_chckbxSelection_3.gridx = 4;
-			gbc_chckbxSelection_3.gridy = 3;
-			panelTeam.add(chckbxSelection_3, gbc_chckbxSelection_3);
-			teamButtonList.add(chckbxSelection_3);
-		} 	
+		} catch (Exception e) {
+			chckbxSelection_3.setEnabled(false);
+		}
+		
+		chckbxSelection_3.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		GridBagConstraints gbc_chckbxSelection_3 = new GridBagConstraints();
+		gbc_chckbxSelection_3.gridx = 4;
+		gbc_chckbxSelection_3.gridy = 3;
+		panelTeam.add(chckbxSelection_3, gbc_chckbxSelection_3);
+		teamButtonList.add(chckbxSelection_3);
 
 		JButton btnSwap = new JButton("Swap");
 		btnSwap.setFont(new Font("Tahoma", Font.PLAIN, 30));

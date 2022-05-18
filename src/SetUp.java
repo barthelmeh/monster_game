@@ -15,8 +15,9 @@ public class SetUp {
 	private MainGame manager;
 	private SetupScreen screen;
 	
-	public SetUp() {
+	public SetUp(SetupScreen incomingScreen) {
 		// Empty so that we can create an instance of this class without running main screen.
+		screen = incomingScreen;
 	}
 
     public SetUp(MainGame incomingManager){
@@ -35,7 +36,7 @@ public class SetUp {
     	ArrayList<Item> items = new ArrayList<Item>();
     	BufferedReader br = null;
         try {
-            File file = new File("..\\Text Files/items.txt");
+            File file = new File("Text Files/items.txt");
             br = new BufferedReader(new FileReader(file));
 
             String item;
@@ -73,10 +74,8 @@ public class SetUp {
         ArrayList<Item> avaiableItems = manager.getAllItems();
         Random rand = new Random();
         for (int i = 0; i < 3; i++){
-        	System.out.println(avaiableItems.size());
             int randomIndex = rand.nextInt(avaiableItems.size());
             Item randomItem = avaiableItems.get(randomIndex);
-            System.out.println(randomItem.getItemName());
             manager.getStarterItems().add(randomItem);
             avaiableItems.remove(randomIndex);
         }
@@ -85,14 +84,16 @@ public class SetUp {
         ArrayList<Monster> monsters = new ArrayList<Monster>();
         BufferedReader br = null;
         try {
-            File file = new File("..\\Text Files\\monsters.txt");
+            File file = new File("Text Files\\monsters.txt");
+
+            //File file = new File("../src/Text Files/monster.txt");
             br = new BufferedReader(new FileReader(file));
 
             String monster;
 
             while ((monster = br.readLine()) != null){
                 String[] values = monster.split(",");
-                Monster obj = new Monster(values[0],Integer.parseInt(values[1]),Integer.parseInt(values[2]),Double.parseDouble(values[3]));
+                Monster obj = new Monster(values[0],Integer.parseInt(values[1]),Integer.parseInt(values[2]),Double.parseDouble(values[3]), Integer.parseInt(values[4]));
                 monsters.add(obj);
             }
         } catch (IOException e) {
@@ -127,16 +128,12 @@ public class SetUp {
 
         
     	newPlayer.setPlayerName(getPlayerName());
-    	newPlayer.addMonster(getUsersStarterMonster());
-    	newPlayer.addItem(getUsersStarterItem());
-        System.out.println(getUsersStarterMonster());
-    	System.out.println(manager.getMaxDay());
-    	System.out.println(manager.getDifficulty());
+    	newPlayer.addStarters(getUsersStarterMonster(), getUsersStarterItem());
     }
 
     
 	public String getPlayerName(){
-        String name = screen.userNameTextField.getText();
+        String name = screen.getUserNameTextField().getText();
         return name;
     }
     public String getSelectedButtonText(ButtonGroup buttonGroup) {
@@ -150,7 +147,7 @@ public class SetUp {
         return null;
     }
     public int getMaxDays() {
-    	int maxDays = screen.maxDaySlider.getValue();
+    	int maxDays = screen.getMaxDaySlider().getValue();
     	return maxDays;
     }
     public GameDifficulty.difficulties getDifficulty(){
@@ -185,8 +182,6 @@ public class SetUp {
     	String userInput = getSelectedButtonText(screen.starterItemButtonGroup);
     	ArrayList<Item> items = manager.getStarterItems();
     	for (Item item : items) {
-    		System.out.println(item.getItemName());
-    		System.out.println(userInput);
     		if (item.getItemName().equals(userInput)) {
     			return item;
     		}

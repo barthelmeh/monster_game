@@ -24,11 +24,11 @@ public class SetupScreen {
 	public ButtonGroup difficultyButtonGroup = new ButtonGroup();
 	public ButtonGroup starterMonsterButtonGroup = new ButtonGroup();
 	public ButtonGroup starterItemButtonGroup = new ButtonGroup();
-	public JTextField userNameTextField = new JTextField();
-	public JSlider maxDaySlider = new JSlider();
 	private JFrame window;
 	private MainGame manager;
 	private SetupScreen screen;
+	private JTextField userNameTextField;
+	private JSlider maxDaySlider;
 	/**
 	 * Launch the application.
 	 */
@@ -64,62 +64,37 @@ public class SetupScreen {
 		initialize();
 	}
 	
+	public JTextField getUserNameTextField() {
+		return userNameTextField;
+	}
+
+	public JSlider getMaxDaySlider() {
+		return maxDaySlider;
+	}
+
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
 		window = new JFrame();
 		window.setTitle("Setup Screen");
-		window.setBounds(100, 100, 1185, 811);
+		window.setBounds(100, 100, 1280, 783);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JLabel lblNewLabel = new JLabel("Monster Hunt");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 50));
-		
-		JLabel lblNewLabel_1 = new JLabel("Name:");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		
-
-		userNameTextField.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		userNameTextField.setColumns(10);
-		
-		JLabel lblNewLabel_1_1 = new JLabel("Difficulty:");
-		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		
-		JLabel lblNewLabel_1_2 = new JLabel("Days:");
-		lblNewLabel_1_2.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		
-		JRadioButton rdbtnEasy = new JRadioButton("Easy");
-		rdbtnEasy.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		
-		JRadioButton rdbtnMedium = new JRadioButton("Medium");
-		rdbtnMedium.setSelected(true);
-		rdbtnMedium.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		
-		JRadioButton rdbtnHard = new JRadioButton("Hard");
-		rdbtnHard.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		
-		difficultyButtonGroup.add(rdbtnEasy);
-		difficultyButtonGroup.add(rdbtnMedium);
-		difficultyButtonGroup.add(rdbtnHard);
-		
-		maxDaySlider.setValue(5);
-		maxDaySlider.setSnapToTicks(true);
-		maxDaySlider.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		maxDaySlider.setPaintTicks(true);
-		maxDaySlider.setPaintLabels(true);
-		maxDaySlider.setMinorTickSpacing(1);
-		maxDaySlider.setMinimum(5);
-		maxDaySlider.setMaximum(15);
-		maxDaySlider.setMajorTickSpacing(5);
+		JLabel lblErrorLabel = new JLabel("");
+		lblErrorLabel.setForeground(Color.RED);
 		
 		JButton btnStartGameButton = new JButton("Start Adventure");
 		btnStartGameButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				SetUp getButtons = new SetUp();
-				if(getButtons.getSelectedButtonText(starterMonsterButtonGroup) != null &&
-						getButtons.getSelectedButtonText(starterItemButtonGroup) != null) {
+				SetUp getButtons = new SetUp(screen);
+				if (getButtons.getPlayerName().length() < 3 || getButtons.getPlayerName().length() > 15) {
+					lblErrorLabel.setText("Please input name between 3 and 15 characters");
+				} else if (getButtons.getSelectedButtonText(starterMonsterButtonGroup) == null) {
+					lblErrorLabel.setText("Please select a monster");
+				} else if (getButtons.getSelectedButtonText(starterItemButtonGroup) == null) {
+					lblErrorLabel.setText("Please select a item");
+				} else {
 					SetUp setup = new SetUp(manager, screen);
 					manager.closeSetupScreen(screen);
 				}
@@ -243,74 +218,101 @@ public class SetupScreen {
 		panelItem.add(rdbtnStarterItem2, gbc_rdbtnStarterItem2);
 		starterItemButtonGroup.add(rdbtnStarterItem2);
 		
+		JPanel panel = new JPanel();
+		
+		
+		lblErrorLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		
 		GroupLayout groupLayout = new GroupLayout(window.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addContainerGap()
-							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-								.addComponent(panelMonster, GroupLayout.PREFERRED_SIZE, 1150, GroupLayout.PREFERRED_SIZE)
-								.addComponent(panelItem, GroupLayout.PREFERRED_SIZE, 1150, GroupLayout.PREFERRED_SIZE)
-								.addGroup(groupLayout.createSequentialGroup()
-									.addGap(313)
-									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-										.addGroup(groupLayout.createSequentialGroup()
-											.addComponent(lblNewLabel_1_2, GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(maxDaySlider, GroupLayout.PREFERRED_SIZE, 374, GroupLayout.PREFERRED_SIZE)
-											.addPreferredGap(ComponentPlacement.RELATED))
-										.addGroup(groupLayout.createSequentialGroup()
-											.addComponent(lblNewLabel_1_1, GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(rdbtnEasy, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(rdbtnMedium)
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(rdbtnHard, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE)
-											.addGap(2))
-										.addGroup(groupLayout.createSequentialGroup()
-											.addComponent(lblNewLabel_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-											.addGap(18)
-											.addComponent(userNameTextField, GroupLayout.PREFERRED_SIZE, 365, GroupLayout.PREFERRED_SIZE)
-											.addPreferredGap(ComponentPlacement.RELATED)))
-									.addGap(366))
-								.addComponent(btnStartGameButton))
-							.addGap(476))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(397)
-							.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 322, GroupLayout.PREFERRED_SIZE)))
+						.addComponent(panel, GroupLayout.DEFAULT_SIZE, 1246, Short.MAX_VALUE)
+						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+							.addComponent(lblErrorLabel, GroupLayout.DEFAULT_SIZE, 995, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(btnStartGameButton))
+						.addComponent(panelMonster, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 1246, Short.MAX_VALUE)
+						.addComponent(panelItem, GroupLayout.DEFAULT_SIZE, 1246, Short.MAX_VALUE))
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)
-					.addGap(6)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
-						.addComponent(userNameTextField, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(lblNewLabel_1_1, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
-						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE, false)
-							.addComponent(rdbtnMedium, GroupLayout.PREFERRED_SIZE, 72, GroupLayout.PREFERRED_SIZE)
-							.addComponent(rdbtnEasy, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
-							.addComponent(rdbtnHard, GroupLayout.PREFERRED_SIZE, 72, GroupLayout.PREFERRED_SIZE)))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(lblNewLabel_1_2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(maxDaySlider, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 246, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
 					.addComponent(panelMonster, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGap(18)
 					.addComponent(panelItem, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnStartGameButton, GroupLayout.PREFERRED_SIZE, 86, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(35, Short.MAX_VALUE))
+					.addGap(55)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnStartGameButton, GroupLayout.PREFERRED_SIZE, 86, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblErrorLabel))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
+		panel.setLayout(null);
+		
+		JLabel lblTitle = new JLabel("Monster Hunt");
+		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTitle.setFont(new Font("Tahoma", Font.PLAIN, 50));
+		lblTitle.setBounds(10, 11, 1226, 61);
+		panel.add(lblTitle);
+		
+		JLabel lblName = new JLabel("Name:");
+		lblName.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		lblName.setBounds(410, 83, 131, 41);
+		panel.add(lblName);
+		
+		userNameTextField = new JTextField();
+		userNameTextField.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		userNameTextField.setBounds(551, 83, 319, 41);
+		panel.add(userNameTextField);
+		userNameTextField.setColumns(10);
+		
+		JLabel lblDifficulty = new JLabel("Difficulty:");
+		lblDifficulty.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		lblDifficulty.setBounds(410, 131, 131, 37);
+		panel.add(lblDifficulty);
+		
+		JRadioButton rdbtnEasy = new JRadioButton("Easy");
+		difficultyButtonGroup.add(rdbtnEasy);
+		rdbtnEasy.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		rdbtnEasy.setBounds(551, 127, 87, 41);
+		panel.add(rdbtnEasy);
+		
+		JRadioButton rdbtnMedium = new JRadioButton("Medium");
+		rdbtnMedium.setSelected(true);
+		difficultyButtonGroup.add(rdbtnMedium);
+		rdbtnMedium.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		rdbtnMedium.setBounds(640, 127, 131, 41);
+		panel.add(rdbtnMedium);
+		
+		JRadioButton rdbtnHard = new JRadioButton("Hard");
+		difficultyButtonGroup.add(rdbtnHard);
+		rdbtnHard.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		rdbtnHard.setBounds(773, 127, 97, 41);
+		panel.add(rdbtnHard);
+		
+		JLabel lblDays = new JLabel("Days:");
+		lblDays.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		lblDays.setBounds(410, 179, 131, 57);
+		panel.add(lblDays);
+		
+		maxDaySlider = new JSlider();
+		maxDaySlider.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		maxDaySlider.setMajorTickSpacing(5);
+		maxDaySlider.setMinorTickSpacing(1);
+		maxDaySlider.setValue(5);
+		maxDaySlider.setSnapToTicks(true);
+		maxDaySlider.setPaintTicks(true);
+		maxDaySlider.setPaintLabels(true);
+		maxDaySlider.setMinimum(5);
+		maxDaySlider.setMaximum(15);
+		maxDaySlider.setBounds(551, 175, 319, 61);
+		panel.add(maxDaySlider);
 		GridBagLayout gbl_panelMonster = new GridBagLayout();
 		gbl_panelMonster.columnWidths = new int[]{245, 81, 81, 81, 0};
 		gbl_panelMonster.rowHeights = new int[]{42, 42, 0, 0, 0};
@@ -458,10 +460,5 @@ public class SetupScreen {
 		starterMonsterButtonGroup.add(rdbtnStarterMonster2);
 		
 		window.getContentPane().setLayout(groupLayout);
-	}
-
-	private String String(Object object) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }
