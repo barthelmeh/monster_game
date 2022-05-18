@@ -103,7 +103,7 @@ public class MainGame {
     	for (int i=0; i<4; i++ ){
 			ArrayList<Monster> team = new ArrayList<Monster>();
 			if (getCurrentDay() < 5) {
-				int randomSize = rand.nextInt(2);
+				int randomSize = rand.nextInt(1,2);
 				for (int j=0; j < randomSize; j++){
 					int randomIndex = rand.nextInt(getAllMonsters().size());
             		Monster randomMonster = getAllMonsters().get(randomIndex);
@@ -125,7 +125,7 @@ public class MainGame {
 					team.add(randomMonster);
 				}
 			}
-			Battle battle = new Battle(team);
+			Battle battle = new Battle(team, newPlayer);
 			getBattles().add(battle);
 		}
 	}
