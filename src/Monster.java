@@ -48,7 +48,7 @@ public class Monster {
         monsterDamage = newDamage;
     }
 
-	public int getMonsterCost() {
+	public int getCost() {
 		return monsterCost;
 	}
 

@@ -74,10 +74,8 @@ public class SetUp {
         ArrayList<Item> avaiableItems = manager.getAllItems();
         Random rand = new Random();
         for (int i = 0; i < 3; i++){
-        	System.out.println(avaiableItems.size());
             int randomIndex = rand.nextInt(avaiableItems.size());
             Item randomItem = avaiableItems.get(randomIndex);
-            System.out.println(randomItem.getItemName());
             manager.getStarterItems().add(randomItem);
             avaiableItems.remove(randomIndex);
         }
@@ -130,16 +128,12 @@ public class SetUp {
 
         
     	newPlayer.setPlayerName(getPlayerName());
-    	newPlayer.addMonster(getUsersStarterMonster());
-    	newPlayer.addItem(getUsersStarterItem());
-        System.out.println(getUsersStarterMonster());
-    	System.out.println(manager.getMaxDay());
-    	System.out.println(manager.getDifficulty());
+    	newPlayer.addStarters(getUsersStarterMonster(), getUsersStarterItem());
     }
 
     
 	public String getPlayerName(){
-        String name = screen.userNameTextField.getText();
+        String name = screen.getUserNameTextField().getText();
         return name;
     }
     public String getSelectedButtonText(ButtonGroup buttonGroup) {
@@ -153,7 +147,7 @@ public class SetUp {
         return null;
     }
     public int getMaxDays() {
-    	int maxDays = screen.maxDaySlider.getValue();
+    	int maxDays = screen.getMaxDaySlider().getValue();
     	return maxDays;
     }
     public GameDifficulty.difficulties getDifficulty(){
@@ -188,8 +182,6 @@ public class SetUp {
     	String userInput = getSelectedButtonText(screen.starterItemButtonGroup);
     	ArrayList<Item> items = manager.getStarterItems();
     	for (Item item : items) {
-    		System.out.println(item.getItemName());
-    		System.out.println(userInput);
     		if (item.getItemName().equals(userInput)) {
     			return item;
     		}

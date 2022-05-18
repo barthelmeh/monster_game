@@ -7,13 +7,11 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JPanel;
-import java.awt.GridLayout;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import javax.swing.JRadioButton;
 import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.event.ActionListener;
@@ -233,7 +231,7 @@ public class StoreScreen {
 		gbc_lblCost.gridy = 4;
 		panelMonster.add(lblCost, gbc_lblCost);
 		
-		JLabel lblMonsterCost = new JLabel(manager.toDollar(firstStoreMonster.getMonsterCost()));
+		JLabel lblMonsterCost = new JLabel(manager.toDollar(firstStoreMonster.getCost()));
 		lblMonsterCost.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblMonsterCost = new GridBagConstraints();
 		gbc_lblMonsterCost.insets = new Insets(0, 0, 5, 5);
@@ -241,7 +239,7 @@ public class StoreScreen {
 		gbc_lblMonsterCost.gridy = 4;
 		panelMonster.add(lblMonsterCost, gbc_lblMonsterCost);
 		
-		JLabel lblMonsterCost_1 = new JLabel(manager.toDollar(secondStoreMonster.getMonsterCost()));
+		JLabel lblMonsterCost_1 = new JLabel(manager.toDollar(secondStoreMonster.getCost()));
 		lblMonsterCost_1.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblMonsterCost_1 = new GridBagConstraints();
 		gbc_lblMonsterCost_1.insets = new Insets(0, 0, 5, 5);
@@ -249,7 +247,7 @@ public class StoreScreen {
 		gbc_lblMonsterCost_1.gridy = 4;
 		panelMonster.add(lblMonsterCost_1, gbc_lblMonsterCost_1);
 		
-		JLabel lblMonsterCost_2 = new JLabel(manager.toDollar(thirdStoreMonster.getMonsterCost()));
+		JLabel lblMonsterCost_2 = new JLabel(manager.toDollar(thirdStoreMonster.getCost()));
 		lblMonsterCost_2.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblMonsterCost_2 = new GridBagConstraints();
 		gbc_lblMonsterCost_2.insets = new Insets(0, 0, 5, 0);
@@ -470,7 +468,7 @@ public class StoreScreen {
 		JButton btnBuyMonster = new JButton("Buy!");
 		btnBuyMonster.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (player.getCurrentMoney() >= firstStoreMonster.getMonsterCost()) {
+				if (player.getCurrentMoney() >= firstStoreMonster.getCost()) {
 					player.addMonster(firstStoreMonster);
 				}
 			}
@@ -486,7 +484,7 @@ public class StoreScreen {
 		JButton btnBuyMonster1 = new JButton("Buy!");
 		btnBuyMonster1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (player.getCurrentMoney() >= secondStoreMonster.getMonsterCost()) {
+				if (player.getCurrentMoney() >= secondStoreMonster.getCost()) {
 					player.addMonster(secondStoreMonster);
 				}
 			}
@@ -502,7 +500,7 @@ public class StoreScreen {
 		JButton btnBuyMonster2 = new JButton("Buy!");
 		btnBuyMonster2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (player.getCurrentMoney() >= thirdStoreMonster.getMonsterCost()) {
+				if (player.getCurrentMoney() >= thirdStoreMonster.getCost()) {
 					player.addMonster(thirdStoreMonster);
 				}
 			}

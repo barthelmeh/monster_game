@@ -10,11 +10,16 @@ public class Player {
         currentMoney = 10;
         currentPoints = 0;
     }
-    public Player(String name, Monster monster){
+    public Player(String name, Monster monster, Item item){
         playerName = name;
         team.add(monster);
+        inventory.add(item);
         currentMoney = 10;
         currentPoints = 0;
+    }
+    public void addStarters(Monster monster, Item item) {
+    	team.add(monster);
+    	inventory.add(item);
     }
     public void setPlayerName(String name){
         playerName = name;
@@ -30,7 +35,7 @@ public class Player {
     }
     public void addMonster(Monster monster){
         team.add(monster);
-        decreaseMoney(monster.getMonsterCost());
+        decreaseMoney(monster.getCost());
     }
     public void addItem(Item item){
         inventory.add(item);
