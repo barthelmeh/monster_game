@@ -1,5 +1,9 @@
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.Random;
+
+import javax.swing.AbstractButton;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 
 
@@ -169,6 +173,16 @@ public class MainGame {
 			getBattles().add(battle);
 		}
 	}
+    public String getSelectedButtonText(ButtonGroup buttonGroup) {
+        for (Enumeration<AbstractButton> buttons = buttonGroup.getElements(); buttons.hasMoreElements();) {
+            AbstractButton button = buttons.nextElement();
+
+            if (button.isSelected()) {
+                return button.getText();
+            }
+        }
+        return null;
+    }
 	public void closeMainScreen(MainScreen mainScreen) {
         mainScreen.closeWindow();
     }

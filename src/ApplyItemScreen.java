@@ -18,6 +18,8 @@ import javax.swing.JRadioButton;
 import javax.swing.JToggleButton;
 import javax.swing.ButtonGroup;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ApplyItemScreen {
 
@@ -63,9 +65,7 @@ public class ApplyItemScreen {
 	}
 	private void setTeam(ArrayList<Monster> newTeam) {
 		team = newTeam;
-		
 	}
-
 	private void setInventory(ArrayList<Item> newInventory) {
 		inventory = newInventory;
 	}
@@ -76,7 +76,9 @@ public class ApplyItemScreen {
 	public void finishedWindow() {
 		manager.closeApplyItemScreen(screen, button);
 	}
-
+	public void applyItem() {
+		
+	}
 	/**
 	 * Initialize the contents of the window.
 	 */
@@ -282,7 +284,12 @@ public class ApplyItemScreen {
 		gbc_lblSelection.gridy = 3;
 		panelTeam.add(lblSelection, gbc_lblSelection);
 		
-		JToggleButton tglbtnMonsterSelect = new JToggleButton("Select");
+		JToggleButton tglbtnMonsterSelect = new JToggleButton();
+		try {
+			tglbtnMonsterSelect.setText(team.get(0).getName());
+		} catch (Exception e){
+			tglbtnMonsterSelect.setEnabled(false);
+		}
 		monsterSelection.add(tglbtnMonsterSelect);
 		tglbtnMonsterSelect.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		GridBagConstraints gbc_tglbtnMonsterSelect = new GridBagConstraints();
@@ -292,7 +299,12 @@ public class ApplyItemScreen {
 		gbc_tglbtnMonsterSelect.gridy = 3;
 		panelTeam.add(tglbtnMonsterSelect, gbc_tglbtnMonsterSelect);
 		
-		JToggleButton tglbtnMonsterSelect_1 = new JToggleButton("Select");
+		JToggleButton tglbtnMonsterSelect_1 = new JToggleButton();
+		try {
+			tglbtnMonsterSelect_1.setText(team.get(1).getName());
+		} catch (Exception e){
+			tglbtnMonsterSelect_1.setEnabled(false);
+		}
 		monsterSelection.add(tglbtnMonsterSelect_1);
 		tglbtnMonsterSelect_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		GridBagConstraints gbc_tglbtnMonsterSelect_1 = new GridBagConstraints();
@@ -303,6 +315,11 @@ public class ApplyItemScreen {
 		panelTeam.add(tglbtnMonsterSelect_1, gbc_tglbtnMonsterSelect_1);
 		
 		JToggleButton tglbtnMonsterSelect_2 = new JToggleButton("Select");
+		try {
+			tglbtnMonsterSelect_2.setText(team.get(2).getName());
+		} catch (Exception e){
+			tglbtnMonsterSelect_2.setEnabled(false);
+		}
 		monsterSelection.add(tglbtnMonsterSelect_2);
 		tglbtnMonsterSelect_2.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		GridBagConstraints gbc_tglbtnMonsterSelect_2 = new GridBagConstraints();
@@ -313,6 +330,11 @@ public class ApplyItemScreen {
 		panelTeam.add(tglbtnMonsterSelect_2, gbc_tglbtnMonsterSelect_2);
 		
 		JToggleButton tglbtnMonsterSelect_3 = new JToggleButton("Select");
+		try {
+			tglbtnMonsterSelect_3.setText(team.get(3).getName());
+		} catch (Exception e){
+			tglbtnMonsterSelect_3.setEnabled(false);
+		}
 		monsterSelection.add(tglbtnMonsterSelect_3);
 		tglbtnMonsterSelect_3.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		GridBagConstraints gbc_tglbtnMonsterSelect_3 = new GridBagConstraints();
@@ -330,7 +352,7 @@ public class ApplyItemScreen {
 		gbl_panelInventory.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panelInventory.setLayout(gbl_panelInventory);
 		
-		JLabel lblName = new JLabel("Name:");
+		JLabel lblName = new JLabel("Cost:");
 		lblName.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblName = new GridBagConstraints();
 		gbc_lblName.insets = new Insets(0, 0, 5, 5);
@@ -400,9 +422,18 @@ public class ApplyItemScreen {
 		panelInventory.add(lblPercentageIncrease, gbc_lblPercentageIncrease);
 		
 		JButton btnExit = new JButton("Exit");
+		btnExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				finishedWindow();
+			}
+		});
 		btnExit.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		
 		JButton btnApplyItem = new JButton("Apply Item");
+		btnApplyItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnApplyItem.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GroupLayout groupLayout = new GroupLayout(window.getContentPane());
 		groupLayout.setHorizontalGroup(

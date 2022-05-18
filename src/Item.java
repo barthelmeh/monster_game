@@ -8,5 +8,4 @@ public interface Item {
     void setItemCost(int itemCost );
     
     void applyItem(Monster monster);
-
 }
