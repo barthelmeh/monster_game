@@ -4,6 +4,7 @@ import java.util.concurrent.TimeUnit;
 public class Battle {
     private ArrayList<Monster> enemyTeam = new ArrayList<Monster>();
     private ArrayList<Monster> playerTeam = new ArrayList<Monster>();
+    private boolean playerTurn = true; // Player goes first.
 
     public Battle(ArrayList<Monster> team, Player playerManager) {
     	enemyTeam = team;
@@ -19,38 +20,57 @@ public class Battle {
         enemyTeam = team;
     }
     
+    public boolean getPlayerTurn() {
+    	return playerTurn;
+    }
+    
+    public void setCurrentTurn(boolean isPlayersTurn) {
+    	playerTurn = isPlayersTurn;
+    }
+    
     public void runBattle(BattleScreen bsManager){
-    	do {
-            Monster enemyMonster = enemyTeam.get(0);
-            Monster playerMonster = playerTeam.get(0);
-            
-            int enemyCurrentHealth = enemyMonster.getMonsterCurrentHealth();
-            int playerCurrentHealth = playerMonster.getMonsterCurrentHealth();
-            int enemyDamage = enemyMonster.getDamage();
-            int playerDamage = playerMonster.getDamage();
-
-            // Player Attacks First
-            enemyCurrentHealth -= playerDamage;
+    	
+    	Monster enemyMonster = enemyTeam.get(0);
+        Monster playerMonster = playerTeam.get(0);
+        
+        int enemyCurrentHealth = enemyMonster.getMonsterCurrentHealth();
+        int playerCurrentHealth = playerMonster.getMonsterCurrentHealth();
+        int enemyDamage = enemyMonster.getDamage();
+        int playerDamage = playerMonster.getDamage();
+    	
+    	if(playerTurn) {
+    		
+    		enemyCurrentHealth -= playerDamage;
             enemyMonster.setCurrentHealth(enemyCurrentHealth);
             
-            if(enemyCurrentHealth > 0) {
-                // Now Enemy Attacks
-                playerCurrentHealth -= enemyDamage;
-                playerMonster.setCurrentHealth(playerCurrentHealth);
-                if(playerCurrentHealth < 0) {
-                    playerTeam.remove(0);
-                    bsManager.updateMonsters("Player");
-                    
-                }
-            } else {
-                enemyTeam.remove(0);
-                bsManager.updateMonsters("Enemy");
+            if(enemyCurrentHealth <= 0) {
+            	enemyTeam.remove(0);
+            	if(enemyTeam.size() == 0) {
+            		// Player has won the battle
+            	}
             }
-
-
-        } while(enemyTeam.size() > 0 && playerTeam.size() > 0);
-        System.out.println("finished battle");
+            
+            // Update the labels
+            bsManager.updateMonsters("Enemy");
+            
+            // Change turn
+            setCurrentTurn(false);
+            
+    	} else { // Enemy turn
+    		playerCurrentHealth -= enemyDamage;
+            playerMonster.setCurrentHealth(playerCurrentHealth);
+            if(playerCurrentHealth < 0) {
+                playerTeam.remove(0);
+                if(playerTeam.size() == 0) {
+                	// Player has lost
+                }
+            }
+            
+            // Update the labels
+            bsManager.updateMonsters("Player");
+            
+            // Change turn
+            setCurrentTurn(true);
+    	}
     }
-
-    
 }

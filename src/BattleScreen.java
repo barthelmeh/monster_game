@@ -17,6 +17,9 @@ import javax.swing.border.BevelBorder;
 import javax.swing.BoxLayout;
 import java.awt.FlowLayout;
 import java.awt.CardLayout;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class BattleScreen {
 
@@ -24,6 +27,7 @@ public class BattleScreen {
 	private MainGame manager;
 	private ArrayList<Monster> playerTeam;
 	private Battle currBattle;
+	private BattleScreen screen;
 	private ArrayList<Monster> enemyTeam;
 
 	public JLabel playerNextMonster;
@@ -62,12 +66,12 @@ public class BattleScreen {
 	
 	public BattleScreen(MainGame incomingManager, Battle battleManager) {
 		manager = incomingManager;
+		screen = this;
 		currBattle = battleManager;
 		enemyTeam = currBattle.getTeam();
 		playerTeam = manager.getPlayer().getTeam();
 		initialize();
 		window.setVisible(true);
-		battleManager.runBattle(this);
 	}
 	public void closeWindow() {
 		window.dispose();
@@ -195,6 +199,13 @@ public class BattleScreen {
 		enemyNextMonster = enemyNextMonsterLabel;
 		enemyNextMonsterLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		enemyNextMonsterPanel.add(enemyNextMonsterLabel);
+		
+		JButton btnNewButton = new JButton("Next Turn");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				currBattle.runBattle(screen);
+			}
+		});
 
 		GroupLayout groupLayout = new GroupLayout(window.getContentPane());
 		groupLayout.setHorizontalGroup(
@@ -218,6 +229,8 @@ public class BattleScreen {
 									.addGap(179))
 								.addGroup(groupLayout.createSequentialGroup()
 									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 									.addComponent(panelEnemyTeam, GroupLayout.PREFERRED_SIZE, 324, GroupLayout.PREFERRED_SIZE)))))
 					.addContainerGap())
 		);
@@ -235,11 +248,14 @@ public class BattleScreen {
 							.addPreferredGap(ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
 							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 								.addComponent(panelPlayerTeam, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE)
-								.addComponent(panelEnemyTeam, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE)))
+								.addComponent(panelEnemyTeam, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE))
+							.addContainerGap())
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(80)
-							.addComponent(lblNewLabel_3)))
-					.addContainerGap())
+							.addComponent(lblNewLabel_3)
+							.addPreferredGap(ComponentPlacement.RELATED, 174, Short.MAX_VALUE)
+							.addComponent(btnNewButton)
+							.addGap(23))))
 		);
 		panelPlayer.setLayout(null);
 		
