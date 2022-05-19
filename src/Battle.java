@@ -18,7 +18,7 @@ public class Battle {
         	totalHealthDam += m.getMonsterCurrentHealth();
         	totalHealthDam += m.getDamage();
         }
-        coinsGained = totalHealthDam / 17;
+        coinsGained = totalHealthDam / 7;
     	resetLevels(playerTeam);
     }
     

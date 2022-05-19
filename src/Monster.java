@@ -79,5 +79,12 @@ public class Monster {
 	public void setMonsterCost(int newMonsterCost) {
 		monsterCost = newMonsterCost;
 	}
+	public String checkIfLeveledUp() {
+		if (getLeveledUp()) {
+			return getName() + "has leveled up";
+		} else {
+			return null;
+		}
+	}
 
 }

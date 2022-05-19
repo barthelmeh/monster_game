@@ -54,10 +54,9 @@ public class WinBattleScreen {
 	}
 	public void closeWindow() {
 		window.dispose();
-		manager.setUpStore();
 	}
 	public void finishedWindow() {
-		closeWindow();
+		manager.closeWinBattleScreen(this);
 	}
 	/**
 	 * Initialize the contents of the frame.

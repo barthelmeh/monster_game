@@ -17,6 +17,9 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.BoxLayout;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
 
 public class MainScreen {
 
@@ -29,7 +32,6 @@ public class MainScreen {
 	private ArrayList<Monster> battle2;
 	private ArrayList<Monster> battle3;
 	private ArrayList<Monster> battle4;
-	private JLabel lblRandomLevelUp;
 	private JLabel lblRandomMonsterLeave;
 	/**
 	 * Launch the application.
@@ -103,7 +105,7 @@ public class MainScreen {
 	private void initialize() {
 		window = new JFrame();
 		window.setTitle("Main Game");
-		window.setBounds(0, 0, 1450, 973);
+		window.setBounds(0, 0, 1450, 1109);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JPanel panelTop = new JPanel();
@@ -112,7 +114,6 @@ public class MainScreen {
 		panelBattles.setBorder(new LineBorder(new Color(0, 0, 0)));
 		
 		JPanel panelTeam = new JPanel();
-		panelTeam.setBorder(new LineBorder(new Color(0, 0, 0)));
 		
 		JPanel panelInventory = new JPanel();
 		panelInventory.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -134,29 +135,34 @@ public class MainScreen {
 		});
 		btnApplyItem.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		
-		lblRandomLevelUp = new JLabel("");
-		lblRandomLevelUp.setHorizontalAlignment(SwingConstants.CENTER);
-		lblRandomLevelUp.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		
 		lblRandomMonsterLeave = new JLabel("");
+		lblRandomMonsterLeave.setForeground(Color.RED);
 		lblRandomMonsterLeave.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRandomMonsterLeave.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GroupLayout groupLayout = new GroupLayout(window.getContentPane());
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
+			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(panelBattles, GroupLayout.DEFAULT_SIZE, 1416, Short.MAX_VALUE)
-						.addComponent(panelTop, GroupLayout.DEFAULT_SIZE, 1416, Short.MAX_VALUE)
-						.addComponent(panelTeam, GroupLayout.DEFAULT_SIZE, 1416, Short.MAX_VALUE)
-						.addComponent(panelInventory, GroupLayout.DEFAULT_SIZE, 1416, Short.MAX_VALUE)
 						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(8)
 							.addComponent(btnMoveTeam, GroupLayout.PREFERRED_SIZE, 473, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnApplyItem, GroupLayout.PREFERRED_SIZE, 473, GroupLayout.PREFERRED_SIZE))
-						.addComponent(lblRandomLevelUp, GroupLayout.DEFAULT_SIZE, 1416, Short.MAX_VALUE)
-						.addComponent(lblRandomMonsterLeave, GroupLayout.PREFERRED_SIZE, 1416, GroupLayout.PREFERRED_SIZE))
+							.addGap(4)
+							.addComponent(btnApplyItem, GroupLayout.PREFERRED_SIZE, 473, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, 468, Short.MAX_VALUE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(10)
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+								.addComponent(lblRandomMonsterLeave, GroupLayout.PREFERRED_SIZE, 1416, GroupLayout.PREFERRED_SIZE)
+								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+									.addComponent(panelBattles, GroupLayout.DEFAULT_SIZE, 1416, Short.MAX_VALUE)
+									.addComponent(panelTop, GroupLayout.DEFAULT_SIZE, 1416, Short.MAX_VALUE))))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(panelTeam, GroupLayout.DEFAULT_SIZE, 1416, Short.MAX_VALUE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(panelInventory, GroupLayout.DEFAULT_SIZE, 1418, Short.MAX_VALUE)))
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
@@ -167,18 +173,16 @@ public class MainScreen {
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(panelBattles, GroupLayout.PREFERRED_SIZE, 387, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(panelTeam, GroupLayout.PREFERRED_SIZE, 135, GroupLayout.PREFERRED_SIZE)
+					.addComponent(panelTeam, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(panelInventory, GroupLayout.PREFERRED_SIZE, 135, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnMoveTeam, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnApplyItem, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(lblRandomLevelUp)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGap(208)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnApplyItem, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnMoveTeam, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
 					.addComponent(lblRandomMonsterLeave, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(41, Short.MAX_VALUE))
+					.addContainerGap())
 		);
 		
 		JPanel panelItem = new JPanel();
@@ -276,90 +280,249 @@ public class MainScreen {
 		JPanel panelMonster = new JPanel();
 		panelMonster.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panelTeam.add(panelMonster);
-	
+		
+		GridBagLayout gbl_panelMonster = new GridBagLayout();
+		gbl_panelMonster.columnWidths = new int[]{333};
+		gbl_panelMonster.rowHeights = new int[]{29, 29, 29, 0, 0, 0};
+		gbl_panelMonster.columnWeights = new double[]{1.0};
+		gbl_panelMonster.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		panelMonster.setLayout(gbl_panelMonster);
+		
 		JLabel lblMonsterName = new JLabel("");
-		lblMonsterName.setBounds(115, 6, 123, 29);
 		JLabel lblLevel = new JLabel("");
+		JLabel lblMonsterHealth = new JLabel("");
+		JLabel lblhasLeveledUp = new JLabel("");
+		
+		lblMonsterName.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMonsterName.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		GridBagConstraints gbc_lblMonsterName = new GridBagConstraints();
+		gbc_lblMonsterName.anchor = GridBagConstraints.NORTH;
+		gbc_lblMonsterName.fill = GridBagConstraints.HORIZONTAL;
+		gbc_lblMonsterName.insets = new Insets(0, 0, 5, 0);
+		gbc_lblMonsterName.gridx = 0;
+		gbc_lblMonsterName.gridy = 0;
+		panelMonster.add(lblMonsterName, gbc_lblMonsterName);
+	
+		lblLevel.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		GridBagConstraints gbc_lblLevel = new GridBagConstraints();
+		gbc_lblLevel.anchor = GridBagConstraints.NORTH;
+		gbc_lblLevel.fill = GridBagConstraints.HORIZONTAL;
+		gbc_lblLevel.insets = new Insets(0, 0, 5, 0);
+		gbc_lblLevel.gridx = 0;
+		gbc_lblLevel.gridy = 1;
+		panelMonster.add(lblLevel, gbc_lblLevel);
+		
+		lblMonsterHealth.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		GridBagConstraints gbc_lblMonsterHealth = new GridBagConstraints();
+		gbc_lblMonsterHealth.insets = new Insets(0, 0, 5, 0);
+		gbc_lblMonsterHealth.fill = GridBagConstraints.HORIZONTAL;
+		gbc_lblMonsterHealth.anchor = GridBagConstraints.NORTH;
+		gbc_lblMonsterHealth.gridx = 0;
+		gbc_lblMonsterHealth.gridy = 2;
+		panelMonster.add(lblMonsterHealth, gbc_lblMonsterHealth);
+		
+		lblhasLeveledUp.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		GridBagConstraints gbc_lblhasLeveledUp = new GridBagConstraints();
+		gbc_lblhasLeveledUp.anchor = GridBagConstraints.NORTH;
+		gbc_lblhasLeveledUp.fill = GridBagConstraints.HORIZONTAL;
+		gbc_lblhasLeveledUp.gridx = 0;
+		gbc_lblhasLeveledUp.gridy = 4;
+		panelMonster.add(lblhasLeveledUp, gbc_lblhasLeveledUp);
+		
 		try {
-			lblMonsterName.setText(team.get(0).getName());
-			lblLevel.setText("Level: " + Integer.toString(team.get(0).getMonsterLevel()));
+			Monster monster = team.get(0);
+			lblMonsterName.setText(monster.getName());
+			lblLevel.setText("Level: " + Integer.toString(monster.getMonsterLevel()));
+			lblMonsterHealth.setText("Health: " + Integer.toString(monster.getMonsterCurrentHealth()));	
+			lblhasLeveledUp.setText(monster.checkIfLeveledUp());
 		} catch (Exception e) {
 			lblMonsterName.setText("Open Slot");
 		}
-		panelMonster.setLayout(null);
-		lblMonsterName.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		panelMonster.add(lblMonsterName);
 		
-		
-		lblLevel.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblLevel.setBounds(10, 46, 333, 29);
-		panelMonster.add(lblLevel);
 		JPanel panelMonster_1 = new JPanel();
 		panelMonster_1.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panelTeam.add(panelMonster_1);
-	
-	
-		JLabel lblMonsterName_1 = new JLabel("");
-		lblMonsterName_1.setBounds(115, 6, 123, 29);
+		GridBagLayout gbl_panelMonster_1 = new GridBagLayout();
+		gbl_panelMonster_1.columnWidths = new int[]{333, 0};
+		gbl_panelMonster_1.rowHeights = new int[]{29, 29, 29, 0, 0, 0};
+		gbl_panelMonster_1.columnWeights = new double[]{1.0, Double.MIN_VALUE};
+		gbl_panelMonster_1.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		panelMonster_1.setLayout(gbl_panelMonster_1);
+		
+		JLabel lblMonsterName_1 = new JLabel((String) null);
 		JLabel lblLevel_1 = new JLabel("");
+		JLabel lblMonsterHealth_1 = new JLabel("");
+		JLabel lblhasLeveledUp_1 = new JLabel((String) null);
 		try {
-			lblMonsterName_1.setText(team.get(1).getName());
-			lblLevel_1.setText("Level: " + Integer.toString(team.get(1).getMonsterLevel()));
+			Monster monster1 = team.get(1);
+			lblMonsterName_1.setText(monster1.getName());
+			lblMonsterHealth_1.setText("Health: " + Integer.toString(monster1.getMonsterCurrentHealth()));	
+			lblLevel_1.setText("Level: " + Integer.toString(monster1.getMonsterLevel()));
+			lblhasLeveledUp_1.setText(monster1.checkIfLeveledUp());
 		} catch (Exception e) {
 			lblMonsterName_1.setText("Open Slot");
 		}
-		panelMonster_1.setLayout(null);
-		lblMonsterName_1.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		panelMonster_1.add(lblMonsterName_1);
 		
+		lblMonsterName_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMonsterName_1.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		GridBagConstraints gbc_lblMonsterName_1 = new GridBagConstraints();
+		gbc_lblMonsterName_1.fill = GridBagConstraints.HORIZONTAL;
+		gbc_lblMonsterName_1.anchor = GridBagConstraints.NORTH;
+		gbc_lblMonsterName_1.insets = new Insets(0, 0, 5, 0);
+		gbc_lblMonsterName_1.gridx = 0;
+		gbc_lblMonsterName_1.gridy = 0;
+		panelMonster_1.add(lblMonsterName_1, gbc_lblMonsterName_1);
 		
 		lblLevel_1.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblLevel_1.setBounds(10, 46, 333, 29);
-		panelMonster_1.add(lblLevel_1);
+		GridBagConstraints gbc_lblLevel_1 = new GridBagConstraints();
+		gbc_lblLevel_1.fill = GridBagConstraints.HORIZONTAL;
+		gbc_lblLevel_1.anchor = GridBagConstraints.NORTH;
+		gbc_lblLevel_1.insets = new Insets(0, 0, 5, 0);
+		gbc_lblLevel_1.gridx = 0;
+		gbc_lblLevel_1.gridy = 1;
+		panelMonster_1.add(lblLevel_1, gbc_lblLevel_1);
+		
+		lblMonsterHealth_1.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		GridBagConstraints gbc_lblMonsterHealth_1 = new GridBagConstraints();
+		gbc_lblMonsterHealth_1.insets = new Insets(0, 0, 5, 0);
+		gbc_lblMonsterHealth_1.fill = GridBagConstraints.HORIZONTAL;
+		gbc_lblMonsterHealth_1.anchor = GridBagConstraints.NORTH;
+		gbc_lblMonsterHealth_1.gridx = 0;
+		gbc_lblMonsterHealth_1.gridy = 2;
+		panelMonster_1.add(lblMonsterHealth_1, gbc_lblMonsterHealth_1);
+		
+		lblhasLeveledUp_1.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		GridBagConstraints gbc_lblhasLeveledUp_1 = new GridBagConstraints();
+		gbc_lblhasLeveledUp_1.fill = GridBagConstraints.HORIZONTAL;
+		gbc_lblhasLeveledUp_1.anchor = GridBagConstraints.NORTH;
+		gbc_lblhasLeveledUp_1.gridx = 0;
+		gbc_lblhasLeveledUp_1.gridy = 4;
+		panelMonster_1.add(lblhasLeveledUp_1, gbc_lblhasLeveledUp_1);
+		
+		
 		JPanel panelMonster_2 = new JPanel();
 		panelMonster_2.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panelTeam.add(panelMonster_2);
+		GridBagLayout gbl_panelMonster_2 = new GridBagLayout();
+		gbl_panelMonster_2.columnWidths = new int[]{333, 0};
+		gbl_panelMonster_2.rowHeights = new int[]{29, 29, 29, 0, 0, 0};
+		gbl_panelMonster_2.columnWeights = new double[]{1.0, Double.MIN_VALUE};
+		gbl_panelMonster_2.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		panelMonster_2.setLayout(gbl_panelMonster_2);
 		
-		JLabel lblMonsterName_2 = new JLabel("Open Slot");
-		lblMonsterName_2.setBounds(115, 6, 123, 29);
+		JLabel lblMonsterName_2 = new JLabel((String) null);
 		JLabel lblLevel_2 = new JLabel("");
+		JLabel lblMonsterHealth_2 = new JLabel("");
+		JLabel lblhasLeveledUp_2 = new JLabel((String) null);
+		
 		try {
-			lblMonsterName_2.setText(team.get(2).getName());
-			lblLevel_2.setText("Level: " + Integer.toString(team.get(2).getMonsterLevel()));
+			Monster monster2 = team.get(2);
+			lblMonsterName_2.setText(monster2.getName());
+			lblLevel_2.setText("Level: " + Integer.toString(monster2.getMonsterLevel()));
+			lblMonsterHealth_2.setText("Health: " + Integer.toString(monster2.getMonsterCurrentHealth()));
+			lblhasLeveledUp_2.setText(monster2.checkIfLeveledUp());
 		} catch (Exception e) {
 			lblMonsterName_2.setText("Open Slot");
 		}
-		panelMonster_2.setLayout(null);
-		lblMonsterName_2.setFont(new Font("Tahoma", Font.PLAIN, 24)); 
-		panelMonster_2.add(lblMonsterName_2);
 		
+		lblMonsterName_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMonsterName_2.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		GridBagConstraints gbc_lblMonsterName_2 = new GridBagConstraints();
+		gbc_lblMonsterName_2.fill = GridBagConstraints.HORIZONTAL;
+		gbc_lblMonsterName_2.anchor = GridBagConstraints.NORTH;
+		gbc_lblMonsterName_2.insets = new Insets(0, 0, 5, 0);
+		gbc_lblMonsterName_2.gridx = 0;
+		gbc_lblMonsterName_2.gridy = 0;
+		panelMonster_2.add(lblMonsterName_2, gbc_lblMonsterName_2);
 		
 		lblLevel_2.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblLevel_2.setBounds(10, 46, 333, 29);
-		panelMonster_2.add(lblLevel_2);
+		GridBagConstraints gbc_lblLevel_2 = new GridBagConstraints();
+		gbc_lblLevel_2.fill = GridBagConstraints.HORIZONTAL;
+		gbc_lblLevel_2.anchor = GridBagConstraints.NORTH;
+		gbc_lblLevel_2.insets = new Insets(0, 0, 5, 0);
+		gbc_lblLevel_2.gridx = 0;
+		gbc_lblLevel_2.gridy = 1;
+		panelMonster_2.add(lblLevel_2, gbc_lblLevel_2);
+		
+		lblMonsterHealth_2.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		GridBagConstraints gbc_lblMonsterHealth_2 = new GridBagConstraints();
+		gbc_lblMonsterHealth_2.insets = new Insets(0, 0, 5, 0);
+		gbc_lblMonsterHealth_2.fill = GridBagConstraints.HORIZONTAL;
+		gbc_lblMonsterHealth_2.anchor = GridBagConstraints.NORTH;
+		gbc_lblMonsterHealth_2.gridx = 0;
+		gbc_lblMonsterHealth_2.gridy = 2;
+		panelMonster_2.add(lblMonsterHealth_2, gbc_lblMonsterHealth_2);
+		
+		lblhasLeveledUp_2.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		GridBagConstraints gbc_lblhasLeveledUp_2 = new GridBagConstraints();
+		gbc_lblhasLeveledUp_2.fill = GridBagConstraints.HORIZONTAL;
+		gbc_lblhasLeveledUp_2.anchor = GridBagConstraints.NORTH;
+		gbc_lblhasLeveledUp_2.gridx = 0;
+		gbc_lblhasLeveledUp_2.gridy = 4;
+		panelMonster_2.add(lblhasLeveledUp_2, gbc_lblhasLeveledUp_2);
+		
 		JPanel panelMonster_3 = new JPanel();
 		panelMonster_3.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panelTeam.add(panelMonster_3);
-	
-		JLabel lblMonsterName_3 = new JLabel("Open Slot");
+		GridBagLayout gbl_panelMonster_3 = new GridBagLayout();
+		gbl_panelMonster_3.columnWidths = new int[]{333, 0};
+		gbl_panelMonster_3.rowHeights = new int[]{29, 29, 29, 0, 0, 0};
+		gbl_panelMonster_3.columnWeights = new double[]{1.0, Double.MIN_VALUE};
+		gbl_panelMonster_3.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		panelMonster_3.setLayout(gbl_panelMonster_3);
+		
+		JLabel lblMonsterName_3 = new JLabel((String) null);
 		JLabel lblLevel_3 = new JLabel("");
-		lblMonsterName_3.setBounds(115, 6, 123, 29);
+		JLabel lblMonsterHealth_3 = new JLabel("");
+		JLabel lblhasLeveledUp_3 = new JLabel((String) null);
+		
 		try {
-			lblMonsterName_3.setText(team.get(3).getName());
-			lblLevel_3.setText("Level: " + Integer.toString(team.get(3).getMonsterLevel()));
+			Monster monster3 = team.get(3);
+			lblMonsterName_3.setText(monster3.getName());
+			lblLevel_3.setText("Level: " + Integer.toString(monster3.getMonsterLevel()));
+			lblMonsterHealth_3.setText("Health: " + Integer.toString(monster3.getMonsterCurrentHealth()));
+			lblhasLeveledUp_3.setText(monster3.checkIfLeveledUp());
 		} catch (Exception e) {
 			lblMonsterName_3.setText("Open Slot");
 		}
-		panelMonster_3.setLayout(null);
+		
+		lblMonsterName_3.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMonsterName_3.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		panelMonster_3.add(lblMonsterName_3);
-		
-		
+		GridBagConstraints gbc_lblMonsterName_3 = new GridBagConstraints();
+		gbc_lblMonsterName_3.fill = GridBagConstraints.HORIZONTAL;
+		gbc_lblMonsterName_3.anchor = GridBagConstraints.NORTH;
+		gbc_lblMonsterName_3.insets = new Insets(0, 0, 5, 0);
+		gbc_lblMonsterName_3.gridx = 0;
+		gbc_lblMonsterName_3.gridy = 0;
+		panelMonster_3.add(lblMonsterName_3, gbc_lblMonsterName_3);
 		
 		lblLevel_3.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblLevel_3.setBounds(10, 46, 333, 29);
-		panelMonster_3.add(lblLevel_3);
+		GridBagConstraints gbc_lblLevel_3 = new GridBagConstraints();
+		gbc_lblLevel_3.fill = GridBagConstraints.HORIZONTAL;
+		gbc_lblLevel_3.anchor = GridBagConstraints.NORTH;
+		gbc_lblLevel_3.insets = new Insets(0, 0, 5, 0);
+		gbc_lblLevel_3.gridx = 0;
+		gbc_lblLevel_3.gridy = 1;
+		panelMonster_3.add(lblLevel_3, gbc_lblLevel_3);
 		
+		
+		lblMonsterHealth_3.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		GridBagConstraints gbc_lblMonsterHealth_3 = new GridBagConstraints();
+		gbc_lblMonsterHealth_3.insets = new Insets(0, 0, 5, 0);
+		gbc_lblMonsterHealth_3.fill = GridBagConstraints.HORIZONTAL;
+		gbc_lblMonsterHealth_3.anchor = GridBagConstraints.NORTH;
+		gbc_lblMonsterHealth_3.gridx = 0;
+		gbc_lblMonsterHealth_3.gridy = 2;
+		panelMonster_3.add(lblMonsterHealth_3, gbc_lblMonsterHealth_3);
+		
+		
+		lblhasLeveledUp_3.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		GridBagConstraints gbc_lblhasLeveledUp_3 = new GridBagConstraints();
+		gbc_lblhasLeveledUp_3.fill = GridBagConstraints.HORIZONTAL;
+		gbc_lblhasLeveledUp_3.anchor = GridBagConstraints.NORTH;
+		gbc_lblhasLeveledUp_3.gridx = 0;
+		gbc_lblhasLeveledUp_3.gridy = 4;
+		panelMonster_3.add(lblhasLeveledUp_3, gbc_lblhasLeveledUp_3);
 		
 		panelBattles.setLayout(new GridLayout(1, 0, 0, 0));
 		
@@ -474,6 +637,11 @@ public class MainScreen {
 		panelBattle2.add(panelBattle1Team_1);
 		
 		JButton btnBattle2 = new JButton("Battle!");
+		btnBattle2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				finishedWindow(1);
+			}
+		});
 		btnBattle2.setFont(new Font("Tahoma", Font.PLAIN, 35));
 		panelBattle2.add(btnBattle2, BorderLayout.SOUTH);
 		
@@ -528,6 +696,11 @@ public class MainScreen {
 		panelBattle3Team.add(lblBattle3Monster3);
 		
 		JButton btnBattle3 = new JButton("Battle!");
+		btnBattle3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				finishedWindow(2);
+			}
+		});
 		btnBattle3.setFont(new Font("Tahoma", Font.PLAIN, 35));
 		panelBattle3.add(btnBattle3, BorderLayout.SOUTH);
 		
@@ -582,6 +755,11 @@ public class MainScreen {
 		panelBattle4Team.add(lblBattle4Monster3);
 		
 		JButton btnBattle4 = new JButton("Battle!");
+		btnBattle4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				finishedWindow(3);
+			}
+		});
 		btnBattle4.setFont(new Font("Tahoma", Font.PLAIN, 35));
 		panelBattle4.add(btnBattle4, BorderLayout.SOUTH);
 		panelTop.setLayout(new GridLayout(1, 0, 0, 0));

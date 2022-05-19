@@ -63,7 +63,11 @@ public class StoreScreen {
 		thirdStoreItem = manager.getStoreItems().get(2);
 		screen = this;
 		initialize();
+		for (Monster monster : manager.getAllMonsters()) {
+			System.out.println(monster.getMonsterCurrentHealth());
+		}
 		window.setVisible(true);
+		
 	}
 	public void closeWindow() {
 		window.dispose();

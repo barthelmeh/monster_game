@@ -21,7 +21,8 @@ public class RandomEvent {
 		int index = 0;
 		for (Monster monster : playerTeam) {
 			int randomNumber = rand.nextInt(1,7);
-			if (randomNumber == 6) {
+			if (randomNumber == 6 && playerTeam.size() > 1) {
+				
 				playerTeam.remove(index);
 				monsterLeave = monster.getName() + "has left";
 				break;

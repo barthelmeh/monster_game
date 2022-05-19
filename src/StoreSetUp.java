@@ -9,7 +9,6 @@ public class StoreSetUp {
     	manager = incomingManager;
     	setAvailableMonsters();
     	setAvailableItems();
-    	manager.launchStoreScreen();
     }
 	
 
