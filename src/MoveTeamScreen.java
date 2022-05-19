@@ -26,9 +26,9 @@ public class MoveTeamScreen {
 	private JFrame window;
 	private MoveTeamScreen screen;
 	private MainGame manager;
-	private JButton button;
 	private ArrayList<JCheckBox> teamButtonList = new ArrayList<JCheckBox>();
 	private ArrayList<Monster> playerTeam;
+	private JLabel lblErrorLabel;
 
 	/**
 	 * Launch the application.
@@ -53,11 +53,10 @@ public class MoveTeamScreen {
 	public MoveTeamScreen() {
 		initialize();
 	}
-	public MoveTeamScreen(MainGame incomingManager, JButton incomingButton) {
+	public MoveTeamScreen(MainGame incomingManager) {
 		screen = this;
 		manager = incomingManager;
 		playerTeam = manager.getPlayer().getTeam();
-		button = incomingButton;
 		initialize();
 		window.setVisible(true);
 	}
@@ -65,7 +64,10 @@ public class MoveTeamScreen {
 		window.dispose();
 	}
 	public void finishedWindow() {
-		manager.closeMoveTeamScreen(screen, button);
+		manager.closeMoveTeamScreen(screen, true);
+	}
+	public void restartWindow() {
+		manager.closeMoveTeamScreen(screen, false);
 	}
 	public void getMaxSelected(ArrayList<JCheckBox> checkboxes) {
 		int max = 2;
@@ -97,8 +99,8 @@ public class MoveTeamScreen {
 	}
 	public void swapMonsters() {
 		int counter = 0;
-		int first = 0;
-		int second = 0;
+		Integer first = (Integer) null;
+		Integer second = (Integer) null;
 		
 		for (JCheckBox box : getTeamButtonList()) {
 			if (counter == 0 && box.isSelected()) {
@@ -107,13 +109,24 @@ public class MoveTeamScreen {
 			} else if (counter == 1 && box.isSelected()) {
 				second = getTeamButtonList().indexOf(box);
 				counter++;
-			} else {
-				Collections.swap(playerTeam, first, second);
 			}
 		}
+		System.out.println(first);
+		System.out.println(second);
+		if (first == (Integer) null) {
+			lblErrorLabel.setText("Please select two more monsters");
+		} else if (second == (Integer) null) {
+			lblErrorLabel.setText("Please select one more monster");
+		}else {
+			Collections.swap(playerTeam, first, second);
+			restartWindow();
+		}
 		
-		window.repaint();
+		
+		
 	}
+	
+
 	/**
 	 * Initialize the contents of the window.
 	 */
@@ -126,14 +139,20 @@ public class MoveTeamScreen {
 		panelTeam.setBorder(new LineBorder(new Color(0, 0, 0)));
 		
 		JPanel panel = new JPanel();
+		
+		lblErrorLabel = new JLabel("");
+		lblErrorLabel.setForeground(Color.RED);
+		lblErrorLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblErrorLabel.setFont(new Font("Tahoma", Font.PLAIN, 50));
 		GroupLayout groupLayout = new GroupLayout(window.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
+				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(panelTeam, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 815, Short.MAX_VALUE)
-						.addComponent(panel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 815, Short.MAX_VALUE))
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addComponent(lblErrorLabel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 817, Short.MAX_VALUE)
+						.addComponent(panelTeam, GroupLayout.DEFAULT_SIZE, 817, Short.MAX_VALUE)
+						.addComponent(panel, GroupLayout.DEFAULT_SIZE, 817, Short.MAX_VALUE))
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
@@ -141,7 +160,9 @@ public class MoveTeamScreen {
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(panelTeam, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(lblErrorLabel, GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 67, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
 		);
@@ -444,6 +465,11 @@ public class MoveTeamScreen {
 		teamButtonList.add(chckbxSelection_3);
 
 		JButton btnSwap = new JButton("Swap");
+		btnSwap.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				swapMonsters();
+			}
+		});
 		btnSwap.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		
 		JButton btnExit = new JButton("Exit");

@@ -25,11 +25,11 @@ public class ApplyItemScreen {
 	private JFrame window;
 	private ApplyItemScreen screen;
 	private MainGame manager;
-	private JButton button;
 	private ArrayList<Item> inventory;
 	private ArrayList<Monster> team;
 	private final ButtonGroup monsterSelection = new ButtonGroup();
 	private final ButtonGroup itemSelection = new ButtonGroup();
+	private JLabel lblErrorLabel;
 
 	/**
 	 * Launch the application.
@@ -53,10 +53,9 @@ public class ApplyItemScreen {
 	public ApplyItemScreen() {
 		initialize();
 	}
-	public ApplyItemScreen(MainGame incomingManager, JButton incomingButton) {
+	public ApplyItemScreen(MainGame incomingManager) {
 		screen = this;
 		manager = incomingManager;
-		button = incomingButton;
 		setInventory(manager.getPlayer().getInventory());
 		setTeam(manager.getPlayer().getTeam());
 		initialize();
@@ -68,12 +67,14 @@ public class ApplyItemScreen {
 	private void setInventory(ArrayList<Item> newInventory) {
 		inventory = newInventory;
 	}
-
+	public void restartWindow() {
+		manager.closeApplyItemScreen(screen, false);
+	}
 	public void closeWindow() {
 		window.dispose();
 	}
 	public void finishedWindow() {
-		manager.closeApplyItemScreen(screen, button);
+		manager.closeApplyItemScreen(screen, true);
 	}
 	public void applyItem() {
 		String userInput = manager.getSelectedButtonText(monsterSelection);
@@ -81,20 +82,26 @@ public class ApplyItemScreen {
 		Monster selectedMonster = null;
 		Item selectedItem = null;
 		int index = 0;
-		for (Monster monster : team){
-            if (monster.getName().equals(userInput)){
-                selectedMonster = monster;
-            }
+		if (userInput == null) {
+			lblErrorLabel.setText("Please select a monster");
+		} else if (userInput1 == null) {
+			lblErrorLabel.setText("Please select a item");
+		} else {
+			for (Monster monster : team){
+	            if (monster.getName().equals(userInput)){
+	                selectedMonster = monster;
+	            }
+			}
+			for (Item item : inventory) {
+				if (item.getItemName().equals(userInput1)){
+	                selectedItem = item;
+	                index = inventory.indexOf(item);
+	            }
+			}
+			selectedItem.applyItem(selectedMonster);
+			inventory.remove(index);
+			restartWindow();
 		}
-		for (Item item : inventory) {
-			if (item.getItemName().equals(userInput1)){
-                selectedItem = item;
-                index = inventory.indexOf(item);
-            }
-		}
-		selectedItem.applyItem(selectedMonster);
-		inventory.remove(index);
-		window.repaint();
 	}
 	/**
 	 * Initialize the contents of the window.
@@ -108,9 +115,9 @@ public class ApplyItemScreen {
 		panelTeam.setBorder(new LineBorder(new Color(0, 0, 0)));
 		GridBagLayout gbl_panelTeam = new GridBagLayout();
 		gbl_panelTeam.columnWidths = new int[]{0, 82, 78, 52, 87, 0};
-		gbl_panelTeam.rowHeights = new int[]{0, 0, 0, 0, 0};
+		gbl_panelTeam.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
 		gbl_panelTeam.columnWeights = new double[]{0.0, 1.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
-		gbl_panelTeam.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panelTeam.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panelTeam.setLayout(gbl_panelTeam);
 		
 		JLabel lblHealth = new JLabel("Health:");
@@ -173,12 +180,72 @@ public class ApplyItemScreen {
 		gbc_lblHealth_4.gridy = 0;
 		panelTeam.add(lblHealth_4, gbc_lblHealth_4);
 		
+		JLabel lblMaxHealth = new JLabel("Max Health:");
+		lblMaxHealth.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		GridBagConstraints gbc_lblMaxHealth = new GridBagConstraints();
+		gbc_lblMaxHealth.insets = new Insets(0, 0, 5, 5);
+		gbc_lblMaxHealth.gridx = 0;
+		gbc_lblMaxHealth.gridy = 1;
+		panelTeam.add(lblMaxHealth, gbc_lblMaxHealth);
+		
+		JLabel lblMaxHealth_1 = new JLabel("0");
+		try {
+			lblMaxHealth_1.setText(Integer.toString(team.get(0).getMonsterMaxHealth()));
+		} catch (Exception e) {
+			lblMaxHealth_1.setText("");
+		}
+		lblMaxHealth_1.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		GridBagConstraints gbc_lblMaxHealth_1 = new GridBagConstraints();
+		gbc_lblMaxHealth_1.insets = new Insets(0, 0, 5, 5);
+		gbc_lblMaxHealth_1.gridx = 1;
+		gbc_lblMaxHealth_1.gridy = 1;
+		panelTeam.add(lblMaxHealth_1, gbc_lblMaxHealth_1);
+		
+		JLabel lblMaxHealth_2 = new JLabel("0");
+		try {
+			lblMaxHealth_2.setText(Integer.toString(team.get(1).getMonsterMaxHealth()));
+		} catch (Exception e) {
+			lblMaxHealth_2.setText("");
+		}
+		lblMaxHealth_2.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		GridBagConstraints gbc_lblMaxHealth_2 = new GridBagConstraints();
+		gbc_lblMaxHealth_2.insets = new Insets(0, 0, 5, 5);
+		gbc_lblMaxHealth_2.gridx = 2;
+		gbc_lblMaxHealth_2.gridy = 1;
+		panelTeam.add(lblMaxHealth_2, gbc_lblMaxHealth_2);
+		
+		JLabel lblMaxHealth_3 = new JLabel("0");
+		try {
+			lblMaxHealth_3.setText(Integer.toString(team.get(2).getMonsterMaxHealth()));
+		} catch (Exception e) {
+			lblMaxHealth_3.setText("");
+		}
+		lblMaxHealth_3.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		GridBagConstraints gbc_lblMaxHealth_3 = new GridBagConstraints();
+		gbc_lblMaxHealth_3.insets = new Insets(0, 0, 5, 5);
+		gbc_lblMaxHealth_3.gridx = 3;
+		gbc_lblMaxHealth_3.gridy = 1;
+		panelTeam.add(lblMaxHealth_3, gbc_lblMaxHealth_3);
+		
+		JLabel lblMaxHealth_4 = new JLabel("0");
+		try {
+			lblMaxHealth_4.setText(Integer.toString(team.get(3).getMonsterMaxHealth()));
+		} catch (Exception e) {
+			lblMaxHealth_4.setText("");
+		}
+		lblMaxHealth_4.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		GridBagConstraints gbc_lblMaxHealth_4 = new GridBagConstraints();
+		gbc_lblMaxHealth_4.insets = new Insets(0, 0, 5, 0);
+		gbc_lblMaxHealth_4.gridx = 4;
+		gbc_lblMaxHealth_4.gridy = 1;
+		panelTeam.add(lblMaxHealth_4, gbc_lblMaxHealth_4);
+		
 		JLabel lblDamage = new JLabel("Damage:");
 		lblDamage.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblDamage = new GridBagConstraints();
 		gbc_lblDamage.insets = new Insets(0, 0, 5, 5);
 		gbc_lblDamage.gridx = 0;
-		gbc_lblDamage.gridy = 1;
+		gbc_lblDamage.gridy = 2;
 		panelTeam.add(lblDamage, gbc_lblDamage);
 		
 		JLabel lblDamage_1 = new JLabel();
@@ -191,7 +258,7 @@ public class ApplyItemScreen {
 		GridBagConstraints gbc_lblDamage_1 = new GridBagConstraints();
 		gbc_lblDamage_1.insets = new Insets(0, 0, 5, 5);
 		gbc_lblDamage_1.gridx = 1;
-		gbc_lblDamage_1.gridy = 1;
+		gbc_lblDamage_1.gridy = 2;
 		panelTeam.add(lblDamage_1, gbc_lblDamage_1);
 		
 		JLabel lblDamage_2 = new JLabel("");
@@ -204,7 +271,7 @@ public class ApplyItemScreen {
 		GridBagConstraints gbc_lblDamage_2 = new GridBagConstraints();
 		gbc_lblDamage_2.insets = new Insets(0, 0, 5, 5);
 		gbc_lblDamage_2.gridx = 2;
-		gbc_lblDamage_2.gridy = 1;
+		gbc_lblDamage_2.gridy = 2;
 		panelTeam.add(lblDamage_2, gbc_lblDamage_2);
 		
 		JLabel lblDamage_3 = new JLabel("");
@@ -217,7 +284,7 @@ public class ApplyItemScreen {
 		GridBagConstraints gbc_lblDamage_3 = new GridBagConstraints();
 		gbc_lblDamage_3.insets = new Insets(0, 0, 5, 5);
 		gbc_lblDamage_3.gridx = 3;
-		gbc_lblDamage_3.gridy = 1;
+		gbc_lblDamage_3.gridy = 2;
 		panelTeam.add(lblDamage_3, gbc_lblDamage_3);
 		
 		JLabel lblDamage_4 = new JLabel("");
@@ -230,7 +297,7 @@ public class ApplyItemScreen {
 		GridBagConstraints gbc_lblDamage_4 = new GridBagConstraints();
 		gbc_lblDamage_4.insets = new Insets(0, 0, 5, 0);
 		gbc_lblDamage_4.gridx = 4;
-		gbc_lblDamage_4.gridy = 1;
+		gbc_lblDamage_4.gridy = 2;
 		panelTeam.add(lblDamage_4, gbc_lblDamage_4);
 		
 		JLabel lblCritChance = new JLabel("Crit Chance:");
@@ -238,7 +305,7 @@ public class ApplyItemScreen {
 		GridBagConstraints gbc_lblCritChance = new GridBagConstraints();
 		gbc_lblCritChance.insets = new Insets(0, 0, 5, 5);
 		gbc_lblCritChance.gridx = 0;
-		gbc_lblCritChance.gridy = 2;
+		gbc_lblCritChance.gridy = 3;
 		panelTeam.add(lblCritChance, gbc_lblCritChance);
 		
 		JLabel lblCritChance_1 = new JLabel("");
@@ -251,7 +318,7 @@ public class ApplyItemScreen {
 		GridBagConstraints gbc_lblCritChance_1 = new GridBagConstraints();
 		gbc_lblCritChance_1.insets = new Insets(0, 0, 5, 5);
 		gbc_lblCritChance_1.gridx = 1;
-		gbc_lblCritChance_1.gridy = 2;
+		gbc_lblCritChance_1.gridy = 3;
 		panelTeam.add(lblCritChance_1, gbc_lblCritChance_1);
 		
 		JLabel lblCritChance_2 = new JLabel("");
@@ -264,7 +331,7 @@ public class ApplyItemScreen {
 		GridBagConstraints gbc_lblCritChance_2 = new GridBagConstraints();
 		gbc_lblCritChance_2.insets = new Insets(0, 0, 5, 5);
 		gbc_lblCritChance_2.gridx = 2;
-		gbc_lblCritChance_2.gridy = 2;
+		gbc_lblCritChance_2.gridy = 3;
 		panelTeam.add(lblCritChance_2, gbc_lblCritChance_2);
 		
 		JLabel lblCritChance_3 = new JLabel("");
@@ -277,7 +344,7 @@ public class ApplyItemScreen {
 		GridBagConstraints gbc_lblCritChance_3 = new GridBagConstraints();
 		gbc_lblCritChance_3.insets = new Insets(0, 0, 5, 5);
 		gbc_lblCritChance_3.gridx = 3;
-		gbc_lblCritChance_3.gridy = 2;
+		gbc_lblCritChance_3.gridy = 3;
 		panelTeam.add(lblCritChance_3, gbc_lblCritChance_3);
 		
 		JLabel lblCritChance_4 = new JLabel("");
@@ -290,7 +357,7 @@ public class ApplyItemScreen {
 		GridBagConstraints gbc_lblCritChance_4 = new GridBagConstraints();
 		gbc_lblCritChance_4.insets = new Insets(0, 0, 5, 0);
 		gbc_lblCritChance_4.gridx = 4;
-		gbc_lblCritChance_4.gridy = 2;
+		gbc_lblCritChance_4.gridy = 3;
 		panelTeam.add(lblCritChance_4, gbc_lblCritChance_4);
 		
 		JLabel lblSelection = new JLabel("Selection:");
@@ -298,7 +365,7 @@ public class ApplyItemScreen {
 		GridBagConstraints gbc_lblSelection = new GridBagConstraints();
 		gbc_lblSelection.insets = new Insets(0, 0, 0, 5);
 		gbc_lblSelection.gridx = 0;
-		gbc_lblSelection.gridy = 3;
+		gbc_lblSelection.gridy = 4;
 		panelTeam.add(lblSelection, gbc_lblSelection);
 		
 		JToggleButton tglbtnMonsterSelect = new JToggleButton();
@@ -313,7 +380,7 @@ public class ApplyItemScreen {
 		gbc_tglbtnMonsterSelect.fill = GridBagConstraints.BOTH;
 		gbc_tglbtnMonsterSelect.insets = new Insets(0, 0, 0, 5);
 		gbc_tglbtnMonsterSelect.gridx = 1;
-		gbc_tglbtnMonsterSelect.gridy = 3;
+		gbc_tglbtnMonsterSelect.gridy = 4;
 		panelTeam.add(tglbtnMonsterSelect, gbc_tglbtnMonsterSelect);
 		
 		JToggleButton tglbtnMonsterSelect_1 = new JToggleButton();
@@ -328,7 +395,7 @@ public class ApplyItemScreen {
 		gbc_tglbtnMonsterSelect_1.fill = GridBagConstraints.BOTH;
 		gbc_tglbtnMonsterSelect_1.insets = new Insets(0, 0, 0, 5);
 		gbc_tglbtnMonsterSelect_1.gridx = 2;
-		gbc_tglbtnMonsterSelect_1.gridy = 3;
+		gbc_tglbtnMonsterSelect_1.gridy = 4;
 		panelTeam.add(tglbtnMonsterSelect_1, gbc_tglbtnMonsterSelect_1);
 		
 		JToggleButton tglbtnMonsterSelect_2 = new JToggleButton("Select");
@@ -343,7 +410,7 @@ public class ApplyItemScreen {
 		gbc_tglbtnMonsterSelect_2.fill = GridBagConstraints.BOTH;
 		gbc_tglbtnMonsterSelect_2.insets = new Insets(0, 0, 0, 5);
 		gbc_tglbtnMonsterSelect_2.gridx = 3;
-		gbc_tglbtnMonsterSelect_2.gridy = 3;
+		gbc_tglbtnMonsterSelect_2.gridy = 4;
 		panelTeam.add(tglbtnMonsterSelect_2, gbc_tglbtnMonsterSelect_2);
 		
 		JToggleButton tglbtnMonsterSelect_3 = new JToggleButton("Select");
@@ -357,7 +424,7 @@ public class ApplyItemScreen {
 		GridBagConstraints gbc_tglbtnMonsterSelect_3 = new GridBagConstraints();
 		gbc_tglbtnMonsterSelect_3.fill = GridBagConstraints.BOTH;
 		gbc_tglbtnMonsterSelect_3.gridx = 4;
-		gbc_tglbtnMonsterSelect_3.gridy = 3;
+		gbc_tglbtnMonsterSelect_3.gridy = 4;
 		panelTeam.add(tglbtnMonsterSelect_3, gbc_tglbtnMonsterSelect_3);
 		
 		JPanel panelInventory = new JPanel();
@@ -453,18 +520,24 @@ public class ApplyItemScreen {
 			}
 		});
 		btnApplyItem.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		
+		lblErrorLabel = new JLabel("");
+		lblErrorLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblErrorLabel.setForeground(Color.RED);
+		lblErrorLabel.setFont(new Font("Tahoma", Font.PLAIN, 50));
 		GroupLayout groupLayout = new GroupLayout(window.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(panelInventory, GroupLayout.DEFAULT_SIZE, 1117, Short.MAX_VALUE)
-						.addComponent(panelTeam, GroupLayout.DEFAULT_SIZE, 1117, Short.MAX_VALUE)
+						.addComponent(panelTeam, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 1117, Short.MAX_VALUE)
 						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
 							.addComponent(btnApplyItem, GroupLayout.PREFERRED_SIZE, 246, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED, 625, Short.MAX_VALUE)
-							.addComponent(btnExit, GroupLayout.PREFERRED_SIZE, 246, GroupLayout.PREFERRED_SIZE)))
+							.addComponent(btnExit, GroupLayout.PREFERRED_SIZE, 246, GroupLayout.PREFERRED_SIZE))
+						.addComponent(lblErrorLabel, GroupLayout.DEFAULT_SIZE, 1117, Short.MAX_VALUE)
+						.addComponent(panelInventory, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 1117, Short.MAX_VALUE))
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
@@ -472,9 +545,11 @@ public class ApplyItemScreen {
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(panelTeam, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
+					.addGap(30)
 					.addComponent(panelInventory, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 190, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(lblErrorLabel, GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addComponent(btnExit, GroupLayout.PREFERRED_SIZE, 67, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnApplyItem, GroupLayout.PREFERRED_SIZE, 67, GroupLayout.PREFERRED_SIZE))

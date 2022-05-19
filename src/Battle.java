@@ -13,17 +13,22 @@ public class Battle {
     	enemyTeam = team;
         playerTeam = playerManager.getTeam();
         manager = mainManager;
-        
         int totalHealthDam = 0;
         for(Monster m : enemyTeam) {
         	totalHealthDam += m.getMonsterCurrentHealth();
         	totalHealthDam += m.getDamage();
         }
         coinsGained = totalHealthDam / 17;
-    	
+    	resetLevels(playerTeam);
     }
     
-    public ArrayList<Monster> getTeam() {
+    public void resetLevels(ArrayList<Monster> team) {
+		for (Monster monster : team) {
+			monster.resetLevel();
+		}
+	}
+
+	public ArrayList<Monster> getTeam() {
         return enemyTeam;
     }
 

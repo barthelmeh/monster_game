@@ -156,7 +156,7 @@ public class SetupScreen {
 		gbc_lblIncreasePercentage.gridy = 1;
 		panelItem.add(lblIncreasePercentage, gbc_lblIncreasePercentage);
 		
-		JLabel lblStarterItemIncrease = new JLabel(Double.toString(manager.getStarterItems().get(0).getItemIncrease()));
+		JLabel lblStarterItemIncrease = new JLabel(manager.toPercentage(manager.getStarterItems().get(0).getItemIncrease()));
 		lblStarterItemIncrease.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblStarterItemIncrease = new GridBagConstraints();
 		gbc_lblStarterItemIncrease.insets = new Insets(0, 0, 5, 5);
@@ -164,7 +164,7 @@ public class SetupScreen {
 		gbc_lblStarterItemIncrease.gridy = 1;
 		panelItem.add(lblStarterItemIncrease, gbc_lblStarterItemIncrease);
 		
-		JLabel lblStarterItemIncrease1 = new JLabel(Double.toString(manager.getStarterItems().get(1).getItemIncrease()));
+		JLabel lblStarterItemIncrease1 = new JLabel(manager.toPercentage(manager.getStarterItems().get(1).getItemIncrease()));
 		lblStarterItemIncrease1.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblStarterItemIncrease1 = new GridBagConstraints();
 		gbc_lblStarterItemIncrease1.insets = new Insets(0, 0, 5, 5);
@@ -172,7 +172,7 @@ public class SetupScreen {
 		gbc_lblStarterItemIncrease1.gridy = 1;
 		panelItem.add(lblStarterItemIncrease1, gbc_lblStarterItemIncrease1);
 		
-		JLabel lblStarterItemIncrease2 = new JLabel(Double.toString(manager.getStarterItems().get(2).getItemIncrease()));
+		JLabel lblStarterItemIncrease2 = new JLabel(manager.toPercentage(manager.getStarterItems().get(2).getItemIncrease()));
 		lblStarterItemIncrease2.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblStarterItemIncrease2 = new GridBagConstraints();
 		gbc_lblStarterItemIncrease2.insets = new Insets(0, 0, 5, 0);
