@@ -4,7 +4,6 @@ import java.util.Random;
 
 import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
-import javax.swing.JButton;
 
 
 public class MainGame {
@@ -22,6 +21,55 @@ public class MainGame {
 
     public MainGame(){
         new SetUp(this);
+    }
+    public void setDaysBattles() {
+		Random rand = new Random();
+    	for (int i=0; i<4; i++ ){
+			ArrayList<Monster> team = new ArrayList<Monster>();
+			if(getCurrentDay() == 1) {
+				int randomSize = rand.nextInt(1, 2);
+				for (int j=0; j < randomSize; j++){
+					int randomIndex = rand.nextInt(getAllMonsters().size());
+            		Monster randomMonster = getAllMonsters().get(randomIndex);
+					team.add(randomMonster);
+				}
+			}
+			else if (getCurrentDay() < 5) {
+				int randomSize = rand.nextInt(1, 3);
+				for (int j=0; j < randomSize; j++){
+					int randomIndex = rand.nextInt(getAllMonsters().size());
+            		Monster randomMonster = getAllMonsters().get(randomIndex);
+					team.add(randomMonster);
+				}
+
+    		} else if (getCurrentDay() >= 5 && getCurrentDay() < 10){
+				int randomSize = rand.nextInt(2, 4);
+				for (int j=0; j < randomSize; j++){
+					int randomIndex = rand.nextInt(getAllMonsters().size());
+            		Monster randomMonster = getAllMonsters().get(randomIndex);
+					team.add(randomMonster);
+				}
+			} else {
+				int randomSize = rand.nextInt(2, 5);
+				for (int j=0; j < randomSize; j++){
+					int randomIndex = rand.nextInt(getAllMonsters().size());
+            		Monster randomMonster = getAllMonsters().get(randomIndex);
+					team.add(randomMonster);
+				}
+			}
+			Battle battle = new Battle(team, newPlayer);
+			getBattles().add(battle);
+		}
+	}
+    public String getSelectedButtonText(ButtonGroup buttonGroup) {
+        for (Enumeration<AbstractButton> buttons = buttonGroup.getElements(); buttons.hasMoreElements();) {
+            AbstractButton button = buttons.nextElement();
+
+            if (button.isSelected()) {
+                return button.getText();
+            }
+        }
+        return null;
     }
 	public String toPercentage(double n){
 		return String.format("%.0f",n*100)+"%";
@@ -122,6 +170,10 @@ public class MainGame {
 			launchRandomEvent();
 		}
     }
+	public void launchWinScreen() {
+		WinBattleScreen winScreen = new WinBattleScreen(this);
+	}
+	
 	public void launchMainScreen() {
 		MainScreen mainScreen = new MainScreen(this);
 	}
@@ -150,68 +202,27 @@ public class MainGame {
 		}
 	}
 
-	public void closeBattleScreen(BattleScreen BattleScreen) {
+	public void closeBattleScreen(BattleScreen BattleScreen, boolean b) {
 		BattleScreen.closeWindow();
+		if(b) {
+			launchWinScreen();
+		} else {
+			launchGameOverScreen();
+		}
 	}
 	public void closeGameOverScreen(GameOverScreen gameOverScreen) {
 		gameOverScreen.closeWindow();
 	}
-    public void closeMainScreen(MainScreen mainScreen) {
+	public void closeWinBattleScreen(WinBattleScreen winBattleScreen) {
+		winBattleScreen.closeWindow();
+	}
+	public void closeMainScreen(MainScreen mainScreen) {
         mainScreen.closeWindow();
-    }
-	public void closeMainScreen(MainScreen mainScreen, String s) {
-        mainScreen.closeWindow();
-        if (s.startsWith("a")) {
-        	launchApplyItemScreen();
-        } else if (s.startsWith("m")) {
-        	launchMoveTeamScreen();
-        }
     }
 	public void closeMainScreen(MainScreen mainScreen, int i) {
 		mainScreen.closeWindow();
 		launchBattleScreen(i);
     }   
-	private void setDaysBattles() {
-		Random rand = new Random();
-    	for (int i=0; i<4; i++ ){
-			ArrayList<Monster> team = new ArrayList<Monster>();
-			if (getCurrentDay() < 5) {
-				int randomSize = rand.nextInt(1, 3);
-				for (int j=0; j < randomSize; j++){
-					int randomIndex = rand.nextInt(getAllMonsters().size());
-            		Monster randomMonster = getAllMonsters().get(randomIndex);
-					team.add(randomMonster);
-				}
-
-    		} else if (getCurrentDay() >= 5 && getCurrentDay() < 10){
-				int randomSize = rand.nextInt(2, 4);
-				for (int j=0; j < randomSize; j++){
-					int randomIndex = rand.nextInt(getAllMonsters().size());
-            		Monster randomMonster = getAllMonsters().get(randomIndex);
-					team.add(randomMonster);
-				}
-			} else {
-				int randomSize = rand.nextInt(2, 5);
-				for (int j=0; j < randomSize; j++){
-					int randomIndex = rand.nextInt(getAllMonsters().size());
-            		Monster randomMonster = getAllMonsters().get(randomIndex);
-					team.add(randomMonster);
-				}
-			}
-			Battle battle = new Battle(team, newPlayer);
-			getBattles().add(battle);
-		}
-	}
-    public String getSelectedButtonText(ButtonGroup buttonGroup) {
-        for (Enumeration<AbstractButton> buttons = buttonGroup.getElements(); buttons.hasMoreElements();) {
-            AbstractButton button = buttons.nextElement();
-
-            if (button.isSelected()) {
-                return button.getText();
-            }
-        }
-        return null;
-    }
     public static void main(String[] args) {
         MainGame gamer = new MainGame();   
     }

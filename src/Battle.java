@@ -47,6 +47,7 @@ public class Battle {
             	enemyTeam.remove(0);
             	if(enemyTeam.size() == 0) {
             		// Player has won the battle
+            		bsManager.winWindow();
             	}
             }
             
@@ -59,10 +60,11 @@ public class Battle {
     	} else { // Enemy turn
     		playerCurrentHealth -= enemyDamage;
             playerMonster.setCurrentHealth(playerCurrentHealth);
-            if(playerCurrentHealth < 0) {
+            if(playerCurrentHealth <= 0) {
                 playerTeam.remove(0);
                 if(playerTeam.size() == 0) {
                 	// Player has lost
+                	bsManager.loseWindow();
                 }
             }
             
