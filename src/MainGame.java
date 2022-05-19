@@ -58,7 +58,7 @@ public class MainGame {
 					team.add(randomMonster);
 				}
 			}
-			Battle battle = new Battle(team, newPlayer);
+			Battle battle = new Battle(team, newPlayer, this);
 			getBattles().add(battle);
 		}
 	}
@@ -169,8 +169,8 @@ public class MainGame {
 			launchMainScreen();
 		}
     }
-	public void launchWinScreen() {
-		WinBattleScreen winScreen = new WinBattleScreen(this);
+	public void launchWinScreen(Battle currBattle) {
+		WinBattleScreen winScreen = new WinBattleScreen(this, currBattle);
 	}
 	
 	public void launchMainScreen() {
@@ -191,8 +191,9 @@ public class MainGame {
 
 	public void closeBattleScreen(BattleScreen BattleScreen, boolean b) {
 		BattleScreen.closeWindow();
+		Battle currBattle = BattleScreen.getCurrentBattle();
 		if(b) {
-			launchWinScreen();
+			launchWinScreen(currBattle);
 		} else {
 			launchGameOverScreen();
 		}

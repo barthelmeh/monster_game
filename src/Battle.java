@@ -1,15 +1,25 @@
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 public class Battle {
     private ArrayList<Monster> enemyTeam = new ArrayList<Monster>();
     private ArrayList<Monster> playerTeam = new ArrayList<Monster>();
     private boolean playerTurn = true; // Player goes first.
+    private int coinsGained;
+    private double coinMult = 1;
+    private MainGame manager;
 
-    public Battle(ArrayList<Monster> team, Player playerManager) {
+    public Battle(ArrayList<Monster> team, Player playerManager, MainGame mainManager) {
     	enemyTeam = team;
         playerTeam = playerManager.getTeam();
+        manager = mainManager;
+        
+        int totalHealthDam = 0;
+        for(Monster m : enemyTeam) {
+        	totalHealthDam += m.getMonsterCurrentHealth();
+        	totalHealthDam += m.getDamage();
+        }
+        coinsGained = totalHealthDam / 17;
     	
     }
     
@@ -29,6 +39,36 @@ public class Battle {
     	playerTurn = isPlayersTurn;
     }
     
+    public int getCoinsGained() {
+    	GameDifficulty.difficulties currDifficulty = manager.getDifficulty();
+    	int currDay = manager.getCurrentDay();
+    	switch(currDifficulty) {
+    		case HARD:
+    			coinMult += 0.5;
+    			break;
+    		case MEDIUM:
+    			coinMult += 0.75;
+    			break;
+    		case EASY:
+    			coinMult += 1;
+    			break;
+    	};
+    	
+    	if(currDay < 2) {
+    		coinMult += 0.25;
+    	} else if(currDay < 5) {
+    		coinMult += 0.5;
+    	} else if(currDay < 8) {
+    		coinMult += 1;
+    	} else {
+    		coinMult += 1.25;
+    	}
+    	
+    	return (int) (Double.valueOf(coinsGained) * coinMult);
+    	
+    }
+    
+    
     public void runBattle(BattleScreen bsManager){
     	
     	Random rand = new Random(); // For critical chance
@@ -41,11 +81,11 @@ public class Battle {
         int enemyDamage = enemyMonster.getDamage();
         int playerDamage = playerMonster.getDamage();
         double playerCritChance = playerMonster.getCriticalStrike();
-        final double critMul = 1.25;
+        final double critMul = 1.75;
     	
     	if(playerTurn) {
     		
-    		// Player Crits
+    		// Player Crits 
     		double critChance = rand.nextDouble(); // Random int between 0 and 100 inclusive
     		if(critChance < playerCritChance) {
     			playerDamage *= critMul;

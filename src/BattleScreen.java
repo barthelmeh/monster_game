@@ -74,6 +74,11 @@ public class BattleScreen {
 		initialize();
 		window.setVisible(true);
 	}
+	
+	public Battle getCurrentBattle() {
+		return currBattle;
+	}
+	
 	public void closeWindow() {
 		window.dispose();
 	}
