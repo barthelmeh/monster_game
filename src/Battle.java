@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 public class Battle {
@@ -30,6 +31,8 @@ public class Battle {
     
     public void runBattle(BattleScreen bsManager){
     	
+    	Random rand = new Random(); // For critical chance
+    	
     	Monster enemyMonster = enemyTeam.get(0);
         Monster playerMonster = playerTeam.get(0);
         
@@ -37,8 +40,16 @@ public class Battle {
         int playerCurrentHealth = playerMonster.getMonsterCurrentHealth();
         int enemyDamage = enemyMonster.getDamage();
         int playerDamage = playerMonster.getDamage();
+        double playerCritChance = playerMonster.getCriticalStrike();
+        final double critMul = 1.25;
     	
     	if(playerTurn) {
+    		
+    		// Player Crits
+    		double critChance = rand.nextDouble(); // Random int between 0 and 100 inclusive
+    		if(critChance < playerCritChance) {
+    			playerDamage *= critMul;
+    		}
     		
     		enemyCurrentHealth -= playerDamage;
             enemyMonster.setCurrentHealth(enemyCurrentHealth);
