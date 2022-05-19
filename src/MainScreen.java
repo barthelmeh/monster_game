@@ -62,7 +62,7 @@ public class MainScreen {
 		initialize();
 		window.setVisible(true);
 	}
-	public MainScreen(MainGame incomingManager, String s, String s2) {
+	public MainScreen(MainGame incomingManager, String s) {
 		screen = this;
 		manager = incomingManager;
 		setTeam(manager.getPlayer().getTeam());
@@ -71,7 +71,6 @@ public class MainScreen {
 		
 		initialize();
 		lblRandomMonsterLeave.setText(s);
-		lblRandomLevelUp.setText(s2);
 		window.setVisible(true);
 	}
 

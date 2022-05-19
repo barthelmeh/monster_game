@@ -70,7 +70,7 @@ public class Monster {
 		return monsterCost;
 	}
 	public void levelUp() {
-		setMonsterLevel(getMonsterLevel()+1)
+		setMonsterLevel(getMonsterLevel()+1);
 		setCurrentHealth(getMonsterCurrentHealth()+10);
 		setMaxHealth(getMonsterMaxHealth()+10);
 		setDamage(getDamage()+10);
