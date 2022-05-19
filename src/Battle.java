@@ -10,10 +10,16 @@ public class Battle {
     public Battle(ArrayList<Monster> team, Player playerManager) {
     	enemyTeam = team;
         playerTeam = playerManager.getTeam();
-    	
+    	resetLevels(playerTeam);
     }
     
-    public ArrayList<Monster> getTeam() {
+    public void resetLevels(ArrayList<Monster> team) {
+		for (Monster monster : team) {
+			monster.resetLevel();
+		}
+	}
+
+	public ArrayList<Monster> getTeam() {
         return enemyTeam;
     }
 

@@ -68,9 +68,10 @@ public class MainScreen {
 		setTeam(manager.getPlayer().getTeam());
 		setInventory(manager.getPlayer().getInventory());
 		setBattles(manager.getBattles());
+		
+		initialize();
 		lblRandomMonsterLeave.setText(s);
 		lblRandomLevelUp.setText(s2);
-		initialize();
 		window.setVisible(true);
 	}
 
@@ -278,50 +279,87 @@ public class MainScreen {
 		panelTeam.add(panelMonster);
 	
 		JLabel lblMonsterName = new JLabel("");
+		lblMonsterName.setBounds(115, 6, 123, 29);
+		JLabel lblLevel = new JLabel("");
 		try {
 			lblMonsterName.setText(team.get(0).getName());
+			lblLevel.setText("Level: " + Integer.toString(team.get(0).getMonsterLevel()));
 		} catch (Exception e) {
 			lblMonsterName.setText("Open Slot");
 		}
+		panelMonster.setLayout(null);
 		lblMonsterName.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		panelMonster.add(lblMonsterName);
+		
+		
+		lblLevel.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblLevel.setBounds(10, 46, 333, 29);
+		panelMonster.add(lblLevel);
 		JPanel panelMonster_1 = new JPanel();
 		panelMonster_1.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panelTeam.add(panelMonster_1);
 	
 	
 		JLabel lblMonsterName_1 = new JLabel("");
+		lblMonsterName_1.setBounds(115, 6, 123, 29);
+		JLabel lblLevel_1 = new JLabel("");
 		try {
 			lblMonsterName_1.setText(team.get(1).getName());
+			lblLevel_1.setText("Level: " + Integer.toString(team.get(1).getMonsterLevel()));
 		} catch (Exception e) {
 			lblMonsterName_1.setText("Open Slot");
 		}
+		panelMonster_1.setLayout(null);
 		lblMonsterName_1.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		panelMonster_1.add(lblMonsterName_1);
+		
+		
+		lblLevel_1.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblLevel_1.setBounds(10, 46, 333, 29);
+		panelMonster_1.add(lblLevel_1);
 		JPanel panelMonster_2 = new JPanel();
 		panelMonster_2.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panelTeam.add(panelMonster_2);
 		
 		JLabel lblMonsterName_2 = new JLabel("Open Slot");
+		lblMonsterName_2.setBounds(115, 6, 123, 29);
+		JLabel lblLevel_2 = new JLabel("");
 		try {
 			lblMonsterName_2.setText(team.get(2).getName());
+			lblLevel_2.setText("Level: " + Integer.toString(team.get(2).getMonsterLevel()));
 		} catch (Exception e) {
 			lblMonsterName_2.setText("Open Slot");
 		}
+		panelMonster_2.setLayout(null);
 		lblMonsterName_2.setFont(new Font("Tahoma", Font.PLAIN, 24)); 
 		panelMonster_2.add(lblMonsterName_2);
+		
+		
+		lblLevel_2.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblLevel_2.setBounds(10, 46, 333, 29);
+		panelMonster_2.add(lblLevel_2);
 		JPanel panelMonster_3 = new JPanel();
 		panelMonster_3.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panelTeam.add(panelMonster_3);
 	
 		JLabel lblMonsterName_3 = new JLabel("Open Slot");
+		JLabel lblLevel_3 = new JLabel("");
+		lblMonsterName_3.setBounds(115, 6, 123, 29);
 		try {
 			lblMonsterName_3.setText(team.get(3).getName());
+			lblLevel_3.setText("Level: " + Integer.toString(team.get(3).getMonsterLevel()));
 		} catch (Exception e) {
 			lblMonsterName_3.setText("Open Slot");
 		}
+		panelMonster_3.setLayout(null);
 		lblMonsterName_3.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		panelMonster_3.add(lblMonsterName_3);
+		
+		
+		
+		lblLevel_3.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblLevel_3.setBounds(10, 46, 333, 29);
+		panelMonster_3.add(lblLevel_3);
 		
 		
 		panelBattles.setLayout(new GridLayout(1, 0, 0, 0));

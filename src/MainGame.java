@@ -222,7 +222,15 @@ public class MainGame {
 	public void closeMainScreen(MainScreen mainScreen, int i) {
 		mainScreen.closeWindow();
 		launchBattleScreen(i);
-    }   
+    }  
+	public void closeMainScreen(MainScreen mainScreen, String s) {
+		mainScreen.closeWindow();
+		if (s.startsWith("a")) {
+			launchApplyItemScreen();
+		} else if (s.startsWith("m")) {
+			launchMoveTeamScreen();
+		}
+	}
     public static void main(String[] args) {
         MainGame gamer = new MainGame();   
     }
