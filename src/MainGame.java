@@ -93,9 +93,8 @@ public class MainGame {
 	public void launchBattleScreen(int battle){
 		new BattleScreen(this,getBattles().get(battle));
 	}
-	public void launchMoveTeamScreen(JButton btnMoveTeam) {
-		btnMoveTeam.setEnabled(false);
-		MoveTeamScreen moveTeam = new MoveTeamScreen(this, btnMoveTeam);
+	public void launchMoveTeamScreen() {
+		MoveTeamScreen moveTeam = new MoveTeamScreen(this);
 	}
 	public void setUpStore(){
 		new StoreSetUp(this);
@@ -104,8 +103,12 @@ public class MainGame {
 	public void launchStoreScreen(){
 		StoreScreen store = new StoreScreen(this, this.getPlayer());
 	}
-	private void launchGameOverScreen() {
+	public void launchGameOverScreen() {
 		GameOverScreen gameOver = new GameOverScreen(this);
+	}
+	public void launchRandomEvent() {
+		RandomEvent random = new RandomEvent(this);
+		launchMainScreen(random.getMonsterLeave(),random.getMonsterLevelUp());
 	}
 	public void closeSetupScreen(SetupScreen SetupWindow) {
 		SetupWindow.closeWindow();
@@ -116,24 +119,35 @@ public class MainGame {
 		if (s.toLowerCase().startsWith("g")){
 			launchGameOverScreen();
 		} else {
-			setDaysBattles();
-			launchMainScreen();
+			launchRandomEvent();
 		}
     }
-	private void launchMainScreen() {
+	public void launchMainScreen() {
 		MainScreen mainScreen = new MainScreen(this);
 	}
-	public void launchApplyItemScreen(JButton btnApplyItem) {
-		btnApplyItem.setEnabled(false);
-		ApplyItemScreen apply = new ApplyItemScreen(this, btnApplyItem);
+	public void launchMainScreen(String s, String s2) {
+		MainScreen mainScreen = new MainScreen(this, s, s2);
 	}
-	public void closeApplyItemScreen(ApplyItemScreen screen, JButton button) {
+	public void launchApplyItemScreen() {
+		ApplyItemScreen apply = new ApplyItemScreen(this);
+	}
+	public void closeApplyItemScreen(ApplyItemScreen screen, boolean b) {
 		screen.closeWindow();
-		button.setEnabled(true);
+		if (b) {
+			launchMainScreen();
+			
+		} else {
+			launchApplyItemScreen();
+		}
+		
 	}
-	public void closeMoveTeamScreen(MoveTeamScreen moveTeamScreen, JButton button) {
+	public void closeMoveTeamScreen(MoveTeamScreen moveTeamScreen, boolean b) {
 		moveTeamScreen.closeWindow();
-		button.setEnabled(true);
+		if (b) {
+			launchMainScreen();
+		} else {
+			launchMoveTeamScreen();
+		}
 	}
 
 	public void closeBattleScreen(BattleScreen BattleScreen) {
@@ -142,7 +156,22 @@ public class MainGame {
 	public void closeGameOverScreen(GameOverScreen gameOverScreen) {
 		gameOverScreen.closeWindow();
 	}
-    private void setDaysBattles() {
+    public void closeMainScreen(MainScreen mainScreen) {
+        mainScreen.closeWindow();
+    }
+	public void closeMainScreen(MainScreen mainScreen, String s) {
+        mainScreen.closeWindow();
+        if (s.startsWith("a")) {
+        	launchApplyItemScreen();
+        } else if (s.startsWith("m")) {
+        	launchMoveTeamScreen();
+        }
+    }
+	public void closeMainScreen(MainScreen mainScreen, int i) {
+		mainScreen.closeWindow();
+		launchBattleScreen(i);
+    }   
+	private void setDaysBattles() {
 		Random rand = new Random();
     	for (int i=0; i<4; i++ ){
 			ArrayList<Monster> team = new ArrayList<Monster>();
@@ -183,16 +212,7 @@ public class MainGame {
         }
         return null;
     }
-	public void closeMainScreen(MainScreen mainScreen) {
-        mainScreen.closeWindow();
-    }
-	public void closeMainScreen(MainScreen mainScreen, int i) {
-		mainScreen.closeWindow();
-		launchBattleScreen(i);
-    }   
     public static void main(String[] args) {
-        MainGame gamer = new MainGame();
-        System.out.println(gamer.getAllMonsters());
-        
+        MainGame gamer = new MainGame();   
     }
 }

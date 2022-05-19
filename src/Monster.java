@@ -4,6 +4,7 @@ public class Monster {
     private int monsterDamage;
     private int monsterCurrentHealth;
     private int monsterCost;
+    private int monsterLevel;
     private double criticalStrike;
 
     
@@ -51,7 +52,9 @@ public class Monster {
 	public int getCost() {
 		return monsterCost;
 	}
-
+	public void levelUp() {
+		
+	}
 	public void setMonsterCost(int newMonsterCost) {
 		monsterCost = newMonsterCost;
 	}

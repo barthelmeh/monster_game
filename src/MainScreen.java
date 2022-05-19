@@ -29,6 +29,8 @@ public class MainScreen {
 	private ArrayList<Monster> battle2;
 	private ArrayList<Monster> battle3;
 	private ArrayList<Monster> battle4;
+	private JLabel lblRandomLevelUp;
+	private JLabel lblRandomMonsterLeave;
 	/**
 	 * Launch the application.
 	 */
@@ -60,6 +62,18 @@ public class MainScreen {
 		initialize();
 		window.setVisible(true);
 	}
+	public MainScreen(MainGame incomingManager, String s, String s2) {
+		screen = this;
+		manager = incomingManager;
+		setTeam(manager.getPlayer().getTeam());
+		setInventory(manager.getPlayer().getInventory());
+		setBattles(manager.getBattles());
+		lblRandomMonsterLeave.setText(s);
+		lblRandomLevelUp.setText(s2);
+		initialize();
+		window.setVisible(true);
+	}
+
 	public void setTeam(ArrayList<Monster> newTeam) {
 		team = newTeam;
 	}
@@ -74,6 +88,9 @@ public class MainScreen {
 	}
 	public void closeWindow() {
 		window.dispose();
+	}
+	public void finishedWindow(String s) {
+		manager.closeMainScreen(this, s);
 	}
 	public void finishedWindow(int i) {
 		manager.closeMainScreen(this, i);
@@ -104,7 +121,7 @@ public class MainScreen {
 		JButton btnMoveTeam = new JButton("Move Monster");
 		btnMoveTeam.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				manager.launchMoveTeamScreen(btnMoveTeam);
+				finishedWindow("move");
 			}
 		});
 		btnMoveTeam.setFont(new Font("Tahoma", Font.PLAIN, 30));
@@ -112,24 +129,34 @@ public class MainScreen {
 		JButton btnApplyItem = new JButton("Apply Item");
 		btnApplyItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				manager.launchApplyItemScreen(btnApplyItem);
+				finishedWindow("apply");
 			}
 		});
 		btnApplyItem.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		
+		lblRandomLevelUp = new JLabel("");
+		lblRandomLevelUp.setHorizontalAlignment(SwingConstants.CENTER);
+		lblRandomLevelUp.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		
+		lblRandomMonsterLeave = new JLabel("");
+		lblRandomMonsterLeave.setHorizontalAlignment(SwingConstants.CENTER);
+		lblRandomMonsterLeave.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GroupLayout groupLayout = new GroupLayout(window.getContentPane());
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
+			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(panelTeam, GroupLayout.DEFAULT_SIZE, 1416, Short.MAX_VALUE)
 						.addComponent(panelBattles, GroupLayout.DEFAULT_SIZE, 1416, Short.MAX_VALUE)
 						.addComponent(panelTop, GroupLayout.DEFAULT_SIZE, 1416, Short.MAX_VALUE)
+						.addComponent(panelTeam, GroupLayout.DEFAULT_SIZE, 1416, Short.MAX_VALUE)
 						.addComponent(panelInventory, GroupLayout.DEFAULT_SIZE, 1416, Short.MAX_VALUE)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(btnMoveTeam, GroupLayout.PREFERRED_SIZE, 473, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnApplyItem, GroupLayout.PREFERRED_SIZE, 473, GroupLayout.PREFERRED_SIZE)))
+							.addComponent(btnApplyItem, GroupLayout.PREFERRED_SIZE, 473, GroupLayout.PREFERRED_SIZE))
+						.addComponent(lblRandomLevelUp, GroupLayout.DEFAULT_SIZE, 1416, Short.MAX_VALUE)
+						.addComponent(lblRandomMonsterLeave, GroupLayout.PREFERRED_SIZE, 1416, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
@@ -138,8 +165,8 @@ public class MainScreen {
 					.addContainerGap()
 					.addComponent(panelTop, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(panelBattles, GroupLayout.PREFERRED_SIZE, 439, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(panelBattles, GroupLayout.PREFERRED_SIZE, 387, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(panelTeam, GroupLayout.PREFERRED_SIZE, 135, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(panelInventory, GroupLayout.PREFERRED_SIZE, 135, GroupLayout.PREFERRED_SIZE)
@@ -147,7 +174,11 @@ public class MainScreen {
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addComponent(btnMoveTeam, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnApplyItem, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(75, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(lblRandomLevelUp)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(lblRandomMonsterLeave, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(41, Short.MAX_VALUE))
 		);
 		
 		JPanel panelItem = new JPanel();
