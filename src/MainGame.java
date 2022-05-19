@@ -26,7 +26,7 @@ public class MainGame {
 		Random rand = new Random();
     	for (int i=0; i<4; i++ ){
 			ArrayList<Monster> team = new ArrayList<Monster>();
-			if(getCurrentDay() == 1) {
+			if(getCurrentDay() == 0) {
 				int randomSize = rand.nextInt(1, 2);
 				for (int j=0; j < randomSize; j++){
 					int randomIndex = rand.nextInt(getAllMonsters().size());

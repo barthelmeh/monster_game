@@ -558,7 +558,7 @@ public class MainScreen {
 		lblDaysLeft.setHorizontalAlignment(SwingConstants.CENTER);
 		panelTop.add(lblDaysLeft);
 		
-		JLabel lblMoney = new JLabel("Money: " + manager.getPlayer().getCurrentMoney());
+		JLabel lblMoney = new JLabel("Coins: 0");
 		lblMoney.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblMoney.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		panelTop.add(lblMoney);

@@ -45,11 +45,12 @@ public class WinBattleScreen {
 	
 	public WinBattleScreen(MainGame incomingManager) {
 		manager = incomingManager;
-		System.out.println("WON ABTTLE OPEN SCREEN");
 		initialize();
+		window.setVisible(true);
 	}
 	public void closeWindow() {
 		window.dispose();
+		manager.setUpStore();
 	}
 	public void finishedWindow() {
 		closeWindow();
