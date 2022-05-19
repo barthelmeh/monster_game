@@ -39,7 +39,8 @@ public class BattleScreen {
 	public JLabel enemyMonsterName;
 	public JLabel enemyMonsterDamage;
 	public JLabel scoreLabel;
-
+	public JLabel currentTurn;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -76,13 +77,19 @@ public class BattleScreen {
 	public void closeWindow() {
 		window.dispose();
 	}
-	public void finishedWindow() {
-		manager.closeBattleScreen(this);
+	public void winWindow() {
+		manager.closeBattleScreen(this, true);
+	}
+	public void loseWindow() {
+		manager.closeBattleScreen(this, false);
 	}
 
 	public void updateMonsters(String team) {
 		switch(team) {
 			case "Player":
+				//Enemy has just attacked so players turn next
+				currentTurn.setText("Current Turn: Player");
+				
 				// Update next monster text
 				String PlayerNextMonsterString = "No Next Monster";
 				if(playerTeam.size() > 1) {
@@ -94,16 +101,19 @@ public class BattleScreen {
 				if (playerTeam.size() > 0) {
 					Monster nextMonster = playerTeam.get(0);
 					playerMonsterName.setText(nextMonster.getName());
-					playerMonsterDamage.setText(Integer.toString(nextMonster.getDamage()));
-					playerMonsterHealth.setText(Integer.toString(nextMonster.getMonsterCurrentHealth()));
+					playerMonsterDamage.setText("Damage: " + Integer.toString(nextMonster.getDamage()));
+					playerMonsterHealth.setText("Health: " + Integer.toString(nextMonster.getMonsterCurrentHealth()));
 
 				} else {
-					playerMonsterName.setText("");
+					playerMonsterName.setText("you lost");
 					playerMonsterDamage.setText("");
 					playerMonsterHealth.setText("");
 				}
 				break;
 			case "Enemy":
+				// Player has just attacked so enemy turn next
+				currentTurn.setText("Current Turn: Enemy");
+				
 				// Update next monster text
 				String EnemyNextMonsterString = "No Next Monster";
 				if(enemyTeam.size() > 1) {
@@ -115,8 +125,8 @@ public class BattleScreen {
 				if (enemyTeam.size() > 0) {
 					Monster nextMonster = enemyTeam.get(0);
 					enemyMonsterName.setText(nextMonster.getName());
-					enemyMonsterDamage.setText(Integer.toString(nextMonster.getDamage()));
-					enemyMonsterHealth.setText(Integer.toString(nextMonster.getMonsterCurrentHealth()));
+					enemyMonsterDamage.setText("Damage: " + Integer.toString(nextMonster.getDamage()));
+					enemyMonsterHealth.setText("Health: " + Integer.toString(nextMonster.getMonsterCurrentHealth()));
 
 				} else {
 					// Enemy has died
@@ -206,15 +216,23 @@ public class BattleScreen {
 				currBattle.runBattle(screen);
 			}
 		});
+		
+		JLabel currentTurnLabel = new JLabel("Current Turn: Player");
+		currentTurn = currentTurnLabel;
+		currentTurnLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		currentTurnLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
 		GroupLayout groupLayout = new GroupLayout(window.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(currentTurnLabel, GroupLayout.DEFAULT_SIZE, 767, Short.MAX_VALUE))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addContainerGap()
-							.addComponent(panelTop, GroupLayout.DEFAULT_SIZE, 764, Short.MAX_VALUE))
+							.addComponent(panelTop, GroupLayout.DEFAULT_SIZE, 767, Short.MAX_VALUE))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(22)
 							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
@@ -223,7 +241,7 @@ public class BattleScreen {
 							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 								.addGroup(groupLayout.createSequentialGroup()
 									.addGap(18)
-									.addComponent(lblNewLabel_3, GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
+									.addComponent(lblNewLabel_3, GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
 									.addGap(18)
 									.addComponent(panelEnemy, GroupLayout.PREFERRED_SIZE, 145, GroupLayout.PREFERRED_SIZE)
 									.addGap(179))
@@ -244,16 +262,20 @@ public class BattleScreen {
 							.addGap(28)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 								.addComponent(panelEnemy, GroupLayout.PREFERRED_SIZE, 136, GroupLayout.PREFERRED_SIZE)
-								.addComponent(panelPlayer, GroupLayout.PREFERRED_SIZE, 136, GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+								.addComponent(panelPlayer, GroupLayout.PREFERRED_SIZE, 136, GroupLayout.PREFERRED_SIZE)))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(80)
+							.addComponent(lblNewLabel_3)))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(currentTurnLabel, GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
 							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 								.addComponent(panelPlayerTeam, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE)
 								.addComponent(panelEnemyTeam, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE))
 							.addContainerGap())
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(80)
-							.addComponent(lblNewLabel_3)
-							.addPreferredGap(ComponentPlacement.RELATED, 174, Short.MAX_VALUE)
+						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
 							.addComponent(btnNewButton)
 							.addGap(23))))
 		);
