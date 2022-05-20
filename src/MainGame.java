@@ -183,7 +183,7 @@ public class MainGame {
 	public void launchRandomEvent() {
 		RandomEvent random = new RandomEvent(this);
 		setDaysBattles();
-		launchMainScreen(random.getMonsterLeave());
+		launchMainScreen(random.getMonsterLeave(), random.getMonsterEnter());
 	}
 	public void closeSetupScreen(SetupScreen SetupWindow) {
 		SetupWindow.closeWindow();
@@ -205,8 +205,8 @@ public class MainGame {
 	public void launchMainScreen() {
 		MainScreen mainScreen = new MainScreen(this);
 	}
-	public void launchMainScreen(String s) {
-		MainScreen mainScreen = new MainScreen(this, s);
+	public void launchMainScreen(String s, String s2) {
+		MainScreen mainScreen = new MainScreen(this, s, s2);
 	}
 	public void launchApplyItemScreen() {
 		ApplyItemScreen apply = new ApplyItemScreen(this);
