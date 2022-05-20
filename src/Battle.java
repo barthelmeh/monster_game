@@ -23,7 +23,7 @@ public class Battle {
         }
         coinsGained = totalHealthDam / 7;
         scoreGained += totalHealthDam / 3;
-    	resetLevels(playerTeam);
+    	manager.getPlayer().resetLevels();
     }
     
 	public ArrayList<Monster> getTeam() {

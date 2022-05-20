@@ -18,6 +18,11 @@ public class Player {
         currentMoney = 10;
         currentPoints = 0;
     }
+    public void resetLevels(){
+        for (Monster monster : team){
+            monster.resetLevel();
+        }
+    }
     public void addStarters(Monster monster, Item item) {
     	team.add(monster);
     	inventory.add(item);

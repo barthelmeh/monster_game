@@ -27,7 +27,6 @@ public class Monster implements Cloneable {
 	}
     public void resetLevel() {
     	if (getLeveledUp() == true) {
-    		System.out.println("asdf");
     		setHasLeveledUp(false);
     	}
     }
