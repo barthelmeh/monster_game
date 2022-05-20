@@ -89,5 +89,4 @@ public class Monster implements Cloneable {
 			return "";
 		}
 	}
-
 }
