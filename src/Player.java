@@ -6,6 +6,7 @@ public class Player {
     private ArrayList<Item> inventory = new ArrayList<Item>();
     private int currentMoney;
     private int currentPoints;
+    
     public Player(){
         currentMoney = 10;
         currentPoints = 0;

@@ -81,7 +81,7 @@ public class Monster {
 	}
 	public String checkIfLeveledUp() {
 		if (getLeveledUp()) {
-			return getName() + "has leveled up";
+			return getName() + " has leveled up";
 		} else {
 			return null;
 		}

@@ -21,6 +21,7 @@ public class WinBattleScreen {
 	public JLabel gainedScoreLabel;
 	private Battle battleManager;
 	private int coinsGained;
+	private int scoreGained;
 
 	/**
 	 * Launch the application.
@@ -49,6 +50,7 @@ public class WinBattleScreen {
 		manager = incomingManager;
 		battleManager = incomingBattle;
 		coinsGained = battleManager.getCoinsGained();
+		scoreGained = battleManager.getScoreGained();
 		initialize();
 		window.setVisible(true);
 	}
@@ -87,7 +89,7 @@ public class WinBattleScreen {
 		coinsLabel.setBounds(10, 168, 764, 43);
 		window.getContentPane().add(coinsLabel);
 		
-		JLabel scoreLabel = new JLabel("x points");
+		JLabel scoreLabel = new JLabel(scoreGained + " points");
 		gainedScoreLabel = scoreLabel;
 		scoreLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		scoreLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
