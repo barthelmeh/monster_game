@@ -63,17 +63,16 @@ public class StoreScreen {
 		thirdStoreItem = manager.getStoreItems().get(2);
 		screen = this;
 		initialize();
-		for (Monster monster : manager.getAllMonsters()) {
-			System.out.println(monster.getMonsterCurrentHealth());
-		}
 		window.setVisible(true);
 		
+	}
+	public void restartWindow() {
+		manager.closeStoreScreen(screen, true);
 	}
 	public void closeWindow() {
 		window.dispose();
 	}
 	public void finishedWindow(String s) {
-		
 		manager.closeStoreScreen(this, s);
 	}
 	/**
@@ -102,7 +101,7 @@ public class StoreScreen {
 		gbc_lblHealth.gridy = 0;
 		panelMonster.add(lblHealth, gbc_lblHealth);
 		
-		JLabel lblMonsterHealth = new JLabel(Integer.toString(firstStoreMonster.getMonsterCurrentHealth()));
+		JLabel lblMonsterHealth = new JLabel(Double.toString(firstStoreMonster.getMonsterCurrentHealth()));
 		lblMonsterHealth.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblMonsterHealth = new GridBagConstraints();
 		gbc_lblMonsterHealth.insets = new Insets(0, 0, 5, 5);
@@ -110,7 +109,7 @@ public class StoreScreen {
 		gbc_lblMonsterHealth.gridy = 0;
 		panelMonster.add(lblMonsterHealth, gbc_lblMonsterHealth);
 		
-		JLabel lblMonsterHealth1 = new JLabel(Integer.toString(secondStoreMonster.getMonsterCurrentHealth()));
+		JLabel lblMonsterHealth1 = new JLabel(Double.toString(secondStoreMonster.getMonsterCurrentHealth()));
 		lblMonsterHealth1.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblMonsterHealth1 = new GridBagConstraints();
 		gbc_lblMonsterHealth1.insets = new Insets(0, 0, 5, 5);
@@ -118,7 +117,7 @@ public class StoreScreen {
 		gbc_lblMonsterHealth1.gridy = 0;
 		panelMonster.add(lblMonsterHealth1, gbc_lblMonsterHealth1);
 		
-		JLabel lblMonsterHealth2 = new JLabel(Integer.toString(thirdStoreMonster.getMonsterCurrentHealth()));
+		JLabel lblMonsterHealth2 = new JLabel(Double.toString(thirdStoreMonster.getMonsterCurrentHealth()));
 		lblMonsterHealth2.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblMonsterHealth2 = new GridBagConstraints();
 		gbc_lblMonsterHealth2.insets = new Insets(0, 0, 5, 0);
@@ -135,7 +134,7 @@ public class StoreScreen {
 		gbc_lblDamage.gridy = 1;
 		panelMonster.add(lblDamage, gbc_lblDamage);
 		
-		JLabel lblMonsterDamage = new JLabel(Integer.toString(firstStoreMonster.getDamage()));
+		JLabel lblMonsterDamage = new JLabel(Double.toString(firstStoreMonster.getDamage()));
 		lblMonsterDamage.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblMonsterDamage = new GridBagConstraints();
 		gbc_lblMonsterDamage.insets = new Insets(0, 0, 5, 5);
@@ -143,7 +142,7 @@ public class StoreScreen {
 		gbc_lblMonsterDamage.gridy = 1;
 		panelMonster.add(lblMonsterDamage, gbc_lblMonsterDamage);
 		
-		JLabel lblMonsterDamage1 = new JLabel(Integer.toString(secondStoreMonster.getDamage()));
+		JLabel lblMonsterDamage1 = new JLabel(Double.toString(secondStoreMonster.getDamage()));
 		lblMonsterDamage1.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblMonsterDamage1 = new GridBagConstraints();
 		gbc_lblMonsterDamage1.insets = new Insets(0, 0, 5, 5);
@@ -151,7 +150,7 @@ public class StoreScreen {
 		gbc_lblMonsterDamage1.gridy = 1;
 		panelMonster.add(lblMonsterDamage1, gbc_lblMonsterDamage1);
 		
-		JLabel lblMonsterDamage2 = new JLabel(Integer.toString(thirdStoreMonster.getDamage()));
+		JLabel lblMonsterDamage2 = new JLabel(Double.toString(thirdStoreMonster.getDamage()));
 		lblMonsterDamage2.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblMonsterDamage2 = new GridBagConstraints();
 		gbc_lblMonsterDamage2.insets = new Insets(0, 0, 5, 0);
@@ -265,7 +264,7 @@ public class StoreScreen {
 		
 		JLabel lblStore = new JLabel("Store");
 		lblStore.setHorizontalAlignment(SwingConstants.CENTER);
-		lblStore.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		lblStore.setFont(new Font("Tahoma", Font.PLAIN, 50));
 		
 		JPanel panelItem = new JPanel();
 		panelItem.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
@@ -390,17 +389,17 @@ public class StoreScreen {
 		btnSleep.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GroupLayout groupLayout = new GroupLayout(window.getContentPane());
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
+			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addComponent(panelItem, GroupLayout.PREFERRED_SIZE, 1150, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblStore, GroupLayout.PREFERRED_SIZE, 1150, GroupLayout.PREFERRED_SIZE)
 						.addComponent(panelMonster, GroupLayout.PREFERRED_SIZE, 1150, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblMoney, GroupLayout.PREFERRED_SIZE, 132, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-					.addContainerGap(916, Short.MAX_VALUE)
+						.addComponent(lblMoney, GroupLayout.PREFERRED_SIZE, 169, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(11, Short.MAX_VALUE))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap(918, Short.MAX_VALUE)
 					.addComponent(btnSleep, GroupLayout.PREFERRED_SIZE, 243, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
 		);
@@ -417,7 +416,7 @@ public class StoreScreen {
 					.addComponent(panelItem, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(btnSleep, GroupLayout.PREFERRED_SIZE, 86, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(97, Short.MAX_VALUE))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		
 		
@@ -427,6 +426,7 @@ public class StoreScreen {
 			public void actionPerformed(ActionEvent e) {
 				if (player.getCurrentMoney() >= firstStoreItem.getItemCost()) {
 					player.addItem(firstStoreItem);
+					restartWindow();
 				}
 			}
 		});
@@ -443,6 +443,7 @@ public class StoreScreen {
 			public void actionPerformed(ActionEvent e) {
 				if (player.getCurrentMoney() >= secondStoreItem.getItemCost()) {
 					player.addItem(secondStoreItem);
+					restartWindow();
 				}
 			}
 		});
@@ -459,6 +460,7 @@ public class StoreScreen {
 			public void actionPerformed(ActionEvent e) {
 				if (player.getCurrentMoney() >= thirdStoreItem.getItemCost()) {
 					player.addItem(thirdStoreItem);
+					restartWindow();
 				}
 			}
 		});
@@ -474,6 +476,7 @@ public class StoreScreen {
 			public void actionPerformed(ActionEvent e) {
 				if (player.getCurrentMoney() >= firstStoreMonster.getCost()) {
 					player.addMonster(firstStoreMonster);
+					restartWindow();
 				}
 			}
 		});
@@ -490,6 +493,7 @@ public class StoreScreen {
 			public void actionPerformed(ActionEvent e) {
 				if (player.getCurrentMoney() >= secondStoreMonster.getCost()) {
 					player.addMonster(secondStoreMonster);
+					restartWindow();
 				}
 			}
 		});
@@ -506,6 +510,7 @@ public class StoreScreen {
 			public void actionPerformed(ActionEvent e) {
 				if (player.getCurrentMoney() >= thirdStoreMonster.getCost()) {
 					player.addMonster(thirdStoreMonster);
+					restartWindow();
 				}
 			}
 		});

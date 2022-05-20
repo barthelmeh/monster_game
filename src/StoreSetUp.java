@@ -9,16 +9,25 @@ public class StoreSetUp {
     	manager = incomingManager;
     	setAvailableMonsters();
     	setAvailableItems();
+    	resetLevels(manager.getPlayer().getTeam());
     }
 	
-
+    public void resetLevels(ArrayList<Monster> team) {
+		for (Monster monster : team) {
+			monster.resetLevel();
+		}
+	}
 	public void setAvailableMonsters() {
-		ArrayList<Monster> avaiableMonsters = manager.getAllMonsters();
+		ArrayList<Monster> avaiableMonsters = new ArrayList<Monster>(manager.getAllMonsters());
         Random rand = new Random();
         for (int i = 0; i < 3; i++){
             int randomIndex = rand.nextInt(avaiableMonsters.size());
-            Monster randomMonster = avaiableMonsters.get(randomIndex);
-            manager.getStoreMonsters().add(randomMonster);
+            try {
+				 Monster randomMonster = avaiableMonsters.get(randomIndex).clone();
+				 manager.getStoreMonsters().add(randomMonster);
+				} catch (CloneNotSupportedException e) {
+					e.printStackTrace();
+				}
             avaiableMonsters.remove(randomIndex);
         }
 	}
@@ -27,10 +36,8 @@ public class StoreSetUp {
 		ArrayList<Item> avaiableItems = manager.getAllItems();
         Random rand = new Random();
         for (int i = 0; i < 3; i++){
-        	System.out.println(avaiableItems.size());
             int randomIndex = rand.nextInt(avaiableItems.size());
             Item randomItem = avaiableItems.get(randomIndex);
-            System.out.println(randomItem.getItemName());
             manager.getStoreItems().add(randomItem);
             avaiableItems.remove(randomIndex);
         }

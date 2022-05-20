@@ -49,6 +49,7 @@ public class WinBattleScreen {
 		manager = incomingManager;
 		battleManager = incomingBattle;
 		coinsGained = battleManager.getCoinsGained();
+		manager.getPlayer().addMoney(coinsGained);
 		initialize();
 		window.setVisible(true);
 	}

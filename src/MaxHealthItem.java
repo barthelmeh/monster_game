@@ -10,11 +10,10 @@ public class MaxHealthItem implements Item {
 	}
 
 	public void applyItem(Monster monster) {
-		int maxHealth = monster.getMonsterMaxHealth();
-		int currentHealth = monster.getMonsterCurrentHealth();
-		int newHealth = (int) (maxHealth + (maxHealth*itemIncrease));
-		int healthPercentage = currentHealth/maxHealth;
-		monster.setCurrentHealth(newHealth*healthPercentage);
+		double maxHealth = monster.getMonsterMaxHealth();
+		double currentHealth = monster.getMonsterCurrentHealth();
+		double newHealth = (maxHealth + (maxHealth*itemIncrease));
+		monster.setCurrentHealth((currentHealth + (currentHealth*itemIncrease)));
 		monster.setMaxHealth(newHealth);
 	}
 

@@ -123,7 +123,7 @@ public class SetupScreen {
 		gbc_lblCost.gridy = 0;
 		panelItem.add(lblCost, gbc_lblCost);
 		
-		JLabel lblStarterItemCost = new JLabel(Integer.toString(manager.getStarterItems().get(0).getItemCost()));
+		JLabel lblStarterItemCost = new JLabel(manager.toDollar(manager.getStarterItems().get(0).getItemCost()));
 		lblStarterItemCost.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblStarterItemCost = new GridBagConstraints();
 		gbc_lblStarterItemCost.insets = new Insets(0, 0, 5, 5);
@@ -131,7 +131,7 @@ public class SetupScreen {
 		gbc_lblStarterItemCost.gridy = 0;
 		panelItem.add(lblStarterItemCost, gbc_lblStarterItemCost);
 		
-		JLabel lblStarterItemCost1 = new JLabel(Integer.toString(manager.getStarterItems().get(1).getItemCost()));
+		JLabel lblStarterItemCost1 = new JLabel(manager.toDollar(manager.getStarterItems().get(1).getItemCost()));
 		lblStarterItemCost1.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblStarterItemCost1 = new GridBagConstraints();
 		gbc_lblStarterItemCost1.insets = new Insets(0, 0, 5, 5);
@@ -139,7 +139,7 @@ public class SetupScreen {
 		gbc_lblStarterItemCost1.gridy = 0;
 		panelItem.add(lblStarterItemCost1, gbc_lblStarterItemCost1);
 		
-		JLabel lblStarterItemCost2 = new JLabel(Integer.toString(manager.getStarterItems().get(2).getItemCost()));
+		JLabel lblStarterItemCost2 = new JLabel(manager.toDollar(manager.getStarterItems().get(2).getItemCost()));
 		lblStarterItemCost2.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblStarterItemCost2 = new GridBagConstraints();
 		gbc_lblStarterItemCost2.insets = new Insets(0, 0, 5, 0);
@@ -330,7 +330,7 @@ public class SetupScreen {
 		panelMonster.add(lblHealth, gbc_lblHealth);
 		
 		
-		JLabel lblStarterMonsterHealth = new JLabel(Integer.toString(manager.getStarterMonsters().get(0).getMonsterMaxHealth()));
+		JLabel lblStarterMonsterHealth = new JLabel(Double.toString(manager.getStarterMonsters().get(0).getMonsterMaxHealth()));
 		lblStarterMonsterHealth.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblStarterMonsterHealth = new GridBagConstraints();
 		gbc_lblStarterMonsterHealth.insets = new Insets(0, 0, 5, 5);
@@ -338,7 +338,7 @@ public class SetupScreen {
 		gbc_lblStarterMonsterHealth.gridy = 0;
 		panelMonster.add(lblStarterMonsterHealth, gbc_lblStarterMonsterHealth);
 		
-		JLabel lblStarterMonster1Health = new JLabel(Integer.toString(manager.getStarterMonsters().get(1).getMonsterMaxHealth()));
+		JLabel lblStarterMonster1Health = new JLabel(Double.toString(manager.getStarterMonsters().get(1).getMonsterMaxHealth()));
 		lblStarterMonster1Health.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblStarterMonster1Health = new GridBagConstraints();
 		gbc_lblStarterMonster1Health.insets = new Insets(0, 0, 5, 5);
@@ -346,7 +346,7 @@ public class SetupScreen {
 		gbc_lblStarterMonster1Health.gridy = 0;
 		panelMonster.add(lblStarterMonster1Health, gbc_lblStarterMonster1Health);
 		
-		JLabel lblStarterMonster2Health = new JLabel(Integer.toString(manager.getStarterMonsters().get(2).getMonsterMaxHealth()));
+		JLabel lblStarterMonster2Health = new JLabel(Double.toString(manager.getStarterMonsters().get(2).getMonsterMaxHealth()));
 		lblStarterMonster2Health.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblStarterMonster2Health = new GridBagConstraints();
 		gbc_lblStarterMonster2Health.insets = new Insets(0, 0, 5, 0);
@@ -363,7 +363,7 @@ public class SetupScreen {
 		gbc_lblDamage.gridy = 1;
 		panelMonster.add(lblDamage, gbc_lblDamage);
 		
-		JLabel lblStarterMonsterDamage = new JLabel(Integer.toString(manager.getStarterMonsters().get(0).getDamage()));
+		JLabel lblStarterMonsterDamage = new JLabel(Double.toString(manager.getStarterMonsters().get(0).getDamage()));
 		lblStarterMonsterDamage.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblStarterMonsterDamage = new GridBagConstraints();
 		gbc_lblStarterMonsterDamage.insets = new Insets(0, 0, 5, 5);
@@ -371,7 +371,7 @@ public class SetupScreen {
 		gbc_lblStarterMonsterDamage.gridy = 1;
 		panelMonster.add(lblStarterMonsterDamage, gbc_lblStarterMonsterDamage);
 		
-		JLabel lblStarterMonster1Damage = new JLabel(Integer.toString(manager.getStarterMonsters().get(1).getDamage()));
+		JLabel lblStarterMonster1Damage = new JLabel(Double.toString(manager.getStarterMonsters().get(1).getDamage()));
 		lblStarterMonster1Damage.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblStarterMonster1Damage = new GridBagConstraints();
 		gbc_lblStarterMonster1Damage.insets = new Insets(0, 0, 5, 5);
@@ -379,7 +379,7 @@ public class SetupScreen {
 		gbc_lblStarterMonster1Damage.gridy = 1;
 		panelMonster.add(lblStarterMonster1Damage, gbc_lblStarterMonster1Damage);
 		
-		JLabel lblStarterMonster2Damage = new JLabel(Integer.toString(manager.getStarterMonsters().get(2).getDamage()));
+		JLabel lblStarterMonster2Damage = new JLabel(Double.toString(manager.getStarterMonsters().get(2).getDamage()));
 		lblStarterMonster2Damage.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblStarterMonster2Damage = new GridBagConstraints();
 		gbc_lblStarterMonster2Damage.insets = new Insets(0, 0, 5, 0);

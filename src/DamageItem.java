@@ -10,8 +10,8 @@ public class DamageItem implements Item {
 	}
 
 	public void applyItem(Monster monster) {
-		int currentDamage = monster.getDamage();
-		int newDamage = (int) (currentDamage + (currentDamage*itemIncrease));
+		double currentDamage = monster.getDamage();
+		double newDamage = (currentDamage + (currentDamage*itemIncrease));
 		monster.setDamage(newDamage);
 	}
 

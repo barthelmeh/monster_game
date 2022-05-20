@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
+import java.util.List;
 import java.util.Random;
 
 import javax.swing.AbstractButton;
@@ -24,8 +25,9 @@ public class MainGame {
         new SetUp(this);
     }
     public void setDaysBattles() {
+    	getBattles().clear();
 		Random rand = new Random();
-		ArrayList<Monster> avaiable = getAllMonsters();
+		ArrayList<Monster> avaiable = new ArrayList<Monster>(getAllMonsters());
 		
     	for (int i=0; i<4; i++ ){
 			ArrayList<Monster> team = new ArrayList<Monster>();
@@ -33,44 +35,65 @@ public class MainGame {
 				int randomSize = rand.nextInt(1, 2);
 				for (int j=0; j < randomSize; j++){
 					int randomIndex = rand.nextInt(avaiable.size());
-            		Monster randomMonster = avaiable.get(randomIndex);
-					team.add(randomMonster);
+					try {
+					 Monster randomMonster = avaiable.get(randomIndex).clone();
+					 team.add(randomMonster);
+					} catch (CloneNotSupportedException e) {
+						e.printStackTrace();
+					}
+					
 				}
-			}
-			else if (getCurrentDay() < 5) {
+			} else if (getCurrentDay() < 5) {
 				int randomSize = rand.nextInt(1, 3);
 				for (int j=0; j < randomSize; j++){
 					int randomIndex = rand.nextInt(avaiable.size());
-            		Monster randomMonster = avaiable.get(randomIndex);
-					team.add(randomMonster);
+					try {
+					 Monster randomMonster = avaiable.get(randomIndex).clone();
+					 team.add(randomMonster);
+					} catch (CloneNotSupportedException e) {
+						e.printStackTrace();
+					}
 				}
 
     		} else if (getCurrentDay() >= 5 && getCurrentDay() < 10){
 				int randomSize = rand.nextInt(2, 4);
 				for (int j=0; j < randomSize; j++){
 					int randomIndex = rand.nextInt(avaiable.size());
-            		Monster randomMonster = avaiable.get(randomIndex);
-					team.add(randomMonster);
+					try {
+					 Monster randomMonster = avaiable.get(randomIndex).clone();
+					 team.add(randomMonster);
+					} catch (CloneNotSupportedException e) {
+						e.printStackTrace();
+					}
 				}
 			} else {
 				int randomSize = rand.nextInt(2, 5);
 				for (int j=0; j < randomSize; j++){
 					int randomIndex = rand.nextInt(avaiable.size());
-            		Monster randomMonster = avaiable.get(randomIndex);
-					team.add(randomMonster);
+					try {
+					 Monster randomMonster = avaiable.get(randomIndex).clone();
+					 team.add(randomMonster);
+					} catch (CloneNotSupportedException e) {
+						e.printStackTrace();
+					}
 				}
 			}
+			
 			Battle battle = new Battle(team, newPlayer, this);
 			getBattles().add(battle);
 		}
 	}
-    public String getSelectedButtonText(ButtonGroup buttonGroup) {
+    public ArrayList<String> getSelectedButtonText(ButtonGroup buttonGroup) {
+    	int index = 0;
+    	ArrayList<String> list = new ArrayList<String>();
         for (Enumeration<AbstractButton> buttons = buttonGroup.getElements(); buttons.hasMoreElements();) {
             AbstractButton button = buttons.nextElement();
-
             if (button.isSelected()) {
-                return button.getText();
+                list.add(button.getText());
+                list.add(Integer.toString(index));
+                return list;
             }
+        index++;
         }
         return null;
     }
@@ -159,6 +182,7 @@ public class MainGame {
 	}
 	public void launchRandomEvent() {
 		RandomEvent random = new RandomEvent(this);
+		setDaysBattles();
 		launchMainScreen(random.getMonsterLeave());
 	}
 	public void closeSetupScreen(SetupScreen SetupWindow) {
@@ -167,6 +191,7 @@ public class MainGame {
         launchMainScreen();
 	}
 	public void closeStoreScreen(StoreScreen storeScreen, String s) {
+		storeScreen.closeWindow();
 		if (s.toLowerCase().startsWith("g")){
 			launchGameOverScreen();
 		} else {
@@ -214,6 +239,12 @@ public class MainGame {
 			launchGameOverScreen();
 		}
 	}
+	public void closeStoreScreen(StoreScreen screen, boolean b) {
+		screen.closeWindow();
+		if (b) {
+			launchStoreScreen();
+		}
+	}
 	public void closeGameOverScreen(GameOverScreen gameOverScreen) {
 		gameOverScreen.closeWindow();
 	}
@@ -239,5 +270,6 @@ public class MainGame {
     public static void main(String[] args) {
         MainGame gamer = new MainGame();   
     }
+	
 	
 }

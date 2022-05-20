@@ -24,7 +24,7 @@ public class RandomEvent {
 			if (randomNumber == 6 && playerTeam.size() > 1) {
 				
 				playerTeam.remove(index);
-				monsterLeave = monster.getName() + "has left";
+				monsterLeave = monster.getName() + " has left";
 				break;
 			} else if (randomNumber >=2 && randomNumber <= 4) {
 				monster.levelUp();
