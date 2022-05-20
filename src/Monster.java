@@ -1,22 +1,24 @@
-public class Monster {
+public class Monster implements Cloneable {
     private String monsterName;
-    private int monsterMaxHealth;
-    private int monsterDamage;
-    private int monsterCurrentHealth;
+    private double monsterMaxHealth;
+    private double monsterDamage;
+    private double monsterCurrentHealth;
     private int monsterCost;
     private int monsterLevel = 0;
     private double criticalStrike;
 	private boolean hasLeveledUp = false;
 
-   
-   
-	public Monster(String name, int health, int damage, double critChance, int cost) {
+	public Monster(String name, double health, double damage, double critChance, int cost) {
         monsterName = name;
         monsterMaxHealth = monsterCurrentHealth = health;
         monsterDamage = damage;
         criticalStrike = critChance;
         monsterCost = cost;
     }
+	public Monster clone() throws CloneNotSupportedException {
+		Monster monster = (Monster) super.clone();
+		return monster;
+	}
 	 public boolean getLeveledUp() {
 			return hasLeveledUp;
 	}
@@ -25,6 +27,7 @@ public class Monster {
 	}
     public void resetLevel() {
     	if (getLeveledUp() == true) {
+    		System.out.println("asdf");
     		setHasLeveledUp(false);
     	}
     }
@@ -32,15 +35,15 @@ public class Monster {
         return monsterName;
     }
 
-    public int getDamage(){
+    public double getDamage(){
         return monsterDamage;
     }
 
-    public int getMonsterCurrentHealth(){
+    public double getMonsterCurrentHealth(){
         return monsterCurrentHealth;
     }
 
-    public int getMonsterMaxHealth(){
+    public double getMonsterMaxHealth(){
         return monsterMaxHealth;
     }
 
@@ -48,15 +51,15 @@ public class Monster {
         return criticalStrike;
     }
 
-    public void setCurrentHealth(int newHealth) {
+    public void setCurrentHealth(double newHealth) {
         monsterCurrentHealth = newHealth;
     }
 
-    public void setMaxHealth(int newHealth) {
+    public void setMaxHealth(double newHealth) {
         monsterMaxHealth = newHealth;
     }
 
-    public void setDamage(int newDamage) {
+    public void setDamage(double newDamage) {
         monsterDamage = newDamage;
     }
 
@@ -80,10 +83,17 @@ public class Monster {
 		monsterCost = newMonsterCost;
 	}
 	public String checkIfLeveledUp() {
+<<<<<<< HEAD
 		if (getLeveledUp()) {
 			return getName() + " has leveled up";
+=======
+		if (getLeveledUp() == true) {
+			System.out.println("1");
+			return " Level Up!";
+>>>>>>> 538ec8818230e33b05fa808e5be374f9bff35132
 		} else {
-			return null;
+			System.out.println("2");
+			return "";
 		}
 	}
 

@@ -82,14 +82,15 @@ public class MoveTeamScreen {
         	for (JCheckBox checkbox : checkboxes) {
                 if (checkbox.isSelected() == false) {
                 	checkbox.setEnabled(false);
+                	System.out.println("here");
                 }
             }
 
         } else {
         	for (JCheckBox checkbox : checkboxes) {
-        		System.out.println(checkbox.getText());
-                if (checkbox.isSelected() == false && checkbox.getText() != null) {
+                if (checkbox.isSelected() == false && checkbox.getText() == (String) null) {
                 	checkbox.setEnabled(true);
+                	System.out.println("asdf" +checkbox.getText());
                 }
             }
         }
@@ -111,8 +112,6 @@ public class MoveTeamScreen {
 				counter++;
 			}
 		}
-		System.out.println(first);
-		System.out.println(second);
 		if (first == (Integer) null) {
 			lblErrorLabel.setText("Please select two more monsters");
 		} else if (second == (Integer) null) {
@@ -207,7 +206,7 @@ public class MoveTeamScreen {
 		
 		JLabel lblHealth1 = new JLabel();
 		try {
-			lblHealth1.setText(Integer.toString(playerTeam.get(0).getMonsterCurrentHealth()));
+			lblHealth1.setText(Double.toString(playerTeam.get(0).getMonsterCurrentHealth()));
 		} catch (Exception e) {
 			lblHealth1.setText("");
 		}
@@ -222,7 +221,7 @@ public class MoveTeamScreen {
 
 		JLabel lblDamage1 = new JLabel();
 		try {
-			lblDamage1.setText(Integer.toString(playerTeam.get(0).getDamage()));
+			lblDamage1.setText(Double.toString(playerTeam.get(0).getDamage()));
 		} catch (Exception e) {
 			lblDamage1.setText("");
 		}
@@ -251,10 +250,9 @@ public class MoveTeamScreen {
 		panelTeam.add(lblCritChance1, gbc_lblCritChance1);
 
 		JCheckBox chckbxSelection = new JCheckBox();
-		chckbxSelection.setEnabled(false);
 		try {
+			
 			chckbxSelection.setText(playerTeam.get(0).getName());
-			chckbxSelection.setEnabled(true);
 			chckbxSelection.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
@@ -275,7 +273,7 @@ public class MoveTeamScreen {
 			
 		JLabel lblHealth2 = new JLabel();
 		try {
-			lblHealth2.setText(Integer.toString(playerTeam.get(1).getMonsterCurrentHealth()));
+			lblHealth2.setText(Double.toString(playerTeam.get(1).getMonsterCurrentHealth()));
 		} catch (Exception e) {
 			lblHealth2.setText("");
 		}
@@ -290,7 +288,7 @@ public class MoveTeamScreen {
 
 		JLabel lblDamage2 = new JLabel();
 		try {
-			lblDamage2.setText(Integer.toString(playerTeam.get(1).getDamage()));
+			lblDamage2.setText(Double.toString(playerTeam.get(1).getDamage()));
 		} catch (Exception e) {
 			lblDamage2.setText("");
 		}
@@ -316,7 +314,6 @@ public class MoveTeamScreen {
 		panelTeam.add(lblCritChance2, gbc_lblCritChance2);
 
 		JCheckBox chckbxSelection_1 = new JCheckBox();
-		chckbxSelection_1.setEnabled(false);
 		try {
 			chckbxSelection_1.setText(playerTeam.get(1).getName());
 			chckbxSelection_1.addMouseListener(new MouseAdapter() {
@@ -338,7 +335,7 @@ public class MoveTeamScreen {
 		
 		JLabel lblHealth3 = new JLabel();
 		try {
-			lblHealth3.setText(Integer.toString(playerTeam.get(2).getMonsterCurrentHealth()));
+			lblHealth3.setText(Double.toString(playerTeam.get(2).getMonsterCurrentHealth()));
 		} catch (Exception e) {
 			lblHealth3.setText("");
 		}
@@ -353,7 +350,7 @@ public class MoveTeamScreen {
 
 		JLabel lblDamage3 = new JLabel();
 		try {
-			lblDamage3.setText(Integer.toString(playerTeam.get(2).getDamage()));
+			lblDamage3.setText(Double.toString(playerTeam.get(2).getDamage()));
 		} catch (Exception e) {
 			lblDamage3.setText("");
 		}
@@ -379,7 +376,6 @@ public class MoveTeamScreen {
 		panelTeam.add(lblCritChance3, gbc_lblCritChance3);
 
 		JCheckBox chckbxSelection_2 = new JCheckBox();
-		chckbxSelection_2.setEnabled(false);
 		try {
 			chckbxSelection_2.setText(manager.toPercentage(playerTeam.get(2).getCriticalStrike()));
 			chckbxSelection_2.setEnabled(true);
@@ -403,7 +399,7 @@ public class MoveTeamScreen {
 		
 		JLabel lblHealth4 = new JLabel();
 		try {
-			lblHealth4.setText(Integer.toString(playerTeam.get(3).getMonsterCurrentHealth()));
+			lblHealth4.setText(Double.toString(playerTeam.get(3).getMonsterCurrentHealth()));
 		} catch (Exception e) {
 			lblHealth4.setText("");
 		}
@@ -418,7 +414,7 @@ public class MoveTeamScreen {
 
 		JLabel lblDamage4 = new JLabel();
 		try {
-			lblDamage4.setText(Integer.toString(playerTeam.get(3).getDamage()));
+			lblDamage4.setText(Double.toString(playerTeam.get(3).getDamage()));
 		} catch (Exception e) {
 			lblDamage4.setText("");
 		}
@@ -443,7 +439,6 @@ public class MoveTeamScreen {
 		panelTeam.add(lblCritChance4, gbc_lblCritChance4);
 
 		JCheckBox chckbxSelection_3 = new JCheckBox();
-		chckbxSelection_3.setEnabled(false);
 		try {
 			chckbxSelection_3.setText(playerTeam.get(3).getName());
 			chckbxSelection_3.setEnabled(true);

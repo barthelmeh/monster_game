@@ -93,7 +93,7 @@ public class SetUp {
 
             while ((monster = br.readLine()) != null){
                 String[] values = monster.split(",");
-                Monster obj = new Monster(values[0],Integer.parseInt(values[1]),Integer.parseInt(values[2]),Double.parseDouble(values[3]), Integer.parseInt(values[4]));
+                Monster obj = new Monster(values[0],Double.parseDouble(values[1]),Double.parseDouble(values[2]),Double.parseDouble(values[3]), Integer.parseInt(values[4]));
                 monsters.add(obj);
             }
         } catch (IOException e) {
@@ -108,12 +108,16 @@ public class SetUp {
     }
 
     public void setStarterMonsters(){
-        ArrayList<Monster> avaiableMonsters = manager.getAllMonsters();
+        ArrayList<Monster> avaiableMonsters = new ArrayList<Monster>(manager.getAllMonsters());
         Random rand = new Random();
         for (int i = 0; i < 3; i++){
             int randomIndex = rand.nextInt(avaiableMonsters.size());
-            Monster randomMonster = avaiableMonsters.get(randomIndex);
-            manager.getStarterMonsters().add(randomMonster);
+            try {
+				 Monster randomMonster = avaiableMonsters.get(randomIndex).clone();
+				 manager.getStarterMonsters().add(randomMonster);
+				} catch (CloneNotSupportedException e) {
+					e.printStackTrace();
+				}
             avaiableMonsters.remove(randomIndex);
         }
     }
@@ -140,7 +144,7 @@ public class SetUp {
     	return maxDays;
     }
     public GameDifficulty.difficulties getDifficulty(){
-        String userInput = manager.getSelectedButtonText(screen.difficultyButtonGroup);
+        String userInput = manager.getSelectedButtonText(screen.difficultyButtonGroup).get(0);
         GameDifficulty.difficulties dif;
 		switch(userInput.toLowerCase()) {
             case "easy":
@@ -159,7 +163,7 @@ public class SetUp {
         return dif;
     }
     public Monster getUsersStarterMonster(){
-        String userInput = manager.getSelectedButtonText(screen.starterMonsterButtonGroup);
+        String userInput = manager.getSelectedButtonText(screen.starterMonsterButtonGroup).get(0);
         ArrayList<Monster> monsters = manager.getStarterMonsters();
         for (Monster monster : monsters){
             if (monster.getName().equals(userInput)){
@@ -168,7 +172,7 @@ public class SetUp {
         } return null;
     }
     private Item getUsersStarterItem() {
-    	String userInput = manager.getSelectedButtonText(screen.starterItemButtonGroup);
+    	String userInput = manager.getSelectedButtonText(screen.starterItemButtonGroup).get(0);
     	ArrayList<Item> items = manager.getStarterItems();
     	for (Item item : items) {
     		if (item.getItemName().equals(userInput)) {

@@ -6,10 +6,12 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.LayoutManager;
 import java.util.ArrayList;
 import java.awt.Font;
 import javax.swing.SwingConstants;
@@ -19,6 +21,8 @@ import javax.swing.ButtonGroup;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class ApplyItemScreen {
 
@@ -77,8 +81,8 @@ public class ApplyItemScreen {
 		manager.closeApplyItemScreen(screen, true);
 	}
 	public void applyItem() {
-		String userInput = manager.getSelectedButtonText(monsterSelection);
-		String userInput1 = manager.getSelectedButtonText(itemSelection);
+		ArrayList<String> userInput = manager.getSelectedButtonText(monsterSelection);
+		ArrayList<String> userInput1 = manager.getSelectedButtonText(itemSelection);
 		Monster selectedMonster = null;
 		Item selectedItem = null;
 		int index = 0;
@@ -88,12 +92,13 @@ public class ApplyItemScreen {
 			lblErrorLabel.setText("Please select a item");
 		} else {
 			for (Monster monster : team){
-	            if (monster.getName().equals(userInput)){
+	            if (monster.getName().equals(userInput.get(0)) && index == Integer.parseInt(userInput.get(1))){
 	                selectedMonster = monster;
 	            }
+	        index++;
 			}
 			for (Item item : inventory) {
-				if (item.getItemName().equals(userInput1)){
+				if (item.getItemName().equals(userInput1.get(0))){
 	                selectedItem = item;
 	                index = inventory.indexOf(item);
 	            }
@@ -102,6 +107,10 @@ public class ApplyItemScreen {
 			inventory.remove(index);
 			restartWindow();
 		}
+	}
+	protected void applyItem(String selectedButtonText) {
+		// TODO Auto-generated method stub
+		
 	}
 	/**
 	 * Initialize the contents of the window.
@@ -130,7 +139,7 @@ public class ApplyItemScreen {
 		
 		JLabel lblHealth_1 = new JLabel("");
 		try {
-			lblHealth_1.setText(Integer.toString(team.get(0).getMonsterCurrentHealth()));
+			lblHealth_1.setText(Double.toString(team.get(0).getMonsterCurrentHealth()));
 		} catch (Exception e) {
 			lblHealth_1.setText("");
 		}
@@ -143,7 +152,7 @@ public class ApplyItemScreen {
 		
 		JLabel lblHealth_2 = new JLabel("");
 		try {
-			lblHealth_2.setText(Integer.toString(team.get(1).getMonsterCurrentHealth()));
+			lblHealth_2.setText(Double.toString(team.get(1).getMonsterCurrentHealth()));
 		} catch (Exception e) {
 			lblHealth_2.setText("");
 		}
@@ -156,7 +165,7 @@ public class ApplyItemScreen {
 		
 		JLabel lblHealth_3 = new JLabel("");
 		try {
-			lblHealth_3.setText(Integer.toString(team.get(2).getMonsterCurrentHealth()));
+			lblHealth_3.setText(Double.toString(team.get(2).getMonsterCurrentHealth()));
 		} catch (Exception e) {
 			lblHealth_3.setText("");
 		}
@@ -169,7 +178,7 @@ public class ApplyItemScreen {
 		
 		JLabel lblHealth_4 = new JLabel("");
 		try {
-			lblHealth_4.setText(Integer.toString(team.get(3).getMonsterCurrentHealth()));
+			lblHealth_4.setText(Double.toString(team.get(3).getMonsterCurrentHealth()));
 		} catch (Exception e) {
 			lblHealth_4.setText("");
 		}
@@ -190,7 +199,7 @@ public class ApplyItemScreen {
 		
 		JLabel lblMaxHealth_1 = new JLabel("0");
 		try {
-			lblMaxHealth_1.setText(Integer.toString(team.get(0).getMonsterMaxHealth()));
+			lblMaxHealth_1.setText(Double.toString(team.get(0).getMonsterMaxHealth()));
 		} catch (Exception e) {
 			lblMaxHealth_1.setText("");
 		}
@@ -203,7 +212,7 @@ public class ApplyItemScreen {
 		
 		JLabel lblMaxHealth_2 = new JLabel("0");
 		try {
-			lblMaxHealth_2.setText(Integer.toString(team.get(1).getMonsterMaxHealth()));
+			lblMaxHealth_2.setText(Double.toString(team.get(1).getMonsterMaxHealth()));
 		} catch (Exception e) {
 			lblMaxHealth_2.setText("");
 		}
@@ -216,7 +225,7 @@ public class ApplyItemScreen {
 		
 		JLabel lblMaxHealth_3 = new JLabel("0");
 		try {
-			lblMaxHealth_3.setText(Integer.toString(team.get(2).getMonsterMaxHealth()));
+			lblMaxHealth_3.setText(Double.toString(team.get(2).getMonsterMaxHealth()));
 		} catch (Exception e) {
 			lblMaxHealth_3.setText("");
 		}
@@ -229,7 +238,7 @@ public class ApplyItemScreen {
 		
 		JLabel lblMaxHealth_4 = new JLabel("0");
 		try {
-			lblMaxHealth_4.setText(Integer.toString(team.get(3).getMonsterMaxHealth()));
+			lblMaxHealth_4.setText(Double.toString(team.get(3).getMonsterMaxHealth()));
 		} catch (Exception e) {
 			lblMaxHealth_4.setText("");
 		}
@@ -250,7 +259,7 @@ public class ApplyItemScreen {
 		
 		JLabel lblDamage_1 = new JLabel();
 		try {
-			lblDamage_1.setText(Integer.toString(team.get(0).getDamage()));
+			lblDamage_1.setText(Double.toString(team.get(0).getDamage()));
 		} catch (Exception e) {
 			lblDamage_1.setText("");
 		}
@@ -263,7 +272,7 @@ public class ApplyItemScreen {
 		
 		JLabel lblDamage_2 = new JLabel("");
 		try {
-			lblDamage_2.setText(Integer.toString(team.get(1).getDamage()));
+			lblDamage_2.setText(Double.toString(team.get(1).getDamage()));
 		} catch (Exception e) {
 			lblDamage_2.setText("");
 		}
@@ -276,7 +285,7 @@ public class ApplyItemScreen {
 		
 		JLabel lblDamage_3 = new JLabel("");
 		try {
-			lblDamage_3.setText(Integer.toString(team.get(2).getDamage()));
+			lblDamage_3.setText(Double.toString(team.get(2).getDamage()));
 		} catch (Exception e) {
 			lblDamage_3.setText("");
 		}
@@ -289,7 +298,7 @@ public class ApplyItemScreen {
 		
 		JLabel lblDamage_4 = new JLabel("");
 		try {
-			lblDamage_4.setText(Integer.toString(team.get(3).getDamage()));
+			lblDamage_4.setText(Double.toString(team.get(3).getDamage()));
 		} catch (Exception e) {
 			lblDamage_4.setText("");
 		}
@@ -398,7 +407,7 @@ public class ApplyItemScreen {
 		gbc_tglbtnMonsterSelect_1.gridy = 4;
 		panelTeam.add(tglbtnMonsterSelect_1, gbc_tglbtnMonsterSelect_1);
 		
-		JToggleButton tglbtnMonsterSelect_2 = new JToggleButton("Select");
+		JToggleButton tglbtnMonsterSelect_2 = new JToggleButton("");
 		try {
 			tglbtnMonsterSelect_2.setText(team.get(2).getName());
 		} catch (Exception e){
@@ -413,7 +422,7 @@ public class ApplyItemScreen {
 		gbc_tglbtnMonsterSelect_2.gridy = 4;
 		panelTeam.add(tglbtnMonsterSelect_2, gbc_tglbtnMonsterSelect_2);
 		
-		JToggleButton tglbtnMonsterSelect_3 = new JToggleButton("Select");
+		JToggleButton tglbtnMonsterSelect_3 = new JToggleButton("");
 		try {
 			tglbtnMonsterSelect_3.setText(team.get(3).getName());
 		} catch (Exception e){
@@ -711,4 +720,6 @@ public class ApplyItemScreen {
 		
 		window.getContentPane().setLayout(groupLayout);
 	}
+
+	
 }

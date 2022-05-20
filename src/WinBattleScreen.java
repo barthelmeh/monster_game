@@ -50,7 +50,11 @@ public class WinBattleScreen {
 		manager = incomingManager;
 		battleManager = incomingBattle;
 		coinsGained = battleManager.getCoinsGained();
+<<<<<<< HEAD
 		scoreGained = battleManager.getScoreGained();
+=======
+		manager.getPlayer().addMoney(coinsGained);
+>>>>>>> 538ec8818230e33b05fa808e5be374f9bff35132
 		initialize();
 		window.setVisible(true);
 	}

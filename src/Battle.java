@@ -26,12 +26,6 @@ public class Battle {
     	resetLevels(playerTeam);
     }
     
-    public void resetLevels(ArrayList<Monster> team) {
-		for (Monster monster : team) {
-			monster.resetLevel();
-		}
-	}
-
 	public ArrayList<Monster> getTeam() {
         return enemyTeam;
     }
@@ -125,10 +119,10 @@ public class Battle {
     	Monster enemyMonster = enemyTeam.get(0);
         Monster playerMonster = playerTeam.get(0);
         
-        int enemyCurrentHealth = enemyMonster.getMonsterCurrentHealth();
-        int playerCurrentHealth = playerMonster.getMonsterCurrentHealth();
-        int enemyDamage = enemyMonster.getDamage();
-        int playerDamage = playerMonster.getDamage();
+        double enemyCurrentHealth = enemyMonster.getMonsterCurrentHealth();
+        double playerCurrentHealth = playerMonster.getMonsterCurrentHealth();
+        double enemyDamage = enemyMonster.getDamage();
+        double playerDamage = playerMonster.getDamage();
         double playerCritChance = playerMonster.getCriticalStrike();
         final double critMul = 1.75;
     	

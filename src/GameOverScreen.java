@@ -66,7 +66,7 @@ public class GameOverScreen {
 		JButton btnNewButton = new JButton("Quit");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				closeWindow();
+				finishedWindow();
 			}
 		});
 		btnNewButton.setBounds(486, 420, 102, 44);

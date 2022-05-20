@@ -107,8 +107,8 @@ public class BattleScreen {
 				if (playerTeam.size() > 0) {
 					Monster nextMonster = playerTeam.get(0);
 					playerMonsterName.setText(nextMonster.getName());
-					playerMonsterDamage.setText("Damage: " + Integer.toString(nextMonster.getDamage()));
-					playerMonsterHealth.setText("Health: " + Integer.toString(nextMonster.getMonsterCurrentHealth()));
+					playerMonsterDamage.setText("Damage: " + Double.toString(nextMonster.getDamage()));
+					playerMonsterHealth.setText("Health: " + Double.toString(nextMonster.getMonsterCurrentHealth()));
 
 				} else {
 					playerMonsterName.setText("you lost");
@@ -131,8 +131,8 @@ public class BattleScreen {
 				if (enemyTeam.size() > 0) {
 					Monster nextMonster = enemyTeam.get(0);
 					enemyMonsterName.setText(nextMonster.getName());
-					enemyMonsterDamage.setText("Damage: " + Integer.toString(nextMonster.getDamage()));
-					enemyMonsterHealth.setText("Health: " + Integer.toString(nextMonster.getMonsterCurrentHealth()));
+					enemyMonsterDamage.setText("Damage: " + Double.toString(nextMonster.getDamage()));
+					enemyMonsterHealth.setText("Health: " + Double.toString(nextMonster.getMonsterCurrentHealth()));
 
 				} else {
 					// Enemy has died
