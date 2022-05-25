@@ -1,3 +1,4 @@
+package main;
 public interface Item {
     /**
      * gets item's name
@@ -14,6 +15,7 @@ public interface Item {
      * @return int item's cost
      */
     int getItemCost();
+    
     /**
      * sets item's name
      * @param itemName String item's new name

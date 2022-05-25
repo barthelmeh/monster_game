@@ -1,3 +1,4 @@
+package main;
 public class HealthItem implements Item {
 	private String itemName; 
     private double itemIncrease;

@@ -1,14 +1,15 @@
-public class MaxHealthItem implements Item {
+package main;
+public class DamageItem implements Item {
     private String itemName; 
     private double itemIncrease;
     private int itemCost;
-  	 /**
-	 * Class Constructor that specifies name, increase percentage and cost of item
+    /**
+	 * Class Constructor to make damage item
 	 * @param name String name of item
-	 * @param increase Double increase percentage of item that is to be applied to user
-	 * @param cost int cost of item 
+	 * @param increase Double amount that the item will increase the monster
+	 * @param cost Int amount required to purchase item
 	 */
-    public MaxHealthItem(String name, double increase , int cost){
+    public DamageItem(String name, double increase , int cost){
 		itemName = name;
 		itemIncrease = increase;
 		itemCost = cost;
@@ -18,13 +19,11 @@ public class MaxHealthItem implements Item {
 	 * @param monster Monster the monster that is getting the item
 	 */
 	public void applyItem(Monster monster) {
-		double maxHealth = monster.getMonsterMaxHealth();
-		double currentHealth = monster.getMonsterCurrentHealth();
-		double newHealth = (maxHealth + (maxHealth*itemIncrease));
-		monster.setCurrentHealth((currentHealth + (currentHealth*itemIncrease)));
-		monster.setMaxHealth(newHealth);
+		double currentDamage = monster.getDamage();
+		double newDamage = (currentDamage + (currentDamage*itemIncrease));
+		monster.setDamage(newDamage);
 	}
-/**
+	/**
 	 * gets Item name to be displayed to user
 	 * @return String item name
 	 */

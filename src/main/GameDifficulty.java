@@ -1,3 +1,4 @@
+package main;
 public class GameDifficulty {
     /**
      * Difficulties that can be picked

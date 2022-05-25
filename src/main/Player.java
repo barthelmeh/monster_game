@@ -1,3 +1,4 @@
+package main;
 import java.util.ArrayList;
 
 public class Player {
@@ -83,6 +84,11 @@ public class Player {
      * added item to inventory and decrease money from user
      * @param item Item new addition to inventory
      */
+    
+    public void addRandomMonster(Monster monster) {
+    	team.add(monster);
+    }
+    
     public void addItem(Item item){
         inventory.add(item);
         decreaseMoney(item.getItemCost());

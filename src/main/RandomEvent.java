@@ -1,3 +1,4 @@
+package main;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -26,21 +27,23 @@ public class RandomEvent {
 	}
 
 	private void monsterEnter(){
+		// Monster has joined the party over night
 		ArrayList<Monster> avaiableMonsters = new ArrayList<Monster>(manager.getAllMonsters());
 		Random rand = new Random();
 		int randomNumber = rand.nextInt(1,21);
-		if (randomNumber == 1){
+		if (randomNumber == 1 && playerTeam.size() < 4){
 			int randomIndex = rand.nextInt(avaiableMonsters.size());
 			try {
 				Monster randomMonster = avaiableMonsters.get(randomIndex).clone();
 				monsterEnter = randomMonster.getName() + " has joined your team";
-				manager.getPlayer().addMonster(randomMonster);
+				manager.getPlayer().addRandomMonster(randomMonster);
 			} catch (CloneNotSupportedException e) {
 				e.printStackTrace();
 			}
 		}
 	}
 	private void randomLeave() {
+		// Monster has left the party over night
 		Random rand = new Random();
 		int index = 0;
 		for (Monster monster : playerTeam) {

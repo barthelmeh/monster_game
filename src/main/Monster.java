@@ -1,3 +1,4 @@
+package main;
 public class Monster implements Cloneable {
     private String monsterName;
     private double monsterMaxHealth;
@@ -133,6 +134,7 @@ public class Monster implements Cloneable {
 	 * levels up the moster by increase monster level by one and damage and health increasing by 10 
 	 */
 	public void levelUp() {
+		// Hard coded level up doesn't depend on stats
 		setMonsterLevel(getMonsterLevel()+1);
 		setCurrentHealth(getMonsterCurrentHealth()+10);
 		setMaxHealth(getMonsterMaxHealth()+10);
