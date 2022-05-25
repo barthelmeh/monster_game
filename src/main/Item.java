@@ -15,13 +15,7 @@ public interface Item {
      * @return int item's cost
      */
     int getItemCost();
-<<<<<<< HEAD:src/main/Item.java
-
-    void setItemName(String itemName);
-    void setItemIncrease(double itemIncrease);
-    void setItemCost(int itemCost);
     
-=======
     /**
      * sets item's name
      * @param itemName String item's new name
@@ -41,6 +35,5 @@ public interface Item {
      * Applys this item to a given monster
      * @param monster Monster specific monster that this item is getting applied to.
      */
->>>>>>> b1f795dd0a2b0eac5823baa91d9dc0d928de4a61:src/Item.java
     void applyItem(Monster monster);
 }
