@@ -12,8 +12,8 @@ public class Battle {
     private MainGame manager;
     private int totalHealthDam;
 	/**
-	 * Class Constructor specifiying the Enemy Team, Player and MainGame as well as setting the battles score and coins and resets whether monster has levelled up.
-	 * @param newEnemyTeam the enemy team play is verusing
+	 * Class Constructor specifying the Enemy Team, Player and MainGame as well as setting the battles score and coins and resets whether monster has levelled up.
+	 * @param newEnemyTeam the enemy team play is versing
 	 * @param playerManager the user
 	 * @param mainManager the main game running everything
 	 */
@@ -25,7 +25,7 @@ public class Battle {
     	manager.getPlayer().resetLevels();
     }
 	/**
-	 * Sets coins and score that can be recieved from this battle.
+	 * Sets coins and score that can be received from this battle.
 	 */
     public void setCoinAndScore(){
 		totalHealthDam = 0;
@@ -170,7 +170,7 @@ public class Battle {
             	enemyTeam.remove(0);
             	if(enemyTeam.size() == 0) {
             		// Player has won the battle
-            		bsManager.winWindow();
+            		bsManager.checkDay();
             	}
             }
             

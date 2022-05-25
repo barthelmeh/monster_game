@@ -40,15 +40,24 @@ public class GameOverScreen {
 	public GameOverScreen() {
 		initialize();
 	}
-	
+	/**
+	 * Class Constructor that specifies the main game in the background
+	 * @param incomingManager Main Game the is running in the background
+	 */
 	public GameOverScreen(MainGame incomingManager) {
 		manager = incomingManager;
 		initialize();
 		window.setVisible(true);
 	}
+	/**
+	 * closes window to user
+	 */
 	public void closeWindow() {
 		window.dispose();
 	}
+	/**
+	 * closes wndow to user via manager to continue game running
+	 */
 	public void finishedWindow() {
 		manager.closeGameOverScreen(this);
 	}

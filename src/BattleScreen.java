@@ -86,6 +86,13 @@ public class BattleScreen {
 	public void closeWindow() {
 		window.dispose();
 	}
+	public void checkDay() {
+		if (manager.getCurrentDay() == manager.getMaxDay()) {
+			loseWindow();
+		} else {
+			winWindow();
+		}
+	}
 	/**
 	 * close window and open win battle screen
 	 */
@@ -100,7 +107,7 @@ public class BattleScreen {
 	}
 	/**
 	 * updates the CritLabel to show to user that their monster got a critical hit
-	 * @param turnOn Boolean sets the visibitlity of the label
+	 * @param turnOn Boolean sets the visibility of the label
 	 * @param name String of the monster that performed the critical hit
 	 */
 	public void updateCritLabel(boolean turnOn, String name) {
@@ -108,8 +115,8 @@ public class BattleScreen {
 		critLabel.setVisible(turnOn);
 	}
 	/**
-	 * updates the moneters labels including current monsters' health and whether or not they are alive.
-	 * @param team String determines whos turn it is.
+	 * updates the monsters labels including current monsters' health and whether or not they are alive.
+	 * @param team String determines who's turn it is.
 	 */
 	public void updateMonsters(String team) {
 		switch(team) {
@@ -373,4 +380,6 @@ public class BattleScreen {
 		panelTop.add(lblNewLabel_2);
 		window.getContentPane().setLayout(groupLayout);
 	}
+
+	
 }
