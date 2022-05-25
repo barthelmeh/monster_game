@@ -11,37 +11,63 @@ public class Battle {
     private double coinMult = 1;
     private MainGame manager;
     private int totalHealthDam;
-
-    public Battle(ArrayList<Monster> team, Player playerManager, MainGame mainManager) {
-    	enemyTeam = team;
+	/**
+	 * Class Constructor specifiying the Enemy Team, Player and MainGame as well as setting the battles score and coins and resets whether monster has levelled up.
+	 * @param newEnemyTeam the enemy team play is verusing
+	 * @param playerManager the user
+	 * @param mainManager the main game running everything
+	 */
+    public Battle(ArrayList<Monster> newEnemyTeam, Player playerManager, MainGame mainManager) {
+    	enemyTeam = newEnemyTeam;
         playerTeam = playerManager.getTeam();
         manager = mainManager;
-        totalHealthDam = 0;
+		setCoinAndScore();
+    	manager.getPlayer().resetLevels();
+    }
+	/**
+	 * Sets coins and score that can be recieved from this battle.
+	 */
+    public void setCoinAndScore(){
+		totalHealthDam = 0;
         for(Monster m : enemyTeam) {
         	totalHealthDam += m.getMonsterCurrentHealth();
         	totalHealthDam += m.getDamage();
         }
         coinsGained = totalHealthDam / 7;
         scoreGained += totalHealthDam / 3;
-    	manager.getPlayer().resetLevels();
-    }
-    
-	public ArrayList<Monster> getTeam() {
+	}
+	/**
+	 * gets the enemy team to use in battle.
+	 * @return enemy team that user is fighting.
+	 */
+	public ArrayList<Monster> getEnemyTeam() {
         return enemyTeam;
     }
-
-    public void setTeam(ArrayList<Monster> team) {
-        enemyTeam = team;
+	/**
+	 * Sets the enemy team that is used in battle.
+	 * @param newEnemyTeam enemy team that user is fighting.
+	 */
+    public void setTeam(ArrayList<Monster> newEnemyTeam) {
+        enemyTeam = newEnemyTeam;
     }
-    
+    /**
+	 * gets whether or not it is the users turn.
+	 * @return a boolean true if is players turn false if not.
+	 */
     public boolean getPlayerTurn() {
     	return playerTurn;
     }
-    
+    /**
+	 * Sets player turn whether to start or not.
+	 * @param isPlayersTurn boolean that sets who attacks first.
+	 */
     public void setCurrentTurn(boolean isPlayersTurn) {
     	playerTurn = isPlayersTurn;
     }
-    
+    /**
+	 * gets difficulty and day and returns a multiplier to determine receive and coins from this battle.
+	 * @return integer to be used to be multiplied by enemy teams total damage.
+	 */
     public int getCoinsGained() {
     	GameDifficulty.difficulties currDifficulty = manager.getDifficulty();
     	int currDay = manager.getCurrentDay();
@@ -65,18 +91,17 @@ public class Battle {
     		coinMult += 1;
     	} else {
     		coinMult += 1.25;
-    	}
-    	
-    	
-    	// Send coins gained info to player
-    	
+    	}	
+    	// Send coins gained info to player	
     	int gainedCoins = (int) (Double.valueOf(coinsGained) * coinMult);
     	manager.getPlayer().addMoney(gainedCoins);
-    	
     	return gainedCoins;
     	
     }
-    
+    /**
+	 * gets difficulty and current day to determine the score multiplier to be used to determine the score for this battle.
+	 * @return integer that is multiplied by enemy teams total damage to get score.
+	 */
     public int getScoreGained() {
     	GameDifficulty.difficulties currDifficulty = manager.getDifficulty();
     	int currDay = manager.getCurrentDay();
@@ -101,17 +126,16 @@ public class Battle {
     	} else {
     		scoreMult += 4;
     	}
-    	
-
     	// Send score gained info to player
-    	
     	int gainedScore = (int) (Double.valueOf(scoreGained) * scoreMult);
     	manager.getPlayer().increasePoints(gainedScore);
-    	
     	return gainedScore;
     }
     
-    
+    /**
+	 * runs battle behind the battle screen.
+	 * @param bsManager battle screen used to update labels to simulate fight.
+	 */
     public void runBattle(BattleScreen bsManager){
     	
     	Random rand = new Random(); // For critical chance
