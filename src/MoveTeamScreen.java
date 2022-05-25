@@ -82,7 +82,7 @@ public class MoveTeamScreen {
         	for (JCheckBox checkbox : checkboxes) {
                 if (checkbox.isSelected() == false) {
                 	checkbox.setEnabled(false);
-                	System.out.println("here");
+
                 }
             }
 
@@ -90,7 +90,6 @@ public class MoveTeamScreen {
         	for (JCheckBox checkbox : checkboxes) {
                 if (checkbox.isSelected() == false && checkbox.getText() == (String) null) {
                 	checkbox.setEnabled(true);
-                	System.out.println("asdf" +checkbox.getText());
                 }
             }
         }

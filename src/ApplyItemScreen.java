@@ -30,7 +30,7 @@ public class ApplyItemScreen {
 	private ApplyItemScreen screen;
 	private MainGame manager;
 	private ArrayList<Item> inventory;
-	private ArrayList<Monster> team;
+	private ArrayList<Monster> playerTeam;
 	private final ButtonGroup monsterSelection = new ButtonGroup();
 	private final ButtonGroup itemSelection = new ButtonGroup();
 	private JLabel lblErrorLabel;
@@ -57,6 +57,10 @@ public class ApplyItemScreen {
 	public ApplyItemScreen() {
 		initialize();
 	}
+	/**
+	 * Class Constructor specifiying the MainGame
+	 * @param incomingManager
+	 */
 	public ApplyItemScreen(MainGame incomingManager) {
 		screen = this;
 		manager = incomingManager;
@@ -65,21 +69,41 @@ public class ApplyItemScreen {
 		initialize();
 		window.setVisible(true);
 	}
+	/**
+	 * Sets player team to be used to easily get specific monsters.
+	 * @param newTeam
+	 */
 	private void setTeam(ArrayList<Monster> newTeam) {
-		team = newTeam;
+		playerTeam = newTeam;
 	}
+	/**
+	 * Sets player inventory to be used to easily get specific items.
+	 * @param newInventory
+	 */
 	private void setInventory(ArrayList<Item> newInventory) {
 		inventory = newInventory;
 	}
+	/**
+	 * Restarts window to update users team and inventory.
+	 */
 	public void restartWindow() {
 		manager.closeApplyItemScreen(screen, false);
 	}
+	/**
+	 * Closes window to user.
+	 */
 	public void closeWindow() {
 		window.dispose();
 	}
+	/**
+	 * Calls MainGame funtion to close window
+	 */
 	public void finishedWindow() {
 		manager.closeApplyItemScreen(screen, true);
 	}
+	/**
+	 * Gets the users selected monster and item and applies it else gives error on screen
+	 */
 	public void applyItem() {
 		ArrayList<String> userInput = manager.getSelectedButtonText(monsterSelection);
 		ArrayList<String> userInput1 = manager.getSelectedButtonText(itemSelection);
@@ -91,7 +115,7 @@ public class ApplyItemScreen {
 		} else if (userInput1 == null) {
 			lblErrorLabel.setText("Please select a item");
 		} else {
-			for (Monster monster : team){
+			for (Monster monster : playerTeam){
 	            if (monster.getName().equals(userInput.get(0)) && index == Integer.parseInt(userInput.get(1))){
 	                selectedMonster = monster;
 	            }
@@ -135,7 +159,7 @@ public class ApplyItemScreen {
 		
 		JLabel lblHealth_1 = new JLabel("");
 		try {
-			lblHealth_1.setText(Double.toString(team.get(0).getMonsterCurrentHealth()));
+			lblHealth_1.setText(Double.toString(playerTeam.get(0).getMonsterCurrentHealth()));
 		} catch (Exception e) {
 			lblHealth_1.setText("");
 		}
@@ -148,7 +172,7 @@ public class ApplyItemScreen {
 		
 		JLabel lblHealth_2 = new JLabel("");
 		try {
-			lblHealth_2.setText(Double.toString(team.get(1).getMonsterCurrentHealth()));
+			lblHealth_2.setText(Double.toString(playerTeam.get(1).getMonsterCurrentHealth()));
 		} catch (Exception e) {
 			lblHealth_2.setText("");
 		}
@@ -161,7 +185,7 @@ public class ApplyItemScreen {
 		
 		JLabel lblHealth_3 = new JLabel("");
 		try {
-			lblHealth_3.setText(Double.toString(team.get(2).getMonsterCurrentHealth()));
+			lblHealth_3.setText(Double.toString(playerTeam.get(2).getMonsterCurrentHealth()));
 		} catch (Exception e) {
 			lblHealth_3.setText("");
 		}
@@ -174,7 +198,7 @@ public class ApplyItemScreen {
 		
 		JLabel lblHealth_4 = new JLabel("");
 		try {
-			lblHealth_4.setText(Double.toString(team.get(3).getMonsterCurrentHealth()));
+			lblHealth_4.setText(Double.toString(playerTeam.get(3).getMonsterCurrentHealth()));
 		} catch (Exception e) {
 			lblHealth_4.setText("");
 		}
@@ -195,7 +219,7 @@ public class ApplyItemScreen {
 		
 		JLabel lblMaxHealth_1 = new JLabel("0");
 		try {
-			lblMaxHealth_1.setText(Double.toString(team.get(0).getMonsterMaxHealth()));
+			lblMaxHealth_1.setText(Double.toString(playerTeam.get(0).getMonsterMaxHealth()));
 		} catch (Exception e) {
 			lblMaxHealth_1.setText("");
 		}
@@ -208,7 +232,7 @@ public class ApplyItemScreen {
 		
 		JLabel lblMaxHealth_2 = new JLabel("0");
 		try {
-			lblMaxHealth_2.setText(Double.toString(team.get(1).getMonsterMaxHealth()));
+			lblMaxHealth_2.setText(Double.toString(playerTeam.get(1).getMonsterMaxHealth()));
 		} catch (Exception e) {
 			lblMaxHealth_2.setText("");
 		}
@@ -221,7 +245,7 @@ public class ApplyItemScreen {
 		
 		JLabel lblMaxHealth_3 = new JLabel("0");
 		try {
-			lblMaxHealth_3.setText(Double.toString(team.get(2).getMonsterMaxHealth()));
+			lblMaxHealth_3.setText(Double.toString(playerTeam.get(2).getMonsterMaxHealth()));
 		} catch (Exception e) {
 			lblMaxHealth_3.setText("");
 		}
@@ -234,7 +258,7 @@ public class ApplyItemScreen {
 		
 		JLabel lblMaxHealth_4 = new JLabel("0");
 		try {
-			lblMaxHealth_4.setText(Double.toString(team.get(3).getMonsterMaxHealth()));
+			lblMaxHealth_4.setText(Double.toString(playerTeam.get(3).getMonsterMaxHealth()));
 		} catch (Exception e) {
 			lblMaxHealth_4.setText("");
 		}
@@ -255,7 +279,7 @@ public class ApplyItemScreen {
 		
 		JLabel lblDamage_1 = new JLabel();
 		try {
-			lblDamage_1.setText(Double.toString(team.get(0).getDamage()));
+			lblDamage_1.setText(Double.toString(playerTeam.get(0).getDamage()));
 		} catch (Exception e) {
 			lblDamage_1.setText("");
 		}
@@ -268,7 +292,7 @@ public class ApplyItemScreen {
 		
 		JLabel lblDamage_2 = new JLabel("");
 		try {
-			lblDamage_2.setText(Double.toString(team.get(1).getDamage()));
+			lblDamage_2.setText(Double.toString(playerTeam.get(1).getDamage()));
 		} catch (Exception e) {
 			lblDamage_2.setText("");
 		}
@@ -281,7 +305,7 @@ public class ApplyItemScreen {
 		
 		JLabel lblDamage_3 = new JLabel("");
 		try {
-			lblDamage_3.setText(Double.toString(team.get(2).getDamage()));
+			lblDamage_3.setText(Double.toString(playerTeam.get(2).getDamage()));
 		} catch (Exception e) {
 			lblDamage_3.setText("");
 		}
@@ -294,7 +318,7 @@ public class ApplyItemScreen {
 		
 		JLabel lblDamage_4 = new JLabel("");
 		try {
-			lblDamage_4.setText(Double.toString(team.get(3).getDamage()));
+			lblDamage_4.setText(Double.toString(playerTeam.get(3).getDamage()));
 		} catch (Exception e) {
 			lblDamage_4.setText("");
 		}
@@ -315,7 +339,7 @@ public class ApplyItemScreen {
 		
 		JLabel lblCritChance_1 = new JLabel("");
 		try {
-			lblCritChance_1.setText(manager.toPercentage(team.get(0).getCriticalStrike()));
+			lblCritChance_1.setText(manager.toPercentage(playerTeam.get(0).getCriticalStrike()));
 		} catch (Exception e) {
 			lblCritChance_1.setText("");
 		}
@@ -328,7 +352,7 @@ public class ApplyItemScreen {
 		
 		JLabel lblCritChance_2 = new JLabel("");
 		try {
-			lblCritChance_2.setText(manager.toPercentage(team.get(1).getCriticalStrike()));
+			lblCritChance_2.setText(manager.toPercentage(playerTeam.get(1).getCriticalStrike()));
 		} catch (Exception e) {
 			lblCritChance_2.setText("");
 		}
@@ -341,7 +365,7 @@ public class ApplyItemScreen {
 		
 		JLabel lblCritChance_3 = new JLabel("");
 		try {
-			lblCritChance_3.setText(manager.toPercentage(team.get(2).getCriticalStrike()));
+			lblCritChance_3.setText(manager.toPercentage(playerTeam.get(2).getCriticalStrike()));
 		} catch (Exception e) {
 			lblCritChance_3.setText("");
 		}
@@ -354,7 +378,7 @@ public class ApplyItemScreen {
 		
 		JLabel lblCritChance_4 = new JLabel("");
 		try {
-			lblCritChance_4.setText(manager.toPercentage(team.get(3).getCriticalStrike()));
+			lblCritChance_4.setText(manager.toPercentage(playerTeam.get(3).getCriticalStrike()));
 		} catch (Exception e) {
 			lblCritChance_4.setText("");
 		}
@@ -375,7 +399,7 @@ public class ApplyItemScreen {
 		
 		JToggleButton tglbtnMonsterSelect = new JToggleButton();
 		try {
-			tglbtnMonsterSelect.setText(team.get(0).getName());
+			tglbtnMonsterSelect.setText(playerTeam.get(0).getName());
 		} catch (Exception e){
 			tglbtnMonsterSelect.setEnabled(false);
 		}
@@ -390,7 +414,7 @@ public class ApplyItemScreen {
 		
 		JToggleButton tglbtnMonsterSelect_1 = new JToggleButton();
 		try {
-			tglbtnMonsterSelect_1.setText(team.get(1).getName());
+			tglbtnMonsterSelect_1.setText(playerTeam.get(1).getName());
 		} catch (Exception e){
 			tglbtnMonsterSelect_1.setEnabled(false);
 		}
@@ -405,7 +429,7 @@ public class ApplyItemScreen {
 		
 		JToggleButton tglbtnMonsterSelect_2 = new JToggleButton("");
 		try {
-			tglbtnMonsterSelect_2.setText(team.get(2).getName());
+			tglbtnMonsterSelect_2.setText(playerTeam.get(2).getName());
 		} catch (Exception e){
 			tglbtnMonsterSelect_2.setEnabled(false);
 		}
@@ -420,7 +444,7 @@ public class ApplyItemScreen {
 		
 		JToggleButton tglbtnMonsterSelect_3 = new JToggleButton("");
 		try {
-			tglbtnMonsterSelect_3.setText(team.get(3).getName());
+			tglbtnMonsterSelect_3.setText(playerTeam.get(3).getName());
 		} catch (Exception e){
 			tglbtnMonsterSelect_3.setEnabled(false);
 		}
@@ -698,19 +722,19 @@ public class ApplyItemScreen {
 		} else if (inventory.size() == 3) {
 			tglbtnItemSelect_3.setEnabled(false);
 		}
-		if (team.size() == 0 ) {
+		if (playerTeam.size() == 0 ) {
 			tglbtnMonsterSelect.setEnabled(false);
 			tglbtnMonsterSelect_1.setEnabled(false);
 			tglbtnMonsterSelect_2.setEnabled(false);
 			tglbtnMonsterSelect_3.setEnabled(false);	
-		} else if (team.size() == 1) {
+		} else if (playerTeam.size() == 1) {
 			tglbtnMonsterSelect_1.setEnabled(false);
 			tglbtnMonsterSelect_2.setEnabled(false);
 			tglbtnMonsterSelect_3.setEnabled(false);
-		} else if (team.size() == 2) {
+		} else if (playerTeam.size() == 2) {
 			tglbtnMonsterSelect_2.setEnabled(false);
 			tglbtnMonsterSelect_3.setEnabled(false);
-		} else if (team.size() == 3) {
+		} else if (playerTeam.size() == 3) {
 			tglbtnMonsterSelect_3.setEnabled(false);
 		}
 		

@@ -85,10 +85,10 @@ public class MainScreen {
 		inventory = newInventory;
 	}
 	public void setBattles(ArrayList<Battle> newBattles) {
-		battle1 = newBattles.get(0).getTeam();
-		battle2 = newBattles.get(1).getTeam();
-		battle3 = newBattles.get(2).getTeam();
-		battle4 = newBattles.get(3).getTeam();
+		battle1 = newBattles.get(0).getEnemyTeam();
+		battle2 = newBattles.get(1).getEnemyTeam();
+		battle3 = newBattles.get(2).getEnemyTeam();
+		battle4 = newBattles.get(3).getEnemyTeam();
 	}
 	public void closeWindow() {
 		window.dispose();

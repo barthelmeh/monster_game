@@ -82,10 +82,9 @@ public class Monster implements Cloneable {
 		monsterCost = newMonsterCost;
 	}
 	public String checkIfLeveledUp() {
-		if (getLeveledUp()) {
-			return getName() + " has leveled up";
+		if (getLeveledUp() == true) {
+			return " Level Up!";
 		} else {
-			System.out.println("2");
 			return "";
 		}
 	}

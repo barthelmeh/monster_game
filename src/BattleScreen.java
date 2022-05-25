@@ -65,7 +65,7 @@ public class BattleScreen {
 		manager = incomingManager;
 		screen = this;
 		currBattle = battleManager;
-		enemyTeam = currBattle.getTeam();
+		enemyTeam = currBattle.getEnemyTeam();
 		playerTeam = manager.getPlayer().getTeam();
 		initialize();
 		window.setVisible(true);
@@ -165,20 +165,20 @@ public class BattleScreen {
 		panelEnemy.setLayout(null);
 		panelEnemy.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		
-		JLabel EnemyHealth = new JLabel("Health: "+currBattle.getTeam().get(0).getMonsterCurrentHealth());
+		JLabel EnemyHealth = new JLabel("Health: "+currBattle.getEnemyTeam().get(0).getMonsterCurrentHealth());
 		enemyMonsterHealth = EnemyHealth;
 		EnemyHealth.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		EnemyHealth.setBounds(10, 43, 125, 14);
 		panelEnemy.add(EnemyHealth);
 		
-		JLabel EnemyName = new JLabel(currBattle.getTeam().get(0).getName());
+		JLabel EnemyName = new JLabel(currBattle.getEnemyTeam().get(0).getName());
 		enemyMonsterName = EnemyName;
 		EnemyName.setHorizontalAlignment(SwingConstants.CENTER);
 		EnemyName.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		EnemyName.setBounds(10, 11, 125, 21);
 		panelEnemy.add(EnemyName);
 		
-		JLabel EnemyDamage = new JLabel("Damage: "+currBattle.getTeam().get(0).getDamage());
+		JLabel EnemyDamage = new JLabel("Damage: "+currBattle.getEnemyTeam().get(0).getDamage());
 		enemyMonsterDamage = EnemyDamage;
 		EnemyDamage.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		EnemyDamage.setBounds(10, 90, 125, 21);
