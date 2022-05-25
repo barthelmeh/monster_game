@@ -33,6 +33,7 @@ public class MainScreen {
 	private ArrayList<Monster> battle3;
 	private ArrayList<Monster> battle4;
 	private JLabel lblRandomMonsterLeave;
+	private JLabel lblRandomMonsterEnter;
 	/**
 	 * Launch the application.
 	 */
@@ -64,7 +65,7 @@ public class MainScreen {
 		initialize();
 		window.setVisible(true);
 	}
-	public MainScreen(MainGame incomingManager, String s) {
+	public MainScreen(MainGame incomingManager, String s, String s2) {
 		screen = this;
 		manager = incomingManager;
 		setTeam(manager.getPlayer().getTeam());
@@ -73,6 +74,7 @@ public class MainScreen {
 		
 		initialize();
 		lblRandomMonsterLeave.setText(s);
+		lblRandomMonsterEnter.setText(s2);
 		window.setVisible(true);
 	}
 
@@ -105,7 +107,7 @@ public class MainScreen {
 	private void initialize() {
 		window = new JFrame();
 		window.setTitle("Main Game");
-		window.setBounds(0, 0, 1450, 954);
+		window.setBounds(0, 0, 1450, 979);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JPanel panelTop = new JPanel();
@@ -139,6 +141,11 @@ public class MainScreen {
 		lblRandomMonsterLeave.setForeground(Color.RED);
 		lblRandomMonsterLeave.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRandomMonsterLeave.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		
+		lblRandomMonsterEnter = new JLabel("");
+		lblRandomMonsterEnter.setHorizontalAlignment(SwingConstants.CENTER);
+		lblRandomMonsterEnter.setForeground(Color.RED);
+		lblRandomMonsterEnter.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GroupLayout groupLayout = new GroupLayout(window.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -147,14 +154,14 @@ public class MainScreen {
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(10)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(panelBattles, GroupLayout.DEFAULT_SIZE, 1426, Short.MAX_VALUE)
-								.addComponent(panelTop, GroupLayout.DEFAULT_SIZE, 1426, Short.MAX_VALUE)))
+								.addComponent(panelBattles, GroupLayout.DEFAULT_SIZE, 1416, Short.MAX_VALUE)
+								.addComponent(panelTop, GroupLayout.DEFAULT_SIZE, 1416, Short.MAX_VALUE)))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addContainerGap()
-							.addComponent(panelTeam, GroupLayout.DEFAULT_SIZE, 1426, Short.MAX_VALUE))
+							.addComponent(panelTeam, GroupLayout.DEFAULT_SIZE, 1416, Short.MAX_VALUE))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addContainerGap()
-							.addComponent(panelInventory, GroupLayout.DEFAULT_SIZE, 1426, Short.MAX_VALUE))
+							.addComponent(panelInventory, GroupLayout.DEFAULT_SIZE, 1416, Short.MAX_VALUE))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addContainerGap()
 							.addComponent(btnMoveTeam, GroupLayout.PREFERRED_SIZE, 473, GroupLayout.PREFERRED_SIZE)
@@ -162,7 +169,10 @@ public class MainScreen {
 							.addComponent(btnApplyItem, GroupLayout.PREFERRED_SIZE, 473, GroupLayout.PREFERRED_SIZE))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addContainerGap()
-							.addComponent(lblRandomMonsterLeave, GroupLayout.PREFERRED_SIZE, 1416, GroupLayout.PREFERRED_SIZE)))
+							.addComponent(lblRandomMonsterLeave, GroupLayout.PREFERRED_SIZE, 1416, GroupLayout.PREFERRED_SIZE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(lblRandomMonsterEnter, GroupLayout.PREFERRED_SIZE, 1416, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
@@ -182,7 +192,9 @@ public class MainScreen {
 						.addComponent(btnApplyItem, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(lblRandomMonsterLeave, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(108, Short.MAX_VALUE))
+					.addGap(18)
+					.addComponent(lblRandomMonsterEnter, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		
 		JPanel panelItem = new JPanel();
@@ -732,7 +744,7 @@ public class MainScreen {
 		lblDaysLeft.setHorizontalAlignment(SwingConstants.CENTER);
 		panelTop.add(lblDaysLeft);
 		
-		JLabel lblMoney = new JLabel("Coins: 0");
+		JLabel lblMoney = new JLabel("Coins: " + manager.getPlayer().getCurrentMoney());
 		lblMoney.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblMoney.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		panelTop.add(lblMoney);

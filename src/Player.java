@@ -6,6 +6,7 @@ public class Player {
     private ArrayList<Item> inventory = new ArrayList<Item>();
     private int currentMoney;
     private int currentPoints;
+    
     public Player(){
         currentMoney = 10;
         currentPoints = 0;
@@ -16,6 +17,11 @@ public class Player {
         inventory.add(item);
         currentMoney = 10;
         currentPoints = 0;
+    }
+    public void resetLevels(){
+        for (Monster monster : team){
+            monster.resetLevel();
+        }
     }
     public void addStarters(Monster monster, Item item) {
     	team.add(monster);

@@ -6,19 +6,24 @@ public class Battle {
     private ArrayList<Monster> playerTeam = new ArrayList<Monster>();
     private boolean playerTurn = true; // Player goes first.
     private int coinsGained;
+    private int scoreGained;
+    private double scoreMult;
     private double coinMult = 1;
     private MainGame manager;
+    private int totalHealthDam;
 
     public Battle(ArrayList<Monster> team, Player playerManager, MainGame mainManager) {
     	enemyTeam = team;
         playerTeam = playerManager.getTeam();
         manager = mainManager;
-        int totalHealthDam = 0;
+        totalHealthDam = 0;
         for(Monster m : enemyTeam) {
         	totalHealthDam += m.getMonsterCurrentHealth();
         	totalHealthDam += m.getDamage();
         }
         coinsGained = totalHealthDam / 7;
+        scoreGained += totalHealthDam / 3;
+    	manager.getPlayer().resetLevels();
     }
     
 	public ArrayList<Monster> getTeam() {
@@ -62,8 +67,48 @@ public class Battle {
     		coinMult += 1.25;
     	}
     	
-    	return (int) (Double.valueOf(coinsGained) * coinMult);
     	
+    	// Send coins gained info to player
+    	
+    	int gainedCoins = (int) (Double.valueOf(coinsGained) * coinMult);
+    	manager.getPlayer().addMoney(gainedCoins);
+    	
+    	return gainedCoins;
+    	
+    }
+    
+    public int getScoreGained() {
+    	GameDifficulty.difficulties currDifficulty = manager.getDifficulty();
+    	int currDay = manager.getCurrentDay();
+    	switch(currDifficulty) {
+    		case HARD:
+    			scoreMult += 5;
+    			break;
+    		case MEDIUM:
+    			scoreMult += 3;
+    			break;
+    		case EASY:
+    			scoreMult += 1.5;
+    			break;
+    	};
+    	
+    	if(currDay < 2) {
+    		scoreMult += 1;
+    	} else if(currDay < 5) {
+    		scoreMult += 2;
+    	} else if(currDay < 8) {
+    		scoreMult += 3;
+    	} else {
+    		scoreMult += 4;
+    	}
+    	
+
+    	// Send score gained info to player
+    	
+    	int gainedScore = (int) (Double.valueOf(scoreGained) * scoreMult);
+    	manager.getPlayer().increasePoints(gainedScore);
+    	
+    	return gainedScore;
     }
     
     
@@ -86,7 +131,10 @@ public class Battle {
     		// Player Crits 
     		double critChance = rand.nextDouble(); // Random int between 0 and 100 inclusive
     		if(critChance < playerCritChance) {
+    			bsManager.updateCritLabel(true, playerMonster.getName());
     			playerDamage *= critMul;
+    		} else {
+    			bsManager.updateCritLabel(false, playerMonster.getName());
     		}
     		
     		enemyCurrentHealth -= playerDamage;

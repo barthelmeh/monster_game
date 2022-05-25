@@ -14,6 +14,7 @@ import javax.swing.border.BevelBorder;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class BattleScreen {
 
@@ -34,6 +35,7 @@ public class BattleScreen {
 	public JLabel enemyMonsterDamage;
 	public JLabel scoreLabel;
 	public JLabel currentTurn;
+	public JLabel critLabel;
 	
 	/**
 	 * Launch the application.
@@ -81,6 +83,11 @@ public class BattleScreen {
 	}
 	public void loseWindow() {
 		manager.closeBattleScreen(this, false);
+	}
+	
+	public void updateCritLabel(boolean turnOn, String name) {
+		critLabel.setText(name + " does a crit!");
+		critLabel.setVisible(turnOn);
 	}
 
 	public void updateMonsters(String team) {
@@ -218,37 +225,41 @@ public class BattleScreen {
 		
 		JLabel currentTurnLabel = new JLabel("Current Turn: Player");
 		currentTurn = currentTurnLabel;
-		currentTurnLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		currentTurnLabel.setFont(new Font("Tahoma", Font.PLAIN, 23));
 		currentTurnLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		JLabel critHitLabel = new JLabel("monstername does a crit!");
+		critLabel = critHitLabel;
+		critHitLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		critHitLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		critHitLabel.setForeground(Color.RED);
+		critHitLabel.setVisible(false);
 
 		GroupLayout groupLayout = new GroupLayout(window.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(currentTurnLabel, GroupLayout.DEFAULT_SIZE, 767, Short.MAX_VALUE))
+					.addContainerGap()
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(currentTurnLabel, GroupLayout.DEFAULT_SIZE, 771, Short.MAX_VALUE)
+						.addComponent(panelTop, GroupLayout.DEFAULT_SIZE, 771, Short.MAX_VALUE)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(panelTop, GroupLayout.DEFAULT_SIZE, 767, Short.MAX_VALUE))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(22)
 							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 								.addComponent(panelPlayerTeam, GroupLayout.PREFERRED_SIZE, 324, GroupLayout.PREFERRED_SIZE)
 								.addComponent(panelPlayer, GroupLayout.PREFERRED_SIZE, 145, GroupLayout.PREFERRED_SIZE))
-							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+									.addComponent(panelEnemyTeam, GroupLayout.PREFERRED_SIZE, 324, GroupLayout.PREFERRED_SIZE))
 								.addGroup(groupLayout.createSequentialGroup()
 									.addGap(18)
 									.addComponent(lblNewLabel_3, GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
 									.addGap(18)
 									.addComponent(panelEnemy, GroupLayout.PREFERRED_SIZE, 145, GroupLayout.PREFERRED_SIZE)
-									.addGap(179))
-								.addGroup(groupLayout.createSequentialGroup()
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-									.addComponent(panelEnemyTeam, GroupLayout.PREFERRED_SIZE, 324, GroupLayout.PREFERRED_SIZE)))))
+									.addGap(179))))
+						.addComponent(critHitLabel, GroupLayout.DEFAULT_SIZE, 764, Short.MAX_VALUE))
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
@@ -256,25 +267,28 @@ public class BattleScreen {
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(panelTop, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(critHitLabel)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(28)
+							.addGap(3)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 								.addComponent(panelEnemy, GroupLayout.PREFERRED_SIZE, 136, GroupLayout.PREFERRED_SIZE)
 								.addComponent(panelPlayer, GroupLayout.PREFERRED_SIZE, 136, GroupLayout.PREFERRED_SIZE)))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(80)
+							.addGap(51)
 							.addComponent(lblNewLabel_3)))
+					.addPreferredGap(ComponentPlacement.UNRELATED, 18, Short.MAX_VALUE)
+					.addComponent(currentTurnLabel)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(currentTurnLabel, GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addGroup(groupLayout.createSequentialGroup()
 							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 								.addComponent(panelPlayerTeam, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE)
 								.addComponent(panelEnemyTeam, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE))
 							.addContainerGap())
-						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(btnNewButton)
 							.addGap(23))))
 		);
