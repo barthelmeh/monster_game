@@ -23,7 +23,7 @@ public class Battle {
         }
         coinsGained = totalHealthDam / 7;
         scoreGained += totalHealthDam / 3;
-    	manager.getPlayer().resetLevels();
+        manager.getPlayer().resetLevels();
     }
     
 	public ArrayList<Monster> getTeam() {
@@ -106,7 +106,7 @@ public class Battle {
     	// Send score gained info to player
     	
     	int gainedScore = (int) (Double.valueOf(scoreGained) * scoreMult);
-    	manager.getPlayer().increasePoints(gainedScore);
+    	manager.getPlayer().increaseScore(gainedScore);
     	
     	return gainedScore;
     }
@@ -155,6 +155,7 @@ public class Battle {
             setCurrentTurn(false);
             
     	} else { // Enemy turn
+    		bsManager.updateCritLabel(false, playerMonster.getName());
     		playerCurrentHealth -= enemyDamage;
             playerMonster.setCurrentHealth(playerCurrentHealth);
             if(playerCurrentHealth <= 0) {

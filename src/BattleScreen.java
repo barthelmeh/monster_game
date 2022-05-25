@@ -345,7 +345,7 @@ public class BattleScreen {
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		panelTop.add(lblNewLabel);
 		
-		JLabel lblNewLabel_2 = new JLabel("Score: "+manager.getPlayer().getPoints());
+		JLabel lblNewLabel_2 = new JLabel("Score: "+manager.getPlayer().getScore());
 		lblNewLabel_2.setVerticalAlignment(SwingConstants.TOP);
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 30));

@@ -71,7 +71,12 @@ public class SetUp {
         manager.setAllItems(items);
     }
     public void setStarterItems(){
-        ArrayList<Item> avaiableItems = manager.getAllItems();
+        ArrayList<Item> avaiableItems = new ArrayList<Item>();
+        for (Item item : manager.getAllItems()) {
+        	if (item.getItemCost() <= 20) {
+        		avaiableItems.add(item);
+        	}
+        }
         Random rand = new Random();
         for (int i = 0; i < 3; i++){
             int randomIndex = rand.nextInt(avaiableItems.size());

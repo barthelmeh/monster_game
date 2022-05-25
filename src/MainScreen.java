@@ -209,7 +209,7 @@ public class MainScreen {
 			lblItemName.setText(inventory.get(0).getItemName());
 			lblItemCost.setText("Cost " + Integer.toString(inventory.get(0).getItemCost()));
 		} catch (Exception e) {
-			lblItemName.setText("Empty Slot");
+			lblItemName.setText("Open Slot");
 			lblItemCost.setText("Cost 0");
 		}
 		panelItem.setLayout(new BorderLayout(0, 0));
@@ -522,7 +522,7 @@ public class MainScreen {
 		try {
 			lblBattleMonster.setText(battle1.get(0).getName());
 		} catch (Exception e) {
-			lblBattleMonster.setText("Open");
+			lblBattleMonster.setText("");
 		}
 		panelBattle1Team.add(lblBattleMonster);
 		
@@ -531,7 +531,7 @@ public class MainScreen {
 		try {
 			lblBattleMonster1.setText(battle1.get(1).getName());
 		} catch (Exception e) {
-			lblBattleMonster1.setText("Open");
+			lblBattleMonster1.setText("");
 		}
 		panelBattle1Team.add(lblBattleMonster1);
 		
@@ -540,7 +540,7 @@ public class MainScreen {
 		try {
 			lblBattleMonster2.setText(battle1.get(2).getName());
 		} catch (Exception e) {
-			lblBattleMonster2.setText("Open");
+			lblBattleMonster2.setText("");
 		}
 		panelBattle1Team.add(lblBattleMonster2);
 		
@@ -549,7 +549,7 @@ public class MainScreen {
 		try {
 			lblBattleMonster3.setText(battle1.get(3).getName());
 		} catch (Exception e) {
-			lblBattleMonster3.setText("Open");
+			lblBattleMonster3.setText("");
 		}
 		panelBattle1Team.add(lblBattleMonster3);
 		panelBattle1.setLayout(new BorderLayout(0, 0));
@@ -572,7 +572,7 @@ public class MainScreen {
 		try {
 			lblBattle2Monster.setText(battle2.get(0).getName());
 		} catch (Exception e){
-			lblBattle2Monster.setText("Open");
+			lblBattle2Monster.setText("");
 		}
 		lblBattle2Monster.setHorizontalAlignment(SwingConstants.CENTER);
 		panelBattle1Team_1.add(lblBattle2Monster);
@@ -581,7 +581,7 @@ public class MainScreen {
 		try {
 			lblBattle2Monster1.setText(battle2.get(1).getName());
 		} catch (Exception e){
-			lblBattle2Monster1.setText("Open");
+			lblBattle2Monster1.setText("");
 		}
 		lblBattle2Monster1.setHorizontalAlignment(SwingConstants.CENTER);
 		panelBattle1Team_1.add(lblBattle2Monster1);
@@ -590,7 +590,7 @@ public class MainScreen {
 		try {
 			lblBattle2Monster2.setText(battle2.get(2).getName());
 		} catch (Exception e){
-			lblBattle2Monster2.setText("Open");
+			lblBattle2Monster2.setText("");
 		}
 		lblBattle2Monster2.setHorizontalAlignment(SwingConstants.CENTER);
 		panelBattle1Team_1.add(lblBattle2Monster2);
@@ -599,7 +599,7 @@ public class MainScreen {
 		try {
 			lblBattle2Monster3.setText(battle2.get(3).getName());
 		} catch (Exception e){
-			lblBattle2Monster3.setText("Open");
+			lblBattle2Monster3.setText("");
 		}
 		lblBattle2Monster3.setHorizontalAlignment(SwingConstants.CENTER);
 		panelBattle1Team_1.add(lblBattle2Monster3);
@@ -634,7 +634,7 @@ public class MainScreen {
 		try {
 			lblBattle3Monster.setText(battle3.get(0).getName());
 		} catch (Exception e){
-			lblBattle3Monster.setText("Open");
+			lblBattle3Monster.setText("");
 		}
 		lblBattle3Monster.setHorizontalAlignment(SwingConstants.CENTER);
 		panelBattle3Team.add(lblBattle3Monster);
@@ -643,7 +643,7 @@ public class MainScreen {
 		try {
 			lblBattle3Monster1.setText(battle3.get(1).getName());
 		} catch (Exception e){
-			lblBattle3Monster1.setText("Open");
+			lblBattle3Monster1.setText("");
 		}
 		lblBattle3Monster1.setHorizontalAlignment(SwingConstants.CENTER);
 		panelBattle3Team.add(lblBattle3Monster1);
@@ -652,7 +652,7 @@ public class MainScreen {
 		try {
 			lblBattle3Monster2.setText(battle3.get(2).getName());
 		} catch (Exception e){
-			lblBattle3Monster2.setText("Open");
+			lblBattle3Monster2.setText("");
 		};
 		lblBattle3Monster2.setHorizontalAlignment(SwingConstants.CENTER);
 		panelBattle3Team.add(lblBattle3Monster2);
@@ -661,7 +661,7 @@ public class MainScreen {
 		try {
 			lblBattle3Monster3.setText(battle3.get(3).getName());
 		} catch (Exception e){
-			lblBattle3Monster3.setText("Open");
+			lblBattle3Monster3.setText("");
 		}
 		lblBattle3Monster3.setHorizontalAlignment(SwingConstants.CENTER);
 		panelBattle3Team.add(lblBattle3Monster3);
@@ -693,7 +693,7 @@ public class MainScreen {
 		try {
 			lblBattle4Monster.setText(battle4.get(0).getName());
 		} catch (Exception e){
-			lblBattle4Monster.setText("Open");
+			lblBattle4Monster.setText("");
 		}
 		lblBattle4Monster.setHorizontalAlignment(SwingConstants.CENTER);
 		panelBattle4Team.add(lblBattle4Monster);
@@ -702,7 +702,7 @@ public class MainScreen {
 		try {
 			lblBattle4Monster1.setText(battle4.get(1).getName());
 		} catch (Exception e){
-			lblBattle4Monster1.setText("Open");
+			lblBattle4Monster1.setText("");
 		}
 		lblBattle4Monster1.setHorizontalAlignment(SwingConstants.CENTER);
 		panelBattle4Team.add(lblBattle4Monster1);
@@ -711,7 +711,7 @@ public class MainScreen {
 		try {
 			lblBattle4Monster2.setText(battle4.get(2).getName());
 		} catch (Exception e){
-			lblBattle4Monster2.setText("Open");
+			lblBattle4Monster2.setText("");
 		}
 		lblBattle4Monster2.setHorizontalAlignment(SwingConstants.CENTER);
 		panelBattle4Team.add(lblBattle4Monster2);
@@ -720,7 +720,7 @@ public class MainScreen {
 		try {
 			lblBattle4Monster3.setText(battle4.get(3).getName());
 		} catch (Exception e){
-			lblBattle4Monster3.setText("Open");
+			lblBattle4Monster3.setText("");
 		}
 		lblBattle4Monster3.setHorizontalAlignment(SwingConstants.CENTER);
 		panelBattle4Team.add(lblBattle4Monster3);
@@ -735,7 +735,7 @@ public class MainScreen {
 		panelBattle4.add(btnBattle4, BorderLayout.SOUTH);
 		panelTop.setLayout(new GridLayout(1, 0, 0, 0));
 		
-		JLabel lblScore = new JLabel("Score: " + manager.getPlayer().getPoints());
+		JLabel lblScore = new JLabel("Score: " + manager.getPlayer().getScore());
 		lblScore.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		panelTop.add(lblScore);
 		

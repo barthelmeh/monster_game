@@ -8,7 +8,6 @@ public class HealthItem implements Item {
 		itemIncrease = increase;
 		itemCost = cost;
 	}
-
 	public void applyItem(Monster monster) {
 		double currentHealth = monster.getMonsterCurrentHealth();
 		double maxHealth = monster.getMonsterMaxHealth();

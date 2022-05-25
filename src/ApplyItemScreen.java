@@ -108,10 +108,6 @@ public class ApplyItemScreen {
 			restartWindow();
 		}
 	}
-	protected void applyItem(String selectedButtonText) {
-		// TODO Auto-generated method stub
-		
-	}
 	/**
 	 * Initialize the contents of the window.
 	 */

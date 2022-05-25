@@ -8,7 +8,10 @@ public class DamageItem implements Item {
 		itemIncrease = increase;
 		itemCost = cost;
 	}
-
+	public DamageItem clone() throws CloneNotSupportedException {
+		DamageItem item = (DamageItem) super.clone();
+		return item;
+	}
 	public void applyItem(Monster monster) {
 		double currentDamage = monster.getDamage();
 		double newDamage = (currentDamage + (currentDamage*itemIncrease));

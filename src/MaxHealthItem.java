@@ -8,7 +8,10 @@ public class MaxHealthItem implements Item {
 		itemIncrease = increase;
 		itemCost = cost;
 	}
-
+	public MaxHealthItem clone() throws CloneNotSupportedException {
+		MaxHealthItem item = (MaxHealthItem) super.clone();
+		return item;
+	}
 	public void applyItem(Monster monster) {
 		double maxHealth = monster.getMonsterMaxHealth();
 		double currentHealth = monster.getMonsterCurrentHealth();

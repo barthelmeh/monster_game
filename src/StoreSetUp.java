@@ -19,11 +19,15 @@ public class StoreSetUp {
 	}
 	public void setAvailableMonsters() {
 		ArrayList<Monster> avaiableMonsters = new ArrayList<Monster>(manager.getAllMonsters());
+		for (Monster monster : avaiableMonsters){
+			System.out.println(monster.getName());
+		}
         Random rand = new Random();
         for (int i = 0; i < 3; i++){
             int randomIndex = rand.nextInt(avaiableMonsters.size());
             try {
 				 Monster randomMonster = avaiableMonsters.get(randomIndex).clone();
+				 System.out.println("Got: " + randomMonster.getName());
 				 manager.getStoreMonsters().add(randomMonster);
 				} catch (CloneNotSupportedException e) {
 					e.printStackTrace();
@@ -33,12 +37,12 @@ public class StoreSetUp {
 	}
 
 	public void setAvailableItems() {
-		ArrayList<Item> avaiableItems = manager.getAllItems();
+		ArrayList<Item> avaiableItems = new ArrayList<Item>(manager.getAllItems());
         Random rand = new Random();
         for (int i = 0; i < 3; i++){
             int randomIndex = rand.nextInt(avaiableItems.size());
-            Item randomItem = avaiableItems.get(randomIndex);
-            manager.getStoreItems().add(randomItem);
+			Item randomItem = avaiableItems.get(randomIndex);
+			manager.getStoreItems().add(randomItem);
             avaiableItems.remove(randomIndex);
         }
 	}

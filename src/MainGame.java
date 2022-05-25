@@ -44,7 +44,7 @@ public class MainGame {
 					
 				}
 			} else if (getCurrentDay() < 5) {
-				int randomSize = rand.nextInt(1, 3);
+				int randomSize = rand.nextInt(2, 4);
 				for (int j=0; j < randomSize; j++){
 					int randomIndex = rand.nextInt(avaiable.size());
 					try {
@@ -56,7 +56,7 @@ public class MainGame {
 				}
 
     		} else if (getCurrentDay() >= 5 && getCurrentDay() < 10){
-				int randomSize = rand.nextInt(2, 4);
+				int randomSize = rand.nextInt(4, 5);
 				for (int j=0; j < randomSize; j++){
 					int randomIndex = rand.nextInt(avaiable.size());
 					try {
@@ -67,7 +67,7 @@ public class MainGame {
 					}
 				}
 			} else {
-				int randomSize = rand.nextInt(2, 5);
+				int randomSize = rand.nextInt(5, 6);
 				for (int j=0; j < randomSize; j++){
 					int randomIndex = rand.nextInt(avaiable.size());
 					try {
@@ -192,6 +192,8 @@ public class MainGame {
 	}
 	public void closeStoreScreen(StoreScreen storeScreen, String s) {
 		storeScreen.closeWindow();
+		getStoreItems().clear();
+		getStoreMonsters().clear();
 		if (s.toLowerCase().startsWith("g")){
 			launchGameOverScreen();
 		} else {

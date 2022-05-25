@@ -18,8 +18,8 @@ public class Player {
         currentMoney = 10;
         currentPoints = 0;
     }
-    public void resetLevels(){
-        for (Monster monster : team){
+    public void resetLevels() {
+        for (Monster monster : team) {
             monster.resetLevel();
         }
     }
@@ -59,10 +59,11 @@ public class Player {
     public void releaseMonster(Monster monster){
         team.remove(monster);
     }
-    public void increasePoints(int points){
+    public void increaseScore(int points){
         currentPoints += points;
     }
-    public int getPoints(){
+    public int getScore(){
         return currentPoints;
     }
+    
 }
