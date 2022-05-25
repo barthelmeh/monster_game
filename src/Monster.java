@@ -27,7 +27,6 @@ public class Monster implements Cloneable {
 	}
     public void resetLevel() {
     	if (getLeveledUp() == true) {
-    		System.out.println("asdf");
     		setHasLeveledUp(false);
     	}
     }
@@ -84,10 +83,8 @@ public class Monster implements Cloneable {
 	}
 	public String checkIfLeveledUp() {
 		if (getLeveledUp() == true) {
-			System.out.println("1");
 			return " Level Up!";
 		} else {
-			System.out.println("2");
 			return "";
 		}
 	}
