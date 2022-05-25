@@ -93,10 +93,10 @@ public class StoreScreen {
 		gbl_panelMonster.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panelMonster.setLayout(gbl_panelMonster);
 		
-		JLabel lblNotEnoughMoney = new JLabel("Not enough money!");
-		lblNotEnoughMoney.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNotEnoughMoney.setForeground(Color.RED);
-		lblNotEnoughMoney.setHorizontalAlignment(SwingConstants.CENTER);
+		JLabel lblErrorLabel = new JLabel("");
+		lblErrorLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblErrorLabel.setForeground(Color.RED);
+		lblErrorLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JLabel lblHealth = new JLabel("Health:");
 		lblHealth.setFont(new Font("Tahoma", Font.PLAIN, 30));
@@ -383,7 +383,7 @@ public class StoreScreen {
 		JButton btnSleep = new JButton("Sleep");
 		btnSleep.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				manager.increaseDay();
+				
 				if (manager.getCurrentDay() == manager.getMaxDay()) {
 					finishedWindow("Game Over");
 				}else {
@@ -406,7 +406,7 @@ public class StoreScreen {
 						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(lblMoney, GroupLayout.PREFERRED_SIZE, 169, GroupLayout.PREFERRED_SIZE)
 							.addGap(201)
-							.addComponent(lblNotEnoughMoney, GroupLayout.PREFERRED_SIZE, 417, GroupLayout.PREFERRED_SIZE)))
+							.addComponent(lblErrorLabel, GroupLayout.PREFERRED_SIZE, 417, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap(917, Short.MAX_VALUE)
@@ -421,7 +421,7 @@ public class StoreScreen {
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblMoney, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNotEnoughMoney, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
+						.addComponent(lblErrorLabel, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(panelMonster, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
@@ -436,12 +436,13 @@ public class StoreScreen {
 		JButton btnBuyItem = new JButton("Buy!");
 		btnBuyItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (player.getCurrentMoney() >= firstStoreItem.getItemCost()) {
-					lblNotEnoughMoney.setVisible(false);
-					player.addItem(firstStoreItem);
-					restartWindow();
+				if (player.getInventory().size() > 4){
+					lblErrorLabel.setText("Inventory Full!");
+				} else if (player.getCurrentMoney() < firstStoreItem.getItemCost()) {
+					lblErrorLabel.setText("Not Enough Money!");
 				} else {
-					lblNotEnoughMoney.setVisible(true);
+					player.addItem(firstStoreItem);
+					restartWindow();	
 				}
 			}
 		});
@@ -456,12 +457,13 @@ public class StoreScreen {
 		JButton btnBuyItem1 = new JButton("Buy!");
 		btnBuyItem1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (player.getCurrentMoney() >= secondStoreItem.getItemCost()) {
-					lblNotEnoughMoney.setVisible(false);
-					player.addItem(secondStoreItem);
-					restartWindow();
+				if (player.getInventory().size() > 4){
+					lblErrorLabel.setText("Inventory Full!");
+				} else if (player.getCurrentMoney() < secondStoreItem.getItemCost()) {
+					lblErrorLabel.setText("Not Enough Money!");
 				} else {
-					lblNotEnoughMoney.setVisible(true);
+					player.addItem(secondStoreItem);
+					restartWindow();	
 				}
 			}
 		});
@@ -476,12 +478,13 @@ public class StoreScreen {
 		JButton btnBuyItem2 = new JButton("Buy!");
 		btnBuyItem2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (player.getCurrentMoney() >= thirdStoreItem.getItemCost()) {
-					lblNotEnoughMoney.setVisible(false);
-					player.addItem(thirdStoreItem);
-					restartWindow();
+				if (player.getInventory().size() > 4){
+					lblErrorLabel.setText("Inventory Full!");
+				} else if (player.getCurrentMoney() < thirdStoreItem.getItemCost()) {
+					lblErrorLabel.setText("Not Enough Money!");
 				} else {
-					lblNotEnoughMoney.setVisible(true);
+					player.addItem(thirdStoreItem);
+					restartWindow();	
 				}
 			}
 		});
@@ -495,12 +498,13 @@ public class StoreScreen {
 		JButton btnBuyMonster = new JButton("Buy!");
 		btnBuyMonster.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (player.getCurrentMoney() >= firstStoreMonster.getCost()) {
-					lblNotEnoughMoney.setVisible(false);
+				if (player.getTeam().size() > 4){
+					lblErrorLabel.setText("Team Full!");
+				} else if (player.getCurrentMoney() < firstStoreMonster.getCost()) {
+					lblErrorLabel.setText("Not Enough Money!");
+				} else {
 					player.addMonster(firstStoreMonster);
-					restartWindow();
-				} else { // Not enough money
-					lblNotEnoughMoney.setVisible(true);
+					restartWindow();	
 				}
 			}
 		});
@@ -515,12 +519,13 @@ public class StoreScreen {
 		JButton btnBuyMonster1 = new JButton("Buy!");
 		btnBuyMonster1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (player.getCurrentMoney() >= secondStoreMonster.getCost()) {
-					lblNotEnoughMoney.setVisible(false);
-					player.addMonster(secondStoreMonster);
-					restartWindow();
+				if (player.getTeam().size() > 4){
+					lblErrorLabel.setText("Team Full!");
+				} else if (player.getCurrentMoney() < secondStoreMonster.getCost()) {
+					lblErrorLabel.setText("Not Enough Money!");
 				} else {
-					lblNotEnoughMoney.setVisible(true);
+					player.addMonster(secondStoreMonster);
+					restartWindow();	
 				}
 			}
 		});
@@ -535,12 +540,13 @@ public class StoreScreen {
 		JButton btnBuyMonster2 = new JButton("Buy!");
 		btnBuyMonster2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (player.getCurrentMoney() >= thirdStoreMonster.getCost()) {
-					lblNotEnoughMoney.setVisible(false);
-					player.addMonster(thirdStoreMonster);
-					restartWindow();
+				if (player.getTeam().size() > 4){
+					lblErrorLabel.setText("Team Full!");
+				} else if (player.getCurrentMoney() < thirdStoreMonster.getCost()) {
+					lblErrorLabel.setText("Not Enough Money!");
 				} else {
-					lblNotEnoughMoney.setVisible(true);
+					player.addMonster(thirdStoreMonster);
+					restartWindow();	
 				}
 			}
 		});

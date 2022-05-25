@@ -171,7 +171,7 @@ public class Battle {
             	enemyTeam.remove(0);
             	if(enemyTeam.size() == 0) {
             		// Player has won the battle
-            		bsManager.winWindow();
+            		bsManager.checkDay();
             	}
             }
             
