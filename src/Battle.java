@@ -37,7 +37,7 @@ public class Battle {
         scoreGained += totalHealthDam / 3;
 	}
 	/**
-	 * gets the enemy team to use in battle.
+	 * Gets the enemy team to use in battle.
 	 * @return enemy team that user is fighting.
 	 */
 	public ArrayList<Monster> getEnemyTeam() {
@@ -51,7 +51,7 @@ public class Battle {
         enemyTeam = newEnemyTeam;
     }
     /**
-	 * gets whether or not it is the users turn.
+	 * Gets whether or not it is the users turn.
 	 * @return a boolean true if is players turn false if not.
 	 */
     public boolean getPlayerTurn() {
@@ -65,7 +65,7 @@ public class Battle {
     	playerTurn = isPlayersTurn;
     }
     /**
-	 * gets difficulty and day and returns a multiplier to determine receive and coins from this battle.
+	 * Gets difficulty and day and returns a multiplier to determine receive and coins from this battle.
 	 * @return integer to be used to be multiplied by enemy teams total damage.
 	 */
     public int getCoinsGained() {
@@ -99,7 +99,7 @@ public class Battle {
     	
     }
     /**
-	 * gets difficulty and current day to determine the score multiplier to be used to determine the score for this battle.
+	 * Gets difficulty and current day to determine the score multiplier to be used to determine the score for this battle.
 	 * @return integer that is multiplied by enemy teams total damage to get score.
 	 */
     public int getScoreGained() {
@@ -133,7 +133,7 @@ public class Battle {
     }
     
     /**
-	 * runs battle behind the battle screen.
+	 * Runs battle behind the battle screen.
 	 * @param bsManager battle screen used to update labels to simulate fight.
 	 */
     public void runBattle(BattleScreen bsManager){
