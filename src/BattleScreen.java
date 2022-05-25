@@ -56,11 +56,14 @@ public class BattleScreen {
 	/**
 	 * Create the application.
 	 */
-	
 	public BattleScreen() {
 		initialize();
 	}
-	
+	/**
+	 * Class Constructor that specifies a main game and battle to run.
+	 * @param incomingManager MainGame that supports to get player names and others.
+	 * @param battleManager Battle that holds player's team and enemy's team to re-write labels.
+	 */
 	public BattleScreen(MainGame incomingManager, Battle battleManager) {
 		manager = incomingManager;
 		screen = this;
@@ -70,26 +73,44 @@ public class BattleScreen {
 		initialize();
 		window.setVisible(true);
 	}
-	
+	/**
+	 * gets current battle to use for labels on screen.
+	 * @return Battle to run to re-write labels.
+	 */
 	public Battle getCurrentBattle() {
 		return currBattle;
 	}
-	
+	/**
+	 * Close BattleScreen.
+	 */
 	public void closeWindow() {
 		window.dispose();
 	}
+	/**
+	 * close window and open win battle screen
+	 */
 	public void winWindow() {
 		manager.closeBattleScreen(this, true);
 	}
+	/**
+	 * close window and open game over screen
+	 */
 	public void loseWindow() {
 		manager.closeBattleScreen(this, false);
 	}
-	
+	/**
+	 * updates the CritLabel to show to user that their monster got a critical hit
+	 * @param turnOn Boolean sets the visibitlity of the label
+	 * @param name String of the monster that performed the critical hit
+	 */
 	public void updateCritLabel(boolean turnOn, String name) {
 		critLabel.setText(name + " does a crit!");
 		critLabel.setVisible(turnOn);
 	}
-
+	/**
+	 * updates the moneters labels including current monsters' health and whether or not they are alive.
+	 * @param team String determines whos turn it is.
+	 */
 	public void updateMonsters(String team) {
 		switch(team) {
 			case "Player":
