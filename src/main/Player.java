@@ -81,14 +81,16 @@ public class Player {
         decreaseMoney(monster.getCost());
     }
     /**
-     * added item to inventory and decrease money from user
-     * @param item Item new addition to inventory
+     * Adds monster to team that occured from random event
+     * @param monster Monster new addition to team
      */
-    
     public void addRandomMonster(Monster monster) {
     	team.add(monster);
     }
-    
+    /**
+     * added item to inventory and decrease money from user
+     * @param item Item new addition to inventory
+     */
     public void addItem(Item item){
         inventory.add(item);
         decreaseMoney(item.getItemCost());

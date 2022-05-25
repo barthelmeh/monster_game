@@ -15,12 +15,18 @@ public class SetUp {
     
 	private MainGame manager;
 	private SetupScreen screen;
-	
+	/**
+     * Class Constructor that is empty
+     * @param incomingScreen Screen to get button texts
+     */
 	public SetUp(SetupScreen incomingScreen) {
 		// Empty so that we can create an instance of this class without running main screen.
 		screen = incomingScreen;
 	}
-
+    /**
+     * Class Constructor specifying main game that is running in the background 
+     * @param incomingManager main game that is running in background
+     */
     public SetUp(MainGame incomingManager){
         manager = incomingManager;
         try {
@@ -33,6 +39,10 @@ public class SetUp {
         } 
         manager.launchSetupScreen();
     }
+    /**
+     * Gets items from file
+     * @throws FileNotFoundException error if file is not found
+     */
     public void setItems() throws FileNotFoundException {
     	ArrayList<Item> items = new ArrayList<Item>();
     	BufferedReader br = null;
@@ -72,6 +82,9 @@ public class SetUp {
         } 
         manager.setAllItems(items);
     }
+    /**
+     * Gets starter items that have cost of less than $20
+     */
     public void setStarterItems(){
         ArrayList<Item> avaiableItems = new ArrayList<Item>();
         for (Item item : manager.getAllItems()) {
@@ -87,6 +100,10 @@ public class SetUp {
             avaiableItems.remove(randomIndex);
         }
     }
+    /**
+     * Gets monsters from a text file
+     * @throws FileNotFoundException error if file is not found
+     */
     private void setMonsters() throws FileNotFoundException {
         ArrayList<Monster> monsters = new ArrayList<Monster>();
         BufferedReader br = null;
@@ -112,7 +129,9 @@ public class SetUp {
             }
         }manager.setAllMonsters(monsters);
     }
-
+    /**
+     * Sets the starter monsters to be picked by the user
+     */
     public void setStarterMonsters(){
         ArrayList<Monster> avaiableMonsters = new ArrayList<Monster>(manager.getAllMonsters());
         Random rand = new Random();
@@ -127,6 +146,11 @@ public class SetUp {
             avaiableMonsters.remove(randomIndex);
         }
     }
+    /**
+     * Class Constructor specifying main game and setup screen
+     * @param incomingManager MainGame holding main variables
+     * @param incomingScreen SetupScreen from which the user come from
+     */
     public SetUp(MainGame incomingManager, SetupScreen incomingScreen){
     	manager = incomingManager;
     	Player newPlayer = manager.getPlayer();
@@ -138,17 +162,26 @@ public class SetUp {
     	newPlayer.setPlayerName(getPlayerName());
     	newPlayer.addStarters(getUsersStarterMonster(), getUsersStarterItem());
     }
-
-    
+    /**
+     * Gets users name that is entered in textField
+     * @return String players name
+     */
 	public String getPlayerName(){
         String name = screen.getUserNameTextField().getText();
         return name;
     }
-    
+    /**
+     * Gets user entered max day that they wish to play
+     * @return int max days that user has inputted
+     */
     public int getMaxDays() {
     	int maxDays = screen.getMaxDaySlider().getValue();
     	return maxDays;
     }
+    /**
+     * Gets user inputs difficulty from button group
+     * @return GameDifficulty.difficulties from selected button group
+     */
     public GameDifficulty.difficulties getDifficulty(){
         String userInput = manager.getSelectedButtonText(screen.difficultyButtonGroup).get(0);
         GameDifficulty.difficulties dif;
@@ -168,7 +201,11 @@ public class SetUp {
 
         return dif;
     }
-    public Monster getUsersStarterMonster(){
+    /**
+     * Gets user's selected starter monster
+     * @return Monster if the button is selected else null
+     */
+    private Monster getUsersStarterMonster(){
         String userInput = manager.getSelectedButtonText(screen.starterMonsterButtonGroup).get(0);
         ArrayList<Monster> monsters = manager.getStarterMonsters();
         for (Monster monster : monsters){
@@ -177,6 +214,10 @@ public class SetUp {
             }
         } return null;
     }
+    /**
+     * Gets user's selected starter item
+     * @return Item if button is select else null
+     */
     private Item getUsersStarterItem() {
     	String userInput = manager.getSelectedButtonText(screen.starterItemButtonGroup).get(0);
     	ArrayList<Item> items = manager.getStarterItems();

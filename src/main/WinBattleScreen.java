@@ -46,7 +46,11 @@ public class WinBattleScreen {
 	public WinBattleScreen() {
 		initialize();
 	}
-	
+	/**
+	 * Class Constructor Specifying MainGame and Battle
+	 * @param incomingManager MainGame running in the background to hold main variables
+	 * @param incomingBattle Battle to get score and coins gained
+	 */
 	public WinBattleScreen(MainGame incomingManager, Battle incomingBattle) {
 		manager = incomingManager;
 		battleManager = incomingBattle;
@@ -55,9 +59,15 @@ public class WinBattleScreen {
 		initialize();
 		window.setVisible(true);
 	}
+	/**
+	 * Close window
+	 */
 	public void closeWindow() {
 		window.dispose();
 	}
+	/**
+	 * Close window via MainGame
+	 */
 	public void finishedWindow() {
 		manager.closeWinBattleScreen(this);
 	}

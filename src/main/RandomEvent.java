@@ -18,14 +18,23 @@ public class RandomEvent {
 		randomLeave();
 		monsterEnter();
 	}
-
+	/**
+	 * get Monster leave string
+	 * @return String get if monster has left
+	 */
 	public String getMonsterLeave() {
 		return monsterLeave;
 	}
+	/**
+	 * get Monster enter string
+	 * @return String get if monster has entered
+	 */
 	public String getMonsterEnter() {
 		return monsterEnter;
 	}
-
+	/**
+	 * generates random number between 1-20 if 1 then monster enters
+	 */
 	private void monsterEnter(){
 		// Monster has joined the party over night
 		ArrayList<Monster> avaiableMonsters = new ArrayList<Monster>(manager.getAllMonsters());
@@ -42,6 +51,9 @@ public class RandomEvent {
 			}
 		}
 	}
+	/**
+	 * generates random number between 1-6 if 6 then monster left else if number is 2-4 then that mosnter levels up
+	 */
 	private void randomLeave() {
 		// Monster has left the party over night
 		Random rand = new Random();

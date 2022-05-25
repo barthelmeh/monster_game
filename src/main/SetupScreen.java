@@ -47,7 +47,8 @@ public class SetupScreen {
 	}
 
 	/**
-	 * Create the application.
+	 * Class Constructor specifying MainGame running in background
+	 * @param incomingManager MainGame that is running in background
 	 */
 	public SetupScreen(MainGame incomingManager) {
 		screen = this;
@@ -55,20 +56,35 @@ public class SetupScreen {
 		initialize();
 		window.setVisible(true);
 	}
+	/**
+	 * Closes window
+	 */
 	public void closeWindow() {
 		window.dispose();
 	}
+	/**
+	 * Closes window via MainGame
+	 */
 	public void finishedWindow() {
 		manager.closeSetupScreen(this);
 	}
+	/**
+	 * Create the application.
+	 */
 	public SetupScreen() {
 		initialize();
 	}
-	
+	/**
+	 * Gets the userNameTextField
+	 * @return JTextField with name of the user
+	 */
 	public JTextField getUserNameTextField() {
 		return userNameTextField;
 	}
-
+	/**
+	 * Gets the maxDaySlider
+	 * @return JSlide with the value of the max days that is wanted to be played
+	 */
 	public JSlider getMaxDaySlider() {
 		return maxDaySlider;
 	}

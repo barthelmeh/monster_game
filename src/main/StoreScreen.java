@@ -53,6 +53,11 @@ public class StoreScreen {
 	public StoreScreen() {
 		initialize();
 	}
+	/**
+	 * Class Constructor specifying the MainGame and the Player
+	 * @param incomingManager MainGame that is running in the background
+	 * @param incomingPlayer Player to access team and inventory to add too.
+	 */
 	public StoreScreen(MainGame incomingManager, Player incomingPlayer) {
 		manager = incomingManager;
 		player = incomingPlayer;
@@ -67,12 +72,22 @@ public class StoreScreen {
 		window.setVisible(true);
 		
 	}
+	/**
+	 * Restarts window to redo labels
+	 */
 	public void restartWindow() {
 		manager.closeStoreScreen(screen, true);
 	}
+	/**
+	 * Close window
+	 */
 	public void closeWindow() {
 		window.dispose();
 	}
+	/**
+	 * Close window via MainGame with string
+	 * @param s String to determine if game is over yet
+	 */
 	public void finishedWindow(String s) {
 		manager.closeStoreScreen(this, s);
 	}
