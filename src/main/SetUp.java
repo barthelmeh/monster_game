@@ -45,6 +45,7 @@ public class SetUp {
             while ((item = br.readLine()) != null){
                 String[] values = item.split(",");
                 
+                // Parsing all values into items from text file
                 switch(values[3]) {
                     case "1":
                         HealthItem healthObj = new HealthItem(values[0],Double.parseDouble(values[1]),Integer.parseInt(values[2]));
@@ -91,14 +92,13 @@ public class SetUp {
         BufferedReader br = null;
         try {
             File file = new File("Text Files\\monsters.txt");
-
-            //File file = new File("../src/Text Files/monster.txt");
             br = new BufferedReader(new FileReader(file));
 
             String monster;
 
             while ((monster = br.readLine()) != null){
                 String[] values = monster.split(",");
+                // Parse the values from the text file straight into the monster obj
                 Monster obj = new Monster(values[0],Double.parseDouble(values[1]),Double.parseDouble(values[2]),Double.parseDouble(values[3]), Integer.parseInt(values[4]));
                 monsters.add(obj);
             }

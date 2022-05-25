@@ -20,20 +20,16 @@ public class StoreSetUp {
 	}
 	public void setAvailableMonsters() {
 		ArrayList<Monster> avaiableMonsters = new ArrayList<Monster>(manager.getAllMonsters());
-		for (Monster monster : avaiableMonsters){
-			System.out.println(monster.getName());
-		}
         Random rand = new Random();
         for (int i = 0; i < 3; i++){
             int randomIndex = rand.nextInt(avaiableMonsters.size());
             try {
 				 Monster randomMonster = avaiableMonsters.get(randomIndex).clone();
-				 System.out.println("Got: " + randomMonster.getName());
 				 manager.getStoreMonsters().add(randomMonster);
 				} catch (CloneNotSupportedException e) {
 					e.printStackTrace();
 				}
-            avaiableMonsters.remove(randomIndex);
+            avaiableMonsters.remove(randomIndex); // Remove current monster from list so no duplicates
         }
 	}
 
@@ -44,7 +40,7 @@ public class StoreSetUp {
             int randomIndex = rand.nextInt(avaiableItems.size());
 			Item randomItem = avaiableItems.get(randomIndex);
 			manager.getStoreItems().add(randomItem);
-            avaiableItems.remove(randomIndex);
+            avaiableItems.remove(randomIndex); // No duplictes
         }
 	}
 }

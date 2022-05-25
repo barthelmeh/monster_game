@@ -30,10 +30,13 @@ public class Battle {
 	 */
     public void setCoinAndScore(){
 		totalHealthDam = 0;
+		// Coins come from total of damage and health from the enemy team
         for(Monster m : enemyTeam) {
         	totalHealthDam += m.getMonsterCurrentHealth();
         	totalHealthDam += m.getDamage();
         }
+        // Making the coins and score gained a more reasonable number.
+        // Scaling
         coinsGained = totalHealthDam / 7;
         scoreGained += totalHealthDam / 3;
         manager.getPlayer().resetLevels();
@@ -74,6 +77,7 @@ public class Battle {
     public int getCoinsGained() {
     	GameDifficulty.difficulties currDifficulty = manager.getDifficulty();
     	int currDay = manager.getCurrentDay();
+    	// Updating coin multiplier, harder difficulty means less coins
     	switch(currDifficulty) {
     		case HARD:
     			coinMult += 0.5;
@@ -85,7 +89,7 @@ public class Battle {
     			coinMult += 1;
     			break;
     	};
-    	
+    	// Updating coin multiplier, later day means more coins
     	if(currDay < 2) {
     		coinMult += 0.25;
     	} else if(currDay < 5) {
@@ -108,6 +112,7 @@ public class Battle {
     public int getScoreGained() {
     	GameDifficulty.difficulties currDifficulty = manager.getDifficulty();
     	int currDay = manager.getCurrentDay();
+    	// Updating score multiplier, harder difficulty means more score
     	switch(currDifficulty) {
     		case HARD:
     			scoreMult += 5;
@@ -119,7 +124,7 @@ public class Battle {
     			scoreMult += 1.5;
     			break;
     	};
-    	
+    	// Updating score multiplier, later day means more score
     	if(currDay < 2) {
     		scoreMult += 1;
     	} else if(currDay < 5) {

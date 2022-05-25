@@ -44,6 +44,11 @@ public class Player {
         team.add(monster);
         decreaseMoney(monster.getCost());
     }
+    
+    public void addRandomMonster(Monster monster) {
+    	team.add(monster);
+    }
+    
     public void addItem(Item item){
         inventory.add(item);
         decreaseMoney(item.getItemCost());

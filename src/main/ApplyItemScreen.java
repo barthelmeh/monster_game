@@ -116,6 +116,7 @@ public class ApplyItemScreen {
 		} else if (userInput1 == null) {
 			lblErrorLabel.setText("Please select a item");
 		} else {
+			// Used to find which monster and item was selected then apply the item to the monster
 			for (Monster monster : playerTeam){
 	            if (monster.getName().equals(userInput.get(0)) && index == Integer.parseInt(userInput.get(1))){
 	                selectedMonster = monster;

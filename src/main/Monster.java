@@ -81,6 +81,7 @@ public class Monster implements Cloneable {
 		return monsterCost;
 	}
 	public void levelUp() {
+		// Hard coded level up doesn't depend on stats
 		setMonsterLevel(getMonsterLevel()+1);
 		setCurrentHealth(getMonsterCurrentHealth()+10);
 		setMaxHealth(getMonsterMaxHealth()+10);

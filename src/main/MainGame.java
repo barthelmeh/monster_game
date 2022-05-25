@@ -37,12 +37,12 @@ public class MainGame {
 		
     	for (int i=0; i<4; i++ ){
 			ArrayList<Monster> team = new ArrayList<Monster>();
-			if(getCurrentDay() == 0) {
+			if(getCurrentDay() == 0) { // Makes sure on the first day you fight teams with 1 enemy
 				int randomSize = rand.nextInt(1, 2);
 				for (int j=0; j < randomSize; j++){
 					int randomIndex = rand.nextInt(avaiable.size());
 					try {
-					 Monster randomMonster = avaiable.get(randomIndex).clone();
+					 Monster randomMonster = avaiable.get(randomIndex).clone(); // Clone so that we don't fight the only instance of the monster
 					 team.add(randomMonster);
 					} catch (CloneNotSupportedException e) {
 						e.printStackTrace();
@@ -97,6 +97,7 @@ public class MainGame {
     public ArrayList<String> getSelectedButtonText(ButtonGroup buttonGroup) {
     	int index = 0;
     	ArrayList<String> list = new ArrayList<String>();
+    	// Enumerate through all buttons to check which one was selected.
         for (Enumeration<AbstractButton> buttons = buttonGroup.getElements(); buttons.hasMoreElements();) {
             AbstractButton button = buttons.nextElement();
             if (button.isSelected()) {
@@ -229,7 +230,7 @@ public class MainGame {
         currentDay++;
     }
 	/**
-	 * gets all items that are initialsed from the text file
+	 * gets all items that are initialised from the text file
 	 * @return ArrayList<Item> 
 	 */
 	public ArrayList<Item> getAllItems() {
@@ -277,7 +278,7 @@ public class MainGame {
 		storeScreen.closeWindow();
 		getStoreItems().clear();
 		getStoreMonsters().clear();
-		if (s.toLowerCase().startsWith("g")){
+		if (s.toLowerCase().startsWith("g")){ // Check whether it is game over or not
 			launchGameOverScreen();
 		} else {
 			launchRandomEvent();
@@ -347,7 +348,7 @@ public class MainGame {
 	public void closeMainScreen(MainScreen mainScreen, String s) {
 		mainScreen.closeWindow();
 		increaseDay();
-		if (s.startsWith("a")) {
+		if (s.startsWith("a")) { // Check if apply item or move monster button has been pressed
 			launchApplyItemScreen();
 		} else if (s.startsWith("m")) {
 			launchMoveTeamScreen();
