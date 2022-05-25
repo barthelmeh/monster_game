@@ -92,6 +92,11 @@ public class StoreScreen {
 		gbl_panelMonster.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panelMonster.setLayout(gbl_panelMonster);
 		
+		JLabel lblNotEnoughMoney = new JLabel("Not enough money!");
+		lblNotEnoughMoney.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblNotEnoughMoney.setForeground(Color.RED);
+		lblNotEnoughMoney.setHorizontalAlignment(SwingConstants.CENTER);
+		
 		JLabel lblHealth = new JLabel("Health:");
 		lblHealth.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblHealth = new GridBagConstraints();
@@ -387,6 +392,7 @@ public class StoreScreen {
 			}
 		});
 		btnSleep.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		
 		GroupLayout groupLayout = new GroupLayout(window.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
@@ -396,10 +402,13 @@ public class StoreScreen {
 						.addComponent(panelItem, GroupLayout.PREFERRED_SIZE, 1150, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblStore, GroupLayout.PREFERRED_SIZE, 1150, GroupLayout.PREFERRED_SIZE)
 						.addComponent(panelMonster, GroupLayout.PREFERRED_SIZE, 1150, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblMoney, GroupLayout.PREFERRED_SIZE, 169, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(11, Short.MAX_VALUE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(lblMoney, GroupLayout.PREFERRED_SIZE, 169, GroupLayout.PREFERRED_SIZE)
+							.addGap(201)
+							.addComponent(lblNotEnoughMoney, GroupLayout.PREFERRED_SIZE, 417, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap(918, Short.MAX_VALUE)
+					.addContainerGap(917, Short.MAX_VALUE)
 					.addComponent(btnSleep, GroupLayout.PREFERRED_SIZE, 243, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
 		);
@@ -409,7 +418,9 @@ public class StoreScreen {
 					.addContainerGap()
 					.addComponent(lblStore, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(lblMoney, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblMoney, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblNotEnoughMoney, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(panelMonster, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
@@ -425,8 +436,11 @@ public class StoreScreen {
 		btnBuyItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (player.getCurrentMoney() >= firstStoreItem.getItemCost()) {
+					lblNotEnoughMoney.setVisible(false);
 					player.addItem(firstStoreItem);
 					restartWindow();
+				} else {
+					lblNotEnoughMoney.setVisible(true);
 				}
 			}
 		});
@@ -442,8 +456,11 @@ public class StoreScreen {
 		btnBuyItem1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (player.getCurrentMoney() >= secondStoreItem.getItemCost()) {
+					lblNotEnoughMoney.setVisible(false);
 					player.addItem(secondStoreItem);
 					restartWindow();
+				} else {
+					lblNotEnoughMoney.setVisible(true);
 				}
 			}
 		});
@@ -459,8 +476,11 @@ public class StoreScreen {
 		btnBuyItem2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (player.getCurrentMoney() >= thirdStoreItem.getItemCost()) {
+					lblNotEnoughMoney.setVisible(false);
 					player.addItem(thirdStoreItem);
 					restartWindow();
+				} else {
+					lblNotEnoughMoney.setVisible(true);
 				}
 			}
 		});
@@ -475,8 +495,11 @@ public class StoreScreen {
 		btnBuyMonster.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (player.getCurrentMoney() >= firstStoreMonster.getCost()) {
+					lblNotEnoughMoney.setVisible(false);
 					player.addMonster(firstStoreMonster);
 					restartWindow();
+				} else { // Not enough money
+					lblNotEnoughMoney.setVisible(true);
 				}
 			}
 		});
@@ -492,8 +515,11 @@ public class StoreScreen {
 		btnBuyMonster1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (player.getCurrentMoney() >= secondStoreMonster.getCost()) {
+					lblNotEnoughMoney.setVisible(false);
 					player.addMonster(secondStoreMonster);
 					restartWindow();
+				} else {
+					lblNotEnoughMoney.setVisible(true);
 				}
 			}
 		});
@@ -509,8 +535,11 @@ public class StoreScreen {
 		btnBuyMonster2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (player.getCurrentMoney() >= thirdStoreMonster.getCost()) {
+					lblNotEnoughMoney.setVisible(false);
 					player.addMonster(thirdStoreMonster);
 					restartWindow();
+				} else {
+					lblNotEnoughMoney.setVisible(true);
 				}
 			}
 		});

@@ -376,7 +376,7 @@ public class MoveTeamScreen {
 
 		JCheckBox chckbxSelection_2 = new JCheckBox();
 		try {
-			chckbxSelection_2.setText(manager.toPercentage(playerTeam.get(2).getCriticalStrike()));
+			chckbxSelection_2.setText(playerTeam.get(3).getName());
 			chckbxSelection_2.setEnabled(true);
 			chckbxSelection_2.addMouseListener(new MouseAdapter() {
 				@Override
