@@ -502,7 +502,11 @@ public class StoreScreen {
 				} else if (player.getCurrentMoney() < firstStoreMonster.getCost()) {
 					lblErrorLabel.setText("Not Enough Money!");
 				} else {
-					player.addMonster(firstStoreMonster);
+					try {
+						player.addMonster(firstStoreMonster.clone());
+					} catch (CloneNotSupportedException f) {
+						f.printStackTrace();
+					}
 					restartWindow();	
 				}
 			}
@@ -523,7 +527,11 @@ public class StoreScreen {
 				} else if (player.getCurrentMoney() < secondStoreMonster.getCost()) {
 					lblErrorLabel.setText("Not Enough Money!");
 				} else {
-					player.addMonster(secondStoreMonster);
+					try {
+						player.addMonster(secondStoreMonster.clone());
+					} catch (CloneNotSupportedException f) {
+						f.printStackTrace();
+					}
 					restartWindow();	
 				}
 			}
@@ -544,7 +552,11 @@ public class StoreScreen {
 				} else if (player.getCurrentMoney() < thirdStoreMonster.getCost()) {
 					lblErrorLabel.setText("Not Enough Money!");
 				} else {
-					player.addMonster(thirdStoreMonster);
+					try {
+						player.addMonster(thirdStoreMonster.clone());
+					} catch (CloneNotSupportedException f) {
+						f.printStackTrace();
+					}
 					restartWindow();	
 				}
 			}

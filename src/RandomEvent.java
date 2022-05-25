@@ -7,7 +7,10 @@ public class RandomEvent {
 	private ArrayList<Monster> playerTeam;
 	private String monsterLeave;
 	private String monsterEnter;
-
+	/**
+	 * Class Constructor specify the Main Game running in the background
+	 * @param incomingManager MainGame running in the background
+	 */
 	public RandomEvent(MainGame incomingManager) {
 		manager = incomingManager;
 		playerTeam = manager.getPlayer().getTeam();

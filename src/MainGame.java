@@ -229,49 +229,92 @@ public class MainGame {
     }
 	/**
 	 * gets all items that are initialsed from the text file
-	 * @return ArrayList<Item> 
+	 * @return ArrayList<Item> all items from text file
 	 */
 	public ArrayList<Item> getAllItems() {
 		return allItems;
 	}
+	/**
+	 * sets a new list of items for user to apply 
+	 * @param newAllItems ArrayList<Item> a list of new items
+	 */
 	public void setAllItems(ArrayList<Item> newAllItems) {
 		allItems = newAllItems;
 	}
+	/**
+	 * Gets the current days battles
+	 * @return ArrayList<Battle> a list of the current days battles
+	 */
 	public ArrayList<Battle> getBattles() {
 		return battles;
 	}
+	/**
+	 * Sets the current days battles
+	 * @param newBattles ArrayList<Battle> a new list of current days battles
+	 */
 	public void setBattles(ArrayList<Battle> newBattles) {
 		battles = newBattles;
 	}
+	/**
+	 * launches the setup screen to the user
+	 */
 	public void launchSetupScreen() {
 		new SetupScreen(this);
 	}
+	/**
+	 * launches Battle screen to the user
+	 * @param battle int index of the battle to get from getBattles list
+	 */
 	public void launchBattleScreen(int battle){
 		new BattleScreen(this,getBattles().get(battle));
 	}
+	/**
+	 * launches move team screen to user
+	 */
 	public void launchMoveTeamScreen() {
 		MoveTeamScreen moveTeam = new MoveTeamScreen(this);
 	}
+	/**
+	 * sets up the days store and then launches the store screen
+	 */
 	public void setUpStore(){
 		new StoreSetUp(this);
 		launchStoreScreen();
 	}
+	/**
+	 * launches the store screen
+	 */
 	public void launchStoreScreen(){
 		StoreScreen store = new StoreScreen(this, this.getPlayer());
 	}
+	/**
+	 * launches the game over screen
+	 */
 	public void launchGameOverScreen() {
 		GameOverScreen gameOver = new GameOverScreen(this);
 	}
+	/**
+	 * launches random event, resets days battles and then launches main screen with strings if monster has entered/left
+	 */
 	public void launchRandomEvent() {
 		RandomEvent random = new RandomEvent(this);
 		setDaysBattles();
 		launchMainScreen(random.getMonsterLeave(), random.getMonsterEnter());
 	}
+	/**
+	 * Close setup screen to user and sets days battles then launches main screen
+	 * @param SetupWindow SetUpScreen this is the screen the user has previously on
+	 */
 	public void closeSetupScreen(SetupScreen SetupWindow) {
 		SetupWindow.closeWindow();
 		setDaysBattles();
         launchMainScreen();
 	}
+	/**
+	 * Closes store screen and if string recieved starts with g then launches game over else launch main screen 
+	 * @param storeScreen StoreScreen that user was previously on
+	 * @param s String to determine if game is over
+	 */
 	public void closeStoreScreen(StoreScreen storeScreen, String s) {
 		storeScreen.closeWindow();
 		getStoreItems().clear();
@@ -282,19 +325,49 @@ public class MainGame {
 			launchRandomEvent();
 		}
     }
+	/**
+	 * relaunches store screen
+	 * @param screen screen that user was just on
+	 * @param b check if user is done or not
+	 */
+	public void closeStoreScreen(StoreScreen screen, boolean b) {
+		screen.closeWindow();
+		if (b){
+			launchStoreScreen();
+		}
+	}
+	/**
+	 * Launches win battle screen to user
+	 * @param currBattle Battle to get score and coins recieved from battle
+	 */
 	public void launchWinScreen(Battle currBattle) {
 		WinBattleScreen winScreen = new WinBattleScreen(this, currBattle);
 	}
-	
+	/**
+	 * launches main screen to user
+	 */
 	public void launchMainScreen() {
 		MainScreen mainScreen = new MainScreen(this);
 	}
+	/**
+	 * launches main screen to user
+	 * @param s String text to be displayed to user if true
+	 * @param s2 String text to be displayed to user if true
+	 */
 	public void launchMainScreen(String s, String s2) {
 		MainScreen mainScreen = new MainScreen(this, s, s2);
 	}
+	/**
+	 * Launches Apply Item Screen to user
+	 */
 	public void launchApplyItemScreen() {
 		ApplyItemScreen apply = new ApplyItemScreen(this);
 	}
+	/**
+	 * Closes apply item screen if user is done else relaunch screen
+	 * @param screen ApplyItemScreen the user was just on
+	 * @param b boolean to determine if user is done applying items
+	 */
 	public void closeApplyItemScreen(ApplyItemScreen screen, boolean b) {
 		screen.closeWindow();
 		if (b) {
@@ -305,6 +378,11 @@ public class MainGame {
 		}
 		
 	}
+	/**
+	 * Closes move team screen if user is done else relaunch screen
+	 * @param moveTeamScreen MoveTeamScreen that the user was just on
+	 * @param b boolean to determine if user is done moving team around
+	 */
 	public void closeMoveTeamScreen(MoveTeamScreen moveTeamScreen, boolean b) {
 		moveTeamScreen.closeWindow();
 		if (b) {
@@ -313,7 +391,11 @@ public class MainGame {
 			launchMoveTeamScreen();
 		}
 	}
-
+	/**
+	 * Closes current battle screen to user and launches win screen if battle is won else go to game over screen
+	 * @param BattleScreen BattleScreen that the user was just on
+	 * @param b boolean to determine if user won the battle or not.
+	 */
 	public void closeBattleScreen(BattleScreen BattleScreen, boolean b) {
 		BattleScreen.closeWindow();
 		Battle currBattle = BattleScreen.getCurrentBattle();
@@ -322,27 +404,44 @@ public class MainGame {
 		} else {
 			launchGameOverScreen();
 		}
+	
 	}
-	public void closeStoreScreen(StoreScreen screen, boolean b) {
-		screen.closeWindow();
-		if (b) {
-			launchStoreScreen();
-		}
-	}
+	/**
+	 * closes the game over screen
+	 * @param gameOverScreen GameOverScreen the users was just on
+	 */
 	public void closeGameOverScreen(GameOverScreen gameOverScreen) {
 		gameOverScreen.closeWindow();
 	}
+	/**
+	 * closes the win battle screen and launches setting up the store
+	 * @param winBattleScreen WinBattleScreen that the user was just on
+	 */
 	public void closeWinBattleScreen(WinBattleScreen winBattleScreen) {
 		winBattleScreen.closeWindow();
 		setUpStore();
 	}
+	/**
+	 * Closes the main screen to the user
+	 * @param mainScreen MainScreen that the user was just on
+	 */
 	public void closeMainScreen(MainScreen mainScreen) {
         mainScreen.closeWindow();
     }
+	/**
+	 * Closes the main screen to the user and launches battle
+	 * @param mainScreen MainScreen that the user was just on
+	 * @param i index of the button of the battle group to deterimen that battle the user is going to fight in
+	 */
 	public void closeMainScreen(MainScreen mainScreen, int i) {
 		mainScreen.closeWindow();
 		launchBattleScreen(i);
     }  
+	/**
+	 * Closes the main screen to the user and launches either apply item screen or move team screen
+	 * @param mainScreen MainScreen that the user was just on
+	 * @param s String to determine if the button was to move team or to apply item screen
+	 */
 	public void closeMainScreen(MainScreen mainScreen, String s) {
 		mainScreen.closeWindow();
 		increaseDay();
@@ -354,7 +453,5 @@ public class MainGame {
 	}
     public static void main(String[] args) {
         MainGame gamer = new MainGame();   
-    }
-	
-	
+    }	
 }

@@ -56,6 +56,10 @@ public class MainScreen {
 	public MainScreen() {
 		initialize();
 	}
+	/**
+	 * Class Constructor specifying the MainGame that runs in the background
+	 * @param incomingManager MainGame that is running in the background
+	 */
 	public MainScreen(MainGame incomingManager) {
 		screen = this;
 		manager = incomingManager;
@@ -65,6 +69,12 @@ public class MainScreen {
 		initialize();
 		window.setVisible(true);
 	}
+	/**
+	 * Class Contructor specifying the MainGame and two strings to be displayed to user
+	 * @param incomingManager MainGame taht is running in the background
+	 * @param s String that is displayed to user if monster has left
+	 * @param s2 String that is displayed to user if monster has joined
+	 */
 	public MainScreen(MainGame incomingManager, String s, String s2) {
 		screen = this;
 		manager = incomingManager;
@@ -77,25 +87,47 @@ public class MainScreen {
 		lblRandomMonsterEnter.setText(s2);
 		window.setVisible(true);
 	}
-
+	/**
+	 * Sets players team for easy get of monsters in list
+	 * @param newTeam ArrayList<Monster> new player teams list
+	 */
 	public void setTeam(ArrayList<Monster> newTeam) {
 		team = newTeam;
 	}
+	/**
+	 * Sets platers inventory for easy get of items in list
+	 * @param newInventory ArrayList<Item> new player inventory list
+	 */
 	public void setInventory(ArrayList<Item> newInventory) {
 		inventory = newInventory;
 	}
+	/**
+	 * sets the current days battle list to 4 variables to easily get to be displayed to user
+	 * @param newBattles ArrayList<Battle> new list of battles
+	 */
 	public void setBattles(ArrayList<Battle> newBattles) {
 		battle1 = newBattles.get(0).getEnemyTeam();
 		battle2 = newBattles.get(1).getEnemyTeam();
 		battle3 = newBattles.get(2).getEnemyTeam();
 		battle4 = newBattles.get(3).getEnemyTeam();
 	}
+	/**
+	 * Closes window to user
+	 */
 	public void closeWindow() {
 		window.dispose();
 	}
+	/**
+	 * Closes window to user via manager
+	 * @param s String to check if move team or apply item button is pressed
+	 */
 	public void finishedWindow(String s) {
 		manager.closeMainScreen(this, s);
 	}
+	/**
+	 * Closes window to user via manager
+	 * @param i int to check which battle button is pressed
+	 */
 	public void finishedWindow(int i) {
 		manager.closeMainScreen(this, i);
 

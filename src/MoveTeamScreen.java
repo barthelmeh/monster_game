@@ -53,6 +53,10 @@ public class MoveTeamScreen {
 	public MoveTeamScreen() {
 		initialize();
 	}
+	/**
+	 * Class Constructor with MainGame in background to get labels
+	 * @param incomingManager Maingame that is used in background to get labels
+	 */
 	public MoveTeamScreen(MainGame incomingManager) {
 		screen = this;
 		manager = incomingManager;
@@ -60,15 +64,28 @@ public class MoveTeamScreen {
 		initialize();
 		window.setVisible(true);
 	}
+	/**
+	 * Close window
+	 */
 	public void closeWindow() {
 		window.dispose();
 	}
+	/**
+	 * Close window if done
+	 */
 	public void finishedWindow() {
 		manager.closeMoveTeamScreen(screen, true);
 	}
+	/**
+	 * restart window if not done
+	 */
 	public void restartWindow() {
 		manager.closeMoveTeamScreen(screen, false);
 	}
+	/**
+	 * Checks if only 2 check boxes are selected setting non selected to setEnable(false)
+	 * @param checkboxes ArrayList<JCheckBox> list containing the checkboxes
+	 */
 	public void getMaxSelected(ArrayList<JCheckBox> checkboxes) {
 		int max = 2;
 		int checkboxCount = 0;
@@ -94,9 +111,16 @@ public class MoveTeamScreen {
             }
         }
     }
+	/**
+	 * gets the teams check box list
+	 * @return ArrayList<JCheckBox> list of checkboxes for user to select
+	 */
 	public ArrayList<JCheckBox> getTeamButtonList() {
 		return teamButtonList;
 	}
+	/**
+	 * Swaps monster around in the lst of the team
+	 */
 	public void swapMonsters() {
 		int counter = 0;
 		Integer first = (Integer) null;
