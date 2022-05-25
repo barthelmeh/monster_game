@@ -1,25 +1,24 @@
-public class HealthItem implements Item {
-	private String itemName; 
+package main;
+public class MaxHealthItem implements Item {
+    private String itemName; 
     private double itemIncrease;
     private int itemCost;
     
-    public HealthItem(String name, double increase , int cost){
+    public MaxHealthItem(String name, double increase , int cost){
 		itemName = name;
 		itemIncrease = increase;
 		itemCost = cost;
 	}
+	public MaxHealthItem clone() throws CloneNotSupportedException {
+		MaxHealthItem item = (MaxHealthItem) super.clone();
+		return item;
+	}
 	public void applyItem(Monster monster) {
-		double currentHealth = monster.getMonsterCurrentHealth();
 		double maxHealth = monster.getMonsterMaxHealth();
-
-		double newHealth = (currentHealth + (currentHealth*itemIncrease));
-
-		if(newHealth > maxHealth) {
-			newHealth = maxHealth;
-		}
-		
-		monster.setCurrentHealth(newHealth);
-		
+		double currentHealth = monster.getMonsterCurrentHealth();
+		double newHealth = (maxHealth + (maxHealth*itemIncrease));
+		monster.setCurrentHealth((currentHealth + (currentHealth*itemIncrease)));
+		monster.setMaxHealth(newHealth);
 	}
 
 	public String getItemName() {

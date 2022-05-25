@@ -1,3 +1,4 @@
+package main;
 public interface Item {
     String getItemName();
     double getItemIncrease();
@@ -5,7 +6,7 @@ public interface Item {
 
     void setItemName(String itemName);
     void setItemIncrease(double itemIncrease);
-    void setItemCost(int itemCost );
+    void setItemCost(int itemCost);
     
     void applyItem(Monster monster);
 }

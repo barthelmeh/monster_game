@@ -1,3 +1,4 @@
+package main;
 public class DamageItem implements Item {
     private String itemName; 
     private double itemIncrease;

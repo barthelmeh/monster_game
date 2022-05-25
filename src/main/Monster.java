@@ -1,3 +1,4 @@
+package main;
 public class Monster implements Cloneable {
     private String monsterName;
     private double monsterMaxHealth;
@@ -32,6 +33,14 @@ public class Monster implements Cloneable {
     }
     public String getName() {
         return monsterName;
+    }
+    
+    public int getLevel() {
+    	return monsterLevel;
+    }
+    
+    public boolean getHasLeveledUp() {
+    	return hasLeveledUp;
     }
 
     public double getDamage(){
